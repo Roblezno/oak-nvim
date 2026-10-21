@@ -28,3 +28,9 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Better J behavior
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+
+-- NEOTREE file explorer
+vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<CR>', {
+  desc = 'Toggle Neo-tree',
+  silent = true,
+})
