@@ -34,3 +34,10 @@ vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<CR>', {
   desc = 'Toggle Neo-tree',
   silent = true,
 })
+
+-- WHICH-TREE Helper
+vim.keymap.set("n", "<leader>?", function()
+  require("which-key").show({ global = false })
+end, {
+  desc = "Buffer Local Keymaps (which-key)",
+})

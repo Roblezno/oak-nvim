@@ -5,3 +5,6 @@ require("config.autocmds")
 
 -- UI Plugins
 require("plugins.ui")
+
+-- Quality of Life
+require("plugins.utilities")

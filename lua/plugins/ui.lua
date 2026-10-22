@@ -119,3 +119,11 @@ vim.pack.add({
 })
 
 require('smear_cursor').setup({})
+
+
+-- MINI.ICONS
+vim.pack.add({
+  "https://github.com/nvim-mini/mini.icons"
+})
+
+require("mini.icons").setup({})
