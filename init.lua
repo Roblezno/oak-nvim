@@ -8,3 +8,6 @@ require("plugins.ui")
 
 -- Quality of Life
 require("plugins.utilities")
+
+-- Navigation plugins
+require("plugins.navigation")

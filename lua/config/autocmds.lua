@@ -36,3 +36,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 	desc = "Highlight the yanked text for 300ms",
 })
+
+-- Build telescope-fzf-native after it is installed or updated
+-- NOTE: Defined here (before any vim.pack.add()) so lockfile installs also trigger it
+-- HELP: :help vim.pack-events
+local pack_build_group = vim.api.nvim_create_augroup("PackBuild", {})
+vim.api.nvim_create_autocmd("PackChanged", {
+	group = pack_build_group,
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == "telescope-fzf-native.nvim" and (kind == "install" or kind == "update") then
+			-- :wait() so the library exists before load_extension("fzf") runs
+			vim.system({ "make" }, { cwd = ev.data.path }):wait()
+		end
+	end,
+	desc = "Build telescope-fzf-native after install or update",
+})
