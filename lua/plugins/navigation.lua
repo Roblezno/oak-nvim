@@ -37,3 +37,12 @@ require('telescope').setup({
 
 })
 require('telescope').load_extension('fzf')
+
+
+-- TMUX NAVIGATOR
+-- Disable plugin default mappings, they are defined in config/keymaps
+vim.g.tmux_navigator_no_mappings = 1
+
+vim.pack.add({
+  "https://github.com/christoomey/vim-tmux-navigator"
+})
