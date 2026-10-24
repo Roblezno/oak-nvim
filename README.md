@@ -3,8 +3,8 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.1.0. The base editor, UI and navigation are set up. Language support (LSP,
-> Treesitter parsers, formatters) for the languages above is not configured yet.
+> **Status:** v0.1.0. The base editor, UI, navigation and Treesitter (baseline languages) are set
+> up. Language support (LSP, formatters) for the languages above is not configured yet.
 
 ## Requirements
 
@@ -13,7 +13,10 @@ scripting, statistics with R and Quarto Markdown writing (among others).
 - A [Nerd Font](https://www.nerdfonts.com), set as your terminal font
 - A terminal with true color support
 - [`ripgrep`](https://github.com/BurntSushi/ripgrep): Telescope live grep and `:grep`
-- `make` and a C compiler (`gcc` or `clang`): builds `telescope-fzf-native`
+- `make` and a C compiler (`gcc` or `clang`): builds `telescope-fzf-native` and the Treesitter
+  parsers
+- [`tree-sitter-cli`](https://github.com/tree-sitter/tree-sitter) **0.26.1+** (from your package
+  manager, not npm), `tar` and `curl`: install the Treesitter parsers
 - Optional: [`fd`](https://github.com/sharkdp/fd) for faster file search in Telescope
 - Optional: a clipboard tool (`wl-clipboard` on Wayland, `xclip`/`xsel` on X11) for system
   clipboard support
@@ -35,6 +38,8 @@ nvim
 
 On first launch `vim.pack` asks you to confirm installing the plugins. They are installed at the
 revisions recorded in `nvim-pack-lock.json`, and `telescope-fzf-native` is built automatically.
+The Treesitter parsers are then downloaded and compiled in the background. Files opened before
+they finish are not highlighted until you reopen them.
 
 To try it without replacing your config:
 
@@ -46,7 +51,7 @@ NVIM_APPNAME=oak-nvim nvim
 ### Updating plugins
 
 Run `:lua vim.pack.update()`, review the changes, then `:write` to apply them or `:quit` to
-cancel.
+cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpdate`).
 
 ## Features
 
@@ -66,6 +71,7 @@ cancel.
 | Navigation | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)       | File explorer                      |
 | Navigation | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)    | Fuzzy finder (with fzf-native)     |
 | Navigation | [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)        | Scrollbar                          |
+| Treesitter | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Parser installer (`main` branch)   |
 
 ### Editor defaults
 
@@ -73,6 +79,8 @@ cancel.
 - 2-space indentation with spaces
 - Persistent undo, no swap or backup files
 - System clipboard integration
+- Treesitter highlighting for Python, R, Bash, YAML, TOML and JSON (Lua and Markdown use the
+  parsers bundled with Neovim)
 - Treesitter-based folding (all folds open by default)
 - Restores the last cursor position when reopening a file
 - Highlights yanked text

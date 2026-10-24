@@ -3,6 +3,10 @@
 ### Implemented
 - Plugin lua file headers documenting all the plugin in that file so
 it is easier to see what's going on in said file.
+- Treesitter support with nvim-treesitter, main branch (https://github.com/nvim-treesitter/nvim-treesitter),
+in treesitter.lua. It installs the parsers for Python, R, Bash, YAML, TOML and JSON.
+Highlighting is started by Neovim through a FileType autocmd, and the parsers are updated
+with :TSUpdate whenever the plugin is updated (PackChanged autocmd).
 
 ## 0.1.1
 ### Fixed

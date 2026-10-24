@@ -11,3 +11,6 @@ require("plugins.utilities")
 
 -- Navigation plugins
 require("plugins.navigation")
+
+-- Treesitter
+require("plugins.treesitter")

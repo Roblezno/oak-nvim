@@ -52,3 +52,35 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	end,
 	desc = "Build telescope-fzf-native after install or update",
 })
+
+-- Update treesitter parsers after nvim-treesitter is updated (parsers must match the plugin)
+-- HELP: :help vim.pack-events, :help :TSUpdate
+local treesitter_update_group = vim.api.nvim_create_augroup("TreesitterUpdate", {})
+vim.api.nvim_create_autocmd("PackChanged", {
+	group = treesitter_update_group,
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == "nvim-treesitter" and kind == "update" then
+			-- Load the plugin first if it is not active, so :TSUpdate exists
+			if not ev.data.active then
+				vim.cmd.packadd("nvim-treesitter")
+			end
+			vim.cmd("TSUpdate")
+		end
+	end,
+	desc = "Update treesitter parsers after nvim-treesitter is updated",
+})
+
+-- Start treesitter highlighting (provided by Neovim) for languages with an installed parser
+-- NOTE: lua and markdown are already highlighted by Neovim by default
+-- HELP: :help vim.treesitter.start()
+local treesitter_start_group = vim.api.nvim_create_augroup("TreesitterStart", {})
+vim.api.nvim_create_autocmd("FileType", {
+	group = treesitter_start_group,
+	pattern = { "python", "r", "sh", "yaml", "toml", "json" }, -- filetypes, not parser names
+	callback = function(ev)
+		-- pcall: on first launch parsers install asynchronously and may not be ready yet
+		pcall(vim.treesitter.start, ev.buf)
+	end,
+	desc = "Start treesitter highlighting",
+})
