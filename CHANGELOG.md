@@ -1,5 +1,9 @@
 # Changelog
-## 0.2.0-dev (UNRELEASED)
+## 0.1.2
+### Fixed
+- nvim-notify was installed but not wired into Neovim's notification system
+(vim.notify). Now it is set as the notification handler.
+
 ### Implemented
 - Plugin lua file headers documenting all the plugin in that file so
 it is easier to see what's going on in said file.
