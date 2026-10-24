@@ -1,3 +1,9 @@
+-- #################################################################
+-- Navigation related plugins. Currently installed:
+-- Neo Tree, Scrollbar, Telescope, Tmux-navigation
+-- #################################################################
+
+
 -- NEO TREE
 vim.pack.add({
   {
@@ -18,9 +24,6 @@ vim.pack.add({
 
 require("scrollbar").setup({})
 
-
--- WARNING: Telescope requires ripgrep, make and a C compier (optional fd too).
--- TODO: I need to add it to README
 
 -- TELESCOPE
 vim.pack.add({

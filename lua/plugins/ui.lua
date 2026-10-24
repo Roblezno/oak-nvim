@@ -1,3 +1,11 @@
+-- #################################################################
+-- Visual interface related plugins. Currently installed:
+-- Kanagawa Theme, Alpha dashboard, Lualine, Notify,
+-- smear-cursor, mini.icons
+-- #################################################################
+
+
+
 -- THEME
 vim.pack.add({
   {
@@ -97,6 +105,7 @@ vim.pack.add({
 })
 
 require("notify").setup({})
+vim.notify = require("notify")
 
 -- SMEAR CURSOR 
 vim.pack.add({

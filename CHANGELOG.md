@@ -1,4 +1,9 @@
 # Changelog
+## 0.2.0-dev (UNRELEASED)
+### Implemented
+- Plugin lua file headers documenting all the plugin in that file so
+it is easier to see what's going on in said file.
+
 ## 0.1.1
 ### Fixed
 - Saving a session in nvim (:restart does that) is controlled by
