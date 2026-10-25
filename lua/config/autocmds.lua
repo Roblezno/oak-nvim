@@ -84,3 +84,17 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 	desc = "Start treesitter highlighting",
 })
+
+-- Disable Ruff hover so K shows basedpyright's type information
+-- HELP: :help LspAttach
+local lsp_ruff_group = vim.api.nvim_create_augroup("LspRuffHover", {})
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = lsp_ruff_group,
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client and client.name == "ruff" then
+			client.server_capabilities.hoverProvider = false
+		end
+	end,
+	desc = "Disable Ruff hover in favor of basedpyright",
+})
