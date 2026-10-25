@@ -12,6 +12,13 @@ information in Python files.
 - LSP keymaps gd (go to definition) and <leader>lf (format). The rest are Neovim defaults
 (K, grn, gra, grr, gri, grt, gO, ]d, [d).
 - README documents the LSP setup and its new requirements (unzip, gzip, python3 with venv, R).
+- Completion support in completion.lua with blink.cmp (https://github.com/saghen/blink.cmp)
+and friendly-snippets (https://github.com/rafamadriz/friendly-snippets). blink.cmp is pinned
+to the 1.* releases, so its prebuilt fuzzy matcher is downloaded automatically. Sources are
+LSP, path, snippets and buffer, with the default keymap preset (<C-y> accept, <C-n>/<C-p>
+navigate, <C-space> open menu/docs, <C-e> hide). blink.cmp registers its LSP capabilities
+itself, so lsp.lua is unchanged.
+- README documents the completion setup and that blink.cmp needs curl.
 
 ## 0.1.2
 ### Fixed

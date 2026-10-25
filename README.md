@@ -3,8 +3,8 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.2.0-dev The base editor, UI, navigation, Treesitter (baseline languages) and LSP
-> (Lua, Python, R) are set up. Completion in development
+> **Status:** v0.2.0-dev The base editor, UI, navigation, Treesitter (baseline languages), LSP
+> (Lua, Python, R) and completion are set up.
 
 ## Requirements
 
@@ -22,6 +22,7 @@ scripting, statistics with R and Quarto Markdown writing (among others).
   ruff) in a virtual environment
 - [R](https://www.r-project.org): runs the R language server, whose packages are compiled from
   source on install
+- `curl`: blink.cmp downloads its prebuilt fuzzy matcher
 - Optional: [`fd`](https://github.com/sharkdp/fd) for faster file search in Telescope
 - Optional: a clipboard tool (`wl-clipboard` on Wayland, `xclip`/`xsel` on X11) for system
   clipboard support
@@ -43,6 +44,7 @@ nvim
 
 On first launch `vim.pack` asks you to confirm installing the plugins. They are installed at the
 revisions recorded in `nvim-pack-lock.json`, and `telescope-fzf-native` is built automatically.
+blink.cmp downloads its prebuilt fuzzy matcher on first load.
 The Treesitter parsers are then downloaded and compiled in the background. Files opened before
 they finish are not highlighted until you reopen them.
 
@@ -84,6 +86,8 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | LSP        | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                | Language server configs            |
 | LSP        | [mason.nvim](https://github.com/mason-org/mason.nvim)                     | Language server installer          |
 | LSP        | [mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim) | Installs and enables the servers   |
+| Completion | [blink.cmp](https://github.com/saghen/blink.cmp)                          | Completion menu (`<C-y>` accepts)  |
+| Completion | [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)      | Snippet collection                 |
 
 
 ## Structure
