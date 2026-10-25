@@ -1,4 +1,7 @@
 # Changelog
+## 0.2.1
+
+
 ## 0.2.0
 ### Implemented
 - LSP support in lsp.lua with nvim-lspconfig (https://github.com/neovim/nvim-lspconfig),
