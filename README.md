@@ -3,8 +3,8 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.1.2. The base editor, UI, navigation and Treesitter (baseline languages) are set
-> up. Language support (LSP, formatters) for the languages above is not configured yet.
+> **Status:** v0.2.0-dev The base editor, UI, navigation and Treesitter (baseline languages) are set
+> up. Language support (LSP, formatters) in development.
 
 ## Requirements
 

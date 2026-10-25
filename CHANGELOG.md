@@ -1,4 +1,7 @@
 # Changelog
+## 0.2.0-dev
+
+
 ## 0.1.2
 ### Fixed
 - nvim-notify was installed but not wired into Neovim's notification system
