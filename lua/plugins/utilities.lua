@@ -1,6 +1,6 @@
 -- #################################################################
 -- Utility tools and Quality of Life related plugins. 
--- Nvim-autopairs, which-key
+-- Nvim-autopairs, which-key, Trouble, Noice
 -- #################################################################
 
 
@@ -23,3 +23,9 @@ vim.pack.add({
 require("which-key").setup({})
 
 
+-- TROUBLE
+vim.pack.add({
+  "https://github.com/folke/trouble.nvim"
+})
+
+require("trouble").setup({})

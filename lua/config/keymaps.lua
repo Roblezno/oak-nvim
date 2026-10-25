@@ -58,3 +58,8 @@ vim.keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<CR>', { desc = 'Tele
 -- LSP (most keymaps are Neovim defaults: K, grn, gra, grr, gri, grt, gO, ]d, [d)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP go to definition" })
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, { desc = "LSP format buffer" })
+
+-- Diagnostics with T
+vim.keymap.set('n', '<leader>tx', '<cmd>Trouble diagnostics toggle<CR> desc = Diagnostics (Trouble)')
+
+

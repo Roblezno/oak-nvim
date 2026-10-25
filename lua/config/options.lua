@@ -115,9 +115,8 @@ vim.opt.sessionoptions:remove("blank") -- Don't save empty/scratch windows in se
 -- Diagnostics (LSP errors/warnings)
 -- HELP: :help vim.diagnostic.config()
 vim.diagnostic.config({
-	virtual_text = true, -- Show the message at the end of the line
+	virtual_text = false, -- Show the message at the end of the line
 	severity_sort = true, -- Errors before warnings in signs and floats
 })
-
 
 -- END OF BASIC CONFIG OPTS
