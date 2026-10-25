@@ -1,5 +1,12 @@
 # Changelog
 ## 0.2.1
+### Implemented
+- LSP diagnostics wired through trouble plugin (https://github.com/folke/trouble.nvim). <leader>tx
+to access the trouble diagnostics buffer.
+- Telescope find recent files option
+
+### Changed
+- Inline diagnostics hidden. Only diagnostics hints remain. Messages are displayed in trouble buffer
 
 
 ## 0.2.0

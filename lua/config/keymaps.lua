@@ -54,6 +54,7 @@ vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<CR>', { desc = 'Tel
 vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<CR>', { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>fr', '<cmd>Telescope oldfiles<CR>', { desc = 'Telescope find recent files' })
 
 -- LSP (most keymaps are Neovim defaults: K, grn, gra, grr, gri, grt, gO, ]d, [d)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP go to definition" })
