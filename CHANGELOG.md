@@ -1,5 +1,5 @@
 # Changelog
-## 0.2.0-dev
+## 0.2.0
 ### Implemented
 - LSP support in lsp.lua with nvim-lspconfig (https://github.com/neovim/nvim-lspconfig),
 mason.nvim (https://github.com/mason-org/mason.nvim) and mason-lspconfig.nvim
