@@ -86,7 +86,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | LSP        | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                | Language server configs            |
 | LSP        | [mason.nvim](https://github.com/mason-org/mason.nvim)                     | Language server installer          |
 | LSP        | [mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim) | Installs and enables the servers   |
-| Completion | [blink.cmp](https://github.com/saghen/blink.cmp)                          | Completion menu (`<C-y>` accepts)  |
+| Completion | [blink.cmp](https://github.com/saghen/blink.cmp)                          | Completion Menu + cmdline          |
 | Completion | [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)      | Snippet collection                 |
 
 

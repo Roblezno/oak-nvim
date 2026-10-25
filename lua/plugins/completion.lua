@@ -21,4 +21,19 @@ require("blink.cmp").setup({
   sources = { default = { "lsp", "path", "snippets", "buffer" } },
   -- Rust matcher (prebuilt binary), falls back to Lua with a warning if unavailable
   fuzzy = { implementation = "prefer_rust_with_warning" },
+  -- Command line: menu pops up automatically for ':' commands only (not '/' '?' searches)
+  -- <Tab> show/accept, <C-n>/<C-p> or <Left>/<Right> navigate, <C-e> cancel
+  cmdline = {
+    keymap = {
+      preset = "cmdline",
+      ["<Tab>"] = { "show", "accept" },
+    },
+    completion = {
+      menu = {
+        auto_show = function()
+          return vim.fn.getcmdtype() == ":"
+        end,
+      },
+    },
+  },
 })
