@@ -17,3 +17,6 @@ require("plugins.treesitter")
 
 -- LSP
 require("plugins.lsp")
+
+-- Completion
+require("plugins.completion")
