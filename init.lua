@@ -14,3 +14,6 @@ require("plugins.navigation")
 
 -- Treesitter
 require("plugins.treesitter")
+
+-- LSP
+require("plugins.lsp")
