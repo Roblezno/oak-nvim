@@ -1,6 +1,17 @@
 # Changelog
 ## 0.2.0-dev
-
+### Implemented
+- LSP support in lsp.lua with nvim-lspconfig (https://github.com/neovim/nvim-lspconfig),
+mason.nvim (https://github.com/mason-org/mason.nvim) and mason-lspconfig.nvim
+(https://github.com/mason-org/mason-lspconfig.nvim). Mason installs lua_ls, basedpyright,
+ruff and r_language_server, and mason-lspconfig enables them (vim.lsp.enable). lua_ls is
+set up to recognise the Neovim runtime.
+- Ruff hover is disabled through a LspAttach autocmd, so K shows basedpyright's type
+information in Python files.
+- Diagnostics are shown at the end of the line (vim.diagnostic.config in options.lua).
+- LSP keymaps gd (go to definition) and <leader>lf (format). The rest are Neovim defaults
+(K, grn, gra, grr, gri, grt, gO, ]d, [d).
+- README documents the LSP setup and its new requirements (unzip, gzip, python3 with venv, R).
 
 ## 0.1.2
 ### Fixed

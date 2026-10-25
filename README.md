@@ -3,8 +3,8 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.2.0-dev The base editor, UI, navigation and Treesitter (baseline languages) are set
-> up. Language support (LSP, formatters) in development.
+> **Status:** v0.2.0-dev The base editor, UI, navigation, Treesitter (baseline languages) and LSP
+> (Lua, Python, R) are set up. Completion in development
 
 ## Requirements
 
@@ -17,6 +17,11 @@ scripting, statistics with R and Quarto Markdown writing (among others).
   parsers
 - [`tree-sitter-cli`](https://github.com/tree-sitter/tree-sitter) **0.26.1+** (from your package
   manager, not npm), `tar` and `curl`: install the Treesitter parsers
+- `unzip` and `gzip`: Mason extracts the language servers it downloads
+- `python3` with the `venv` module: Mason installs the Python language servers (basedpyright,
+  ruff) in a virtual environment
+- [R](https://www.r-project.org): runs the R language server, whose packages are compiled from
+  source on install
 - Optional: [`fd`](https://github.com/sharkdp/fd) for faster file search in Telescope
 - Optional: a clipboard tool (`wl-clipboard` on Wayland, `xclip`/`xsel` on X11) for system
   clipboard support
@@ -41,6 +46,10 @@ revisions recorded in `nvim-pack-lock.json`, and `telescope-fzf-native` is built
 The Treesitter parsers are then downloaded and compiled in the background. Files opened before
 they finish are not highlighted until you reopen them.
 
+Mason then installs the language servers in the background (`:Mason` shows the progress). The R
+server is compiled from source, so it can take several minutes; keep Neovim open until it
+finishes.
+
 To try it without replacing your config:
 
 ```sh
@@ -57,33 +66,25 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 
 ### Plugins
 
-| Area       | Plugin                                                                | Purpose                            |
-| ---------- | --------------------------------------------------------------------- | ---------------------------------- |
-| UI         | [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim)             | Colorscheme (wave, transparent)    |
-| UI         | [alpha-nvim](https://github.com/goolord/alpha-nvim)                   | Start dashboard                    |
-| UI         | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)          | Statusline                         |
-| UI         | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)     | Highlight TODO/NOTE/WARNING tags   |
-| UI         | [nvim-notify](https://github.com/rcarriga/nvim-notify)                | Notification popups                |
-| UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)     | Animated cursor movement           |
-| UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                 | Icon provider                      |
-| Utilities  | [nvim-autopairs](https://github.com/windwp/nvim-autopairs)            | Auto-close brackets and quotes     |
-| Utilities  | [which-key.nvim](https://github.com/folke/which-key.nvim)             | Keymap hints                       |
-| Navigation | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)       | File explorer                      |
-| Navigation | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)    | Fuzzy finder (with fzf-native)     |
-| Navigation | [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)        | Scrollbar                          |
-| Treesitter | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Parser installer (`main` branch)   |
+| Area       | Plugin                                                                    | Purpose                            |
+| ---------- | ------------------------------------------------------------------------- | ---------------------------------- |
+| UI         | [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim)                 | Colorscheme (wave, transparent)    |
+| UI         | [alpha-nvim](https://github.com/goolord/alpha-nvim)                       | Start dashboard                    |
+| UI         | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)              | Statusline                         |
+| UI         | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)         | Highlight TODO/NOTE/WARNING tags   |
+| UI         | [nvim-notify](https://github.com/rcarriga/nvim-notify)                    | Notification popups                |
+| UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)         | Animated cursor movement           |
+| UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                     | Icon provider                      |
+| Utilities  | [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                | Auto-close brackets and quotes     |
+| Utilities  | [which-key.nvim](https://github.com/folke/which-key.nvim)                 | Keymap hints                       |
+| Navigation | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)           | File explorer                      |
+| Navigation | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)        | Fuzzy finder (with fzf-native)     |
+| Navigation | [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)            | Scrollbar                          |
+| Treesitter | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)     | Parser installer (`main` branch)   |
+| LSP        | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                | Language server configs            |
+| LSP        | [mason.nvim](https://github.com/mason-org/mason.nvim)                     | Language server installer          |
+| LSP        | [mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim) | Installs and enables the servers   |
 
-### Editor defaults
-
-- Relative line numbers, cursorline and a column guide at 100
-- 2-space indentation with spaces
-- Persistent undo, no swap or backup files
-- System clipboard integration
-- Treesitter highlighting for Python, R, Bash, YAML, TOML and JSON (Lua and Markdown use the
-  parsers bundled with Neovim)
-- Treesitter-based folding (all folds open by default)
-- Restores the last cursor position when reopening a file
-- Highlights yanked text
 
 ## Structure
 
