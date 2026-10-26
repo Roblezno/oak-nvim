@@ -56,9 +56,14 @@ vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Telesc
 vim.keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<CR>', { desc = 'Telescope help tags' })
 vim.keymap.set('n', '<leader>fr', '<cmd>Telescope oldfiles<CR>', { desc = 'Telescope find recent files' })
 
--- LSP (most keymaps are Neovim defaults: K, grn, gra, grr, gri, grt, gO, ]d, [d)
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP go to definition" })
+-- LSP remaps (originaly g<t,r,a,i...>)
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, { desc = "LSP format buffer" })
+vim.keymap.set({ "n", "v" }, "<leader>lr", vim.lsp.buf.rename, { desc = "LSP rename" })
+vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "LSP action" })
+vim.keymap.set({ "n", "v" }, "<leader>li", vim.lsp.buf.implementation, { desc = "LSP go to implementation" })
+vim.keymap.set({ "n", "v" }, "<leader>lR", vim.lsp.buf.references, { desc = "LSP references" })
+vim.keymap.set({ "n", "v" }, "<leader>lt", vim.lsp.buf.type_definition, { desc = "LSP type deffinition" })
+
 
 -- Diagnostics with T
 vim.keymap.set('n', '<leader>tx', '<cmd>Trouble diagnostics toggle<CR> desc = Diagnostics (Trouble)')
