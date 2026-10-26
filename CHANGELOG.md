@@ -3,11 +3,13 @@
 ### Implemented
 - LSP diagnostics wired through trouble plugin (https://github.com/folke/trouble.nvim). <leader>tx
 to access the trouble diagnostics buffer.
-- Telescope find recent files option
 
 ### Changed
 - Inline diagnostics hidden. Only diagnostics hints remain. Messages are displayed in trouble buffer
+- Remapped LSP keymaps from g<r,n,t...> to <leader>l<r,n,t...>
 
+### Fixed
+- Telescope find recent files option was not defined. Now accesed by <leader>fr
 
 ## 0.2.0
 ### Implemented
