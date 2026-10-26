@@ -1,4 +1,6 @@
 # Changelog
+## 0.2.2
+
 ## 0.2.1
 ### Implemented
 - LSP diagnostics wired through trouble plugin (https://github.com/folke/trouble.nvim). <leader>tx
