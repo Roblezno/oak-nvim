@@ -13,7 +13,7 @@ vim.pack.add({
   }
 })
 
--- Transparent background, also applied to floating windows and popup menus
+-- Transparent background. Floats and popup menus follow it through transparent-popups (below)
 local transparent = true
 
 require('kanagawa').setup({
@@ -28,23 +28,6 @@ require('kanagawa').setup({
                 }
             }
           },
-  -- Highlight overrides, merged into kanagawa's own groups
-  -- HELP: https://github.com/rebelot/kanagawa.nvim#customization
-  overrides = function()
-    local hl = {
-      -- blink.cmp borders use the same colour as any other float border
-      BlinkCmpMenuBorder = { link = "FloatBorder" },
-      BlinkCmpDocBorder = { link = "FloatBorder" },
-    }
-    -- Floats (LSP hover, blink.cmp docs) and popup menu (blink.cmp menu)
-    if transparent then
-      hl.NormalFloat = { bg = "none" }
-      hl.FloatBorder = { bg = "none" }
-      hl.FloatTitle = { bg = "none" }
-      hl.Pmenu = { bg = "none" }
-    end
-    return hl
-  end,
 })
 
 vim.cmd("colorscheme kanagawa")
