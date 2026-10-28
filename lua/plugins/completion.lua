@@ -15,7 +15,9 @@ vim.pack.add({
   { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
 })
 
-require("blink.cmp").setup({
+-- Menu padding and borders come from transparent-popups (loaded in ui.lua).
+-- Options set below are merged on top of them and win
+require("blink.cmp").setup(vim.tbl_deep_extend("force", require("transparent-popups").blink_opts(), {
   -- <C-y> accept, <C-n>/<C-p> navigate, <C-space> open menu/docs, <C-e> hide
   keymap = { preset = "default" },
   sources = { default = { "lsp", "path", "snippets", "buffer" } },
@@ -36,4 +38,4 @@ require("blink.cmp").setup({
       },
     },
   },
-})
+}))
