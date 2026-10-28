@@ -1,5 +1,7 @@
 # Changelog
 ## 0.2.2
+- LSP hover and blink completion menu now match Kanagawa-wave theme, have transparency,
+border and rignt-left padding.
 
 ## 0.2.1
 ### Implemented
