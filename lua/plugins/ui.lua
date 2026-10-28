@@ -1,7 +1,7 @@
 -- #################################################################
 -- Visual interface related plugins. Currently installed:
 -- Kanagawa Theme, Alpha dashboard, Lualine, Notify,
--- smear-cursor, mini.icons
+-- smear-cursor, mini.icons, transparent-popups (local)
 -- #################################################################
 
 
@@ -48,6 +48,13 @@ require('kanagawa').setup({
 })
 
 vim.cmd("colorscheme kanagawa")
+
+-- TRANSPARENT POPUPS (local plugin, in development)
+-- NOTE: Loaded from the plugins workspace instead of vim.pack while it is being written,
+-- so edits are picked up with :restart. Must stay before completion.lua (blink.cmp uses it)
+-- HELP: :help 'runtimepath', :help lua-module-load
+vim.opt.runtimepath:prepend(vim.fn.expand("~/Documents/proyectos/nvim-plugins/nvim-transparent-popups"))
+require("transparent-popups").setup()
 
 -- ALPHA STARTING WINDOW
 vim.pack.add({
