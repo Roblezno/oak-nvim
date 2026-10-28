@@ -35,9 +35,16 @@ vim.cmd("colorscheme kanagawa")
 -- TRANSPARENT POPUPS (local plugin, in development)
 -- NOTE: Loaded from the plugins workspace instead of vim.pack while it is being written,
 -- so edits are picked up with :restart. Must stay before completion.lua (blink.cmp uses it)
+-- pcall: if the plugin folder is missing, keep the float border and load the rest of the config
 -- HELP: :help 'runtimepath', :help lua-module-load
 vim.opt.runtimepath:prepend(vim.fn.expand("~/Documents/proyectos/nvim-plugins/nvim-transparent-popups"))
-require("transparent-popups").setup()
+local has_transparent_popups, transparent_popups = pcall(require, "transparent-popups")
+if has_transparent_popups then
+  transparent_popups.setup()
+else
+  vim.o.winborder = "single"
+  vim.notify("transparent-popups not loaded: " .. transparent_popups:match("[^\n]+"), vim.log.levels.WARN)
+end
 
 -- ALPHA STARTING WINDOW
 vim.pack.add({
