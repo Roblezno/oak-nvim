@@ -42,6 +42,7 @@ vim.opt.completeopt = "menuone,noinsert,noselect" -- Completion options
 vim.opt.showmode = false -- Don't show mode in command line
 vim.opt.pumheight = 10 -- Popup menu height
 vim.opt.pumblend = 10 -- Popup menu transparency
+vim.opt.winborder = "single" -- Default border for floating windows (LSP hover, blink.cmp, ...)
 vim.opt.redrawtime = 10000 -- Timeout for syntax highlighting redraw
 vim.opt.maxmempattern = 20000 -- Max memory for pattern matching
 -- NOTE: The next line could be increased in case I need to search for
