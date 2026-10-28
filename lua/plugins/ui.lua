@@ -1,7 +1,7 @@
 -- #################################################################
 -- Visual interface related plugins. Currently installed:
 -- Kanagawa Theme, Alpha dashboard, Lualine, Notify,
--- smear-cursor, mini.icons, transparent-popups (local)
+-- smear-cursor, mini.icons, transparent-popups
 -- #################################################################
 
 
@@ -32,12 +32,14 @@ require('kanagawa').setup({
 
 vim.cmd("colorscheme kanagawa")
 
--- TRANSPARENT POPUPS (local plugin, in development)
--- NOTE: Loaded from the plugins workspace instead of vim.pack while it is being written,
--- so edits are picked up with :restart. Must stay before completion.lua (blink.cmp uses it)
--- pcall: if the plugin folder is missing, keep the float border and load the rest of the config
--- HELP: :help 'runtimepath', :help lua-module-load
-vim.opt.runtimepath:prepend(vim.fn.expand("~/Documents/proyectos/nvim-plugins/nvim-transparent-popups"))
+-- TRANSPARENT POPUPS
+-- NOTE: My own plugin: float borders and transparency that follow the colorscheme, padding for
+-- LSP hover and the blink.cmp menu. Must stay after the colorscheme and before completion.lua
+-- (blink.cmp uses it). pcall: if it isn't installed, keep the float border and load the rest
+-- HELP: https://github.com/Roblezno/nvim-transparent-popups, :checkhealth transparent-popups
+vim.pack.add({
+  "https://github.com/Roblezno/nvim-transparent-popups",
+})
 local has_transparent_popups, transparent_popups = pcall(require, "transparent-popups")
 if has_transparent_popups then
   transparent_popups.setup()

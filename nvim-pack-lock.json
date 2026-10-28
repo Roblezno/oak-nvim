@@ -58,6 +58,10 @@
       "rev": "00fe857e7cd97ee5e556de643ee920b003a96b03",
       "src": "https://github.com/petertriho/nvim-scrollbar"
     },
+    "nvim-transparent-popups": {
+      "rev": "1a25bb878273d8dc0172490f5595ee8e9cc098a8",
+      "src": "https://github.com/Roblezno/nvim-transparent-popups"
+    },
     "nvim-treesitter": {
       "rev": "a2f694478be07f89c2d03cc17858a8745a400c4b",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
