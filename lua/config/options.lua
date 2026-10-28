@@ -120,4 +120,20 @@ vim.diagnostic.config({
 	severity_sort = true, -- Errors before warnings in signs and floats
 })
 
+-- LSP Hover (K) padding
+-- NOTE: Neovim has no padding option for LSP floats, so the function that opens them
+-- is wrapped to add 1 space on each side of the hover text only. Signature help and
+-- diagnostics floats are left untouched: they highlight text by column and padding
+-- would shift it. The border comes from 'winborder' (above)
+-- HELP: :help vim.lsp.util.open_floating_preview(), :help vim.lsp.buf.hover()
+local open_floating_preview = vim.lsp.util.open_floating_preview
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts)
+	if opts and opts.focus_id == "textDocument/hover" then
+		contents = vim.tbl_map(function(line)
+			return " " .. line .. " "
+		end, contents)
+	end
+	return open_floating_preview(contents, syntax, opts)
+end
+
 -- END OF BASIC CONFIG OPTS
