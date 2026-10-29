@@ -30,6 +30,10 @@ Now implementing Quarto Markdown and related plugins.
   supported)
 - Optional: the [Quarto CLI](https://quarto.org) for the browser preview of `.qmd` and `.md`
   files
+- Optional, to run code chunks and show images:
+  [Miniforge](https://github.com/conda-forge/miniforge) (conda/mamba in `~/miniforge3`),
+  ImageMagick (`magick`) and a terminal with the kitty graphics protocol (Ghostty, kitty). See
+  [Running code chunks](#running-code-chunks-molten)
 
 ## Installation
 
@@ -66,7 +70,8 @@ NVIM_APPNAME=oak-nvim nvim
 ### Updating plugins
 
 Run `:lua vim.pack.update()`, review the changes, then `:write` to apply them or `:quit` to
-cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpdate`).
+cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpdate`). When
+`molten-nvim` is updated, `:UpdateRemotePlugins` runs too; restart Neovim afterwards.
 
 ## Features
 
@@ -96,6 +101,8 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                  | Quarto preview, LSP in code chunks |
 | Markdown   | [otter.nvim](https://github.com/jmbuhr/otter.nvim)                        | LSP backend for code chunks        |
 | Markdown   | [img-clip.nvim](https://github.com/HakonHarnes/img-clip.nvim)             | Paste clipboard images             |
+| Markdown   | [image.nvim](https://github.com/3rd/image.nvim)                           | Image popups and plot outputs      |
+| Markdown   | [molten-nvim](https://github.com/benlubas/molten-nvim)                    | Run code chunks in Jupyter kernels |
 
 ### Markdown and Quarto
 
@@ -109,6 +116,55 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
   it.
 - `<leader>mi` saves the clipboard image in an `assets/` folder next to the current file and
   inserts the markdown link.
+- With the cursor on an image link in `.md` or `.qmd`, the image is shown in a popup
+  (image.nvim).
+
+### Running code chunks (molten)
+
+Code chunks in `.qmd` files run in Jupyter kernels through molten, and their output (text and
+plots) is shown under each chunk. Molten runs from a dedicated `neovim` conda env, so it works
+whichever env is active. Each project env runs its own kernel, so chunks see that env's packages.
+
+One-time setup:
+
+```sh
+mamba create -n neovim -c conda-forge python=3.12 pynvim jupyter_client cairosvg pyperclip bash_kernel
+mamba run -n neovim python -m bash_kernel.install --user   # kernel "bash"
+mkdir -p ~/.local/share/jupyter/runtime                     # jupyter_client does not create it
+```
+
+For each project env, register a kernel named after the env (`<env>` for Python, `<env>-r` for
+R):
+
+```sh
+# Python
+mamba install -n <env> -c conda-forge ipykernel
+mamba run -n <env> python -m ipykernel install --user --name <env> --display-name "Python (<env>)"
+
+# R (installspec needs jupyter on PATH, taken from the neovim env)
+mamba install -n <env> -c conda-forge r-irkernel
+env PATH="$HOME/miniforge3/envs/neovim/bin:$PATH" mamba run -n <env> \
+  R -q -e "IRkernel::installspec(name = '<env>-r', displayname = 'R (<env>)')"
+```
+
+Inside tmux, add this to `~/.tmux.conf` so images are drawn:
+
+```
+set -gq allow-passthrough on
+set -g visual-activity off
+set-option -g focus-events on
+```
+
+After `vim.pack` installs molten on the first launch, restart Neovim once so its commands are
+registered. `:checkhealth molten` and `:checkhealth image` check the setup.
+
+- `<leader>ji` starts the kernel named after the active conda env (or opens the picker),
+  `<leader>jI` opens the picker to attach another kernel (e.g. R or bash).
+- `<leader>jc` / `<leader>ja` / `<leader>jA` / `<leader>jl` run the cell / cell and above / all
+  cells / line, `<leader>jr` runs the visual selection.
+- `<leader>jo` enters the output window, `<leader>jh` hides the output, `<leader>jd` deletes it.
+- `<leader>jx` / `<leader>jR` / `<leader>jq` interrupt / restart / stop the kernel,
+  `<leader>jb` opens HTML output in the browser.
 
 
 ## Structure
