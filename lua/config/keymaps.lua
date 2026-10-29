@@ -74,4 +74,32 @@ vim.keymap.set("n", "<leader>mp", "<Cmd>QuartoPreview<CR>", { desc = "Quarto pre
 vim.keymap.set("n", "<leader>mq", "<Cmd>QuartoClosePreview<CR>", { desc = "Close Quarto preview" })
 vim.keymap.set("n", "<leader>mi", "<Cmd>PasteImage<CR>", { desc = "Paste clipboard image (img-clip)" })
 
+-- MOLTEN / QUARTO RUNNER (Jupyter kernels)
+-- NOTE: Kernels are named after their conda env: <env> for Python, <env>-r for R, plus bash.
+-- The run keymaps use quarto's runner, which sends the chunk to molten. require() is called
+-- inside each function because plugins are not loaded yet when this file runs
+-- HELP: :help molten, https://github.com/quarto-dev/quarto-nvim
+vim.keymap.set("n", "<leader>ji", function()
+  local env = vim.env.CONDA_DEFAULT_ENV
+  if env and vim.tbl_contains(vim.fn.MoltenAvailableKernels(), env) then
+    vim.cmd("MoltenInit " .. env)
+  else
+    vim.cmd("MoltenInit") -- no kernel named after the active env: open the picker
+  end
+end, { desc = "Molten init kernel for active conda env" })
+vim.keymap.set("n", "<leader>jI", "<Cmd>MoltenInit<CR>", { desc = "Molten init kernel (picker)" })
+vim.keymap.set("n", "<leader>jc", function() require("quarto.runner").run_cell() end, { desc = "Run cell" })
+vim.keymap.set("n", "<leader>ja", function() require("quarto.runner").run_above() end, { desc = "Run cell and above" })
+vim.keymap.set("n", "<leader>jA", function() require("quarto.runner").run_all() end, { desc = "Run all cells" })
+vim.keymap.set("n", "<leader>jl", function() require("quarto.runner").run_line() end, { desc = "Run line" })
+vim.keymap.set("v", "<leader>jr", function() require("quarto.runner").run_range() end, { desc = "Run selection" })
+-- noautocmd: auto-open is off, so open the output window on demand without triggering it again
+vim.keymap.set("n", "<leader>jo", "<Cmd>noautocmd MoltenEnterOutput<CR>", { desc = "Molten enter output" })
+vim.keymap.set("n", "<leader>jh", "<Cmd>MoltenHideOutput<CR>", { desc = "Molten hide output" })
+vim.keymap.set("n", "<leader>jd", "<Cmd>MoltenDelete<CR>", { desc = "Molten delete cell output" })
+vim.keymap.set("n", "<leader>jx", "<Cmd>MoltenInterrupt<CR>", { desc = "Molten interrupt kernel" })
+vim.keymap.set("n", "<leader>jR", "<Cmd>MoltenRestart!<CR>", { desc = "Molten restart kernel (clear outputs)" })
+vim.keymap.set("n", "<leader>jq", "<Cmd>MoltenDeinit<CR>", { desc = "Molten stop kernel" })
+vim.keymap.set("n", "<leader>jb", "<Cmd>MoltenOpenInBrowser<CR>", { desc = "Molten open HTML output in browser" })
+
 
