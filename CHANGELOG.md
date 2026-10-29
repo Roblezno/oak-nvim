@@ -1,4 +1,29 @@
 # Changelog
+## 0.3.1-dev (Unreleased)
+### Implemented
+- Image support in markdown.lua with image.nvim (https://github.com/3rd/image.nvim), using the
+kitty graphics protocol (Ghostty) and the ImageMagick CLI. In .md and .qmd files the image link
+under the cursor is shown in a popup. smear-cursor and notify floats are ignored by its overlap
+clearing, otherwise they hide molten's plots.
+- Running Quarto code chunks with molten-nvim (https://github.com/benlubas/molten-nvim), pinned
+to the 1.* releases. Chunks run in Jupyter kernels and their output (text and plots, through
+image.nvim) is shown under each chunk. Molten's Python dependencies live in a dedicated `neovim`
+conda env, set as python3_host_prog in options.lua when it exists. Kernels are registered per
+project conda env: <env> for Python, <env>-r for R, plus bash.
+- :UpdateRemotePlugins runs through a PackChanged autocmd when molten-nvim is installed or
+updated, so its commands are registered after a restart.
+- Molten and quarto runner keymaps under <leader>j: <leader>ji starts the kernel named after the
+active conda env (or opens the picker), <leader>jI opens the picker, <leader>jc/ja/jA/jl run the
+cell/cell and above/all cells/line, <leader>jr runs the visual selection, <leader>jo enters the
+output window, <leader>jh/jd hide/delete the output, <leader>jx/jR/jq interrupt/restart/stop the
+kernel and <leader>jb opens HTML output in the browser.
+- README documents the molten setup (conda env, kernel registration, Jupyter runtime folder, tmux
+options) and its new requirements (Miniforge, ImageMagick, a terminal with the kitty graphics
+protocol).
+
+### Changed
+- quarto-nvim's code runner is enabled and sends chunks to molten (default_method = "molten").
+
 ## 0.3.0-dev (Unreleased)
 ### Implemented
 - Quarto (.qmd) highlighting and folding: the markdown Treesitter parser is registered for the
@@ -15,6 +40,8 @@ by Mason.
 markdown link.
 - README documents the markdown and Quarto setup and its new requirements (Quarto CLI,
 wl-clipboard or xclip for pasting images).
+- bashls (bash-language-server), installed by Mason, for bash files. Bash code chunks in .qmd get
+LSP features through otter too.
 
 ### Changed
 - r_language_server no longer attaches to quarto buffers. R chunks in .qmd go through otter, so
