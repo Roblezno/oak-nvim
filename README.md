@@ -3,8 +3,8 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.2.2. The base editor, UI, navigation, Treesitter (baseline languages), base
-LSP and cmp with some utilities. Implementing visual updates on lsp and cmp.
+> **Status:** v0.2.3. The base editor, UI, navigation, Treesitter (baseline languages), base
+LSP and cmp with some utilities and custom theme updates with personal plugins. 
 
 ## Requirements
 
@@ -77,6 +77,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | UI         | [nvim-notify](https://github.com/rcarriga/nvim-notify)                    | Notification popups                |
 | UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)         | Animated cursor movement           |
 | UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                     | Icon provider                      |
+| UI         | [transparent-popups](https://github.com/Roblezno/nvim-transparent-popups) | Custom themed popups               |
 | Utilities  | [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                | Auto-close brackets and quotes     |
 | Utilities  | [which-key.nvim](https://github.com/folke/which-key.nvim)                 | Keymap hints                       |
 | Navigation | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)           | File explorer                      |
