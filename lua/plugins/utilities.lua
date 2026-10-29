@@ -29,3 +29,8 @@ vim.pack.add({
 })
 
 require("trouble").setup({})
+
+
+-- TODO: Añadir cosas de https://github.com/folke/snacks.nvim
+
+
