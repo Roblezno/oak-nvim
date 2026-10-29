@@ -17,7 +17,7 @@ vim.pack.add({
 
 require("quarto").setup({
   lspFeatures = {
-    languages = { "r", "python" }, -- only languages with an installed LSP
+    languages = { "r", "python", "bash" }, -- only languages with an installed LSP
   },
   codeRunner = { enabled = false }, -- no REPL/Jupyter runner installed
 })
