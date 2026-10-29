@@ -1,5 +1,28 @@
 # Changelog
 ## 0.3.0-dev (Unreleased)
+### Implemented
+- Quarto (.qmd) highlighting and folding: the markdown Treesitter parser is registered for the
+quarto filetype. Code chunks and the YAML header are highlighted through the markdown queries
+bundled with Neovim.
+- Quarto support in markdown.lua with quarto-nvim (https://github.com/quarto-dev/quarto-nvim)
+and otter.nvim (https://github.com/jmbuhr/otter.nvim). Python and R code chunks get LSP features
+(completion, hover, diagnostics on save) through otter. <leader>mp opens the browser preview
+(quarto preview, also for .md files) and <leader>mq closes it.
+- marksman (https://github.com/artempyanykh/marksman) language server for .md files, installed
+by Mason.
+- Pasting clipboard images with img-clip.nvim (https://github.com/HakonHarnes/img-clip.nvim).
+<leader>mi saves the image in an assets/ folder next to the current file and inserts the
+markdown link.
+- README documents the markdown and Quarto setup and its new requirements (Quarto CLI,
+wl-clipboard or xclip for pasting images).
+
+### Changed
+- r_language_server no longer attaches to quarto buffers. R chunks in .qmd go through otter, so
+completions and diagnostics are not duplicated.
+
+### Fixed
+- The Trouble keymap (<leader>tx) had its description inside the command string, so extra keys
+were typed after opening Trouble. The description is now in the keymap options.
 
 ## 0.2.3
 - Replacing the manual steps in 0.2.2 with a custom plugin: https://github.com/Roblezno/nvim-transparent-popups.

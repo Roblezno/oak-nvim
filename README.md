@@ -26,7 +26,10 @@ Now implementing Quarto Markdown and related plugins.
 - `curl`: blink.cmp downloads its prebuilt fuzzy matcher
 - Optional: [`fd`](https://github.com/sharkdp/fd) for faster file search in Telescope
 - Optional: a clipboard tool (`wl-clipboard` on Wayland, `xclip`/`xsel` on X11) for system
-  clipboard support
+  clipboard support. Pasting images (img-clip) needs `wl-clipboard` or `xclip` (`xsel` is not
+  supported)
+- Optional: the [Quarto CLI](https://quarto.org) for the browser preview of `.qmd` and `.md`
+  files
 
 ## Installation
 
@@ -90,6 +93,22 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | LSP        | [mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim) | Installs and enables the servers   |
 | Completion | [blink.cmp](https://github.com/saghen/blink.cmp)                          | Completion Menu + cmdline          |
 | Completion | [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)      | Snippet collection                 |
+| Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                  | Quarto preview, LSP in code chunks |
+| Markdown   | [otter.nvim](https://github.com/jmbuhr/otter.nvim)                        | LSP backend for code chunks        |
+| Markdown   | [img-clip.nvim](https://github.com/HakonHarnes/img-clip.nvim)             | Paste clipboard images             |
+
+### Markdown and Quarto
+
+- `.qmd` files are highlighted and folded with the markdown Treesitter parser, including the
+  code chunks and the YAML header.
+- Python and R code chunks in `.qmd` get completion, hover and diagnostics through otter
+  (diagnostics refresh on save).
+- `.md` files use the [marksman](https://github.com/artempyanykh/marksman) language server
+  (installed by Mason): link and heading completion, go to linked files.
+- `<leader>mp` opens the browser preview (`quarto preview`, also for `.md`), `<leader>mq` closes
+  it.
+- `<leader>mi` saves the clipboard image in an `assets/` folder next to the current file and
+  inserts the markdown link.
 
 
 ## Structure
