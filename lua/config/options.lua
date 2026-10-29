@@ -122,4 +122,13 @@ vim.diagnostic.config({
 
 -- NOTE: LSP hover (K) padding is done by transparent-popups, see lua/plugins/ui.lua
 
+-- Providers
+-- molten-nvim (a Python remote plugin) needs pynvim and jupyter_client. They live in a dedicated
+-- `neovim` conda env, so molten works whatever env is active. Skipped until that env exists
+-- HELP: :help provider-python, :checkhealth provider
+local python3_host = vim.fn.expand("~/miniforge3/envs/neovim/bin/python")
+if vim.fn.executable(python3_host) == 1 then
+	vim.g.python3_host_prog = python3_host
+end
+
 -- END OF BASIC CONFIG OPTS

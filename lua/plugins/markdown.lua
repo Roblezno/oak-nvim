@@ -1,6 +1,6 @@
 -- #################################################################
 -- Markdown and Quarto related plugins. Currently installed:
--- otter.nvim, quarto-nvim, img-clip.nvim, image.nvim
+-- otter.nvim, quarto-nvim, img-clip.nvim, image.nvim, molten-nvim
 -- #################################################################
 
 
@@ -19,7 +19,10 @@ require("quarto").setup({
   lspFeatures = {
     languages = { "r", "python", "bash" }, -- only languages with an installed LSP
   },
-  codeRunner = { enabled = false }, -- no REPL/Jupyter runner installed
+  codeRunner = {
+    enabled = true,
+    default_method = "molten", -- run chunks in Jupyter kernels (see MOLTEN-NVIM below)
+  },
 })
 
 
@@ -71,4 +74,23 @@ require("image").setup({
     "blink-cmp-menu", "blink-cmp-documentation", "blink-cmp-signature", "",
   },
   tmux_show_only_in_active_window = true,
+})
+
+
+-- MOLTEN-NVIM
+-- NOTE: Runs code chunks in Jupyter kernels and shows the output under each chunk (plots through
+-- image.nvim). It is a Python remote plugin: its deps live in the `neovim` conda env (see
+-- python3_host_prog in options.lua) and :UpdateRemotePlugins registers its commands (see
+-- autocmds.lua). Restart nvim after the first install. Pinned to 1.x as molten recommends.
+-- Options are read from vim.g, so they are set before the plugin loads
+-- HELP: https://github.com/benlubas/molten-nvim, :checkhealth molten
+vim.g.molten_image_provider = "image.nvim"
+vim.g.molten_auto_open_output = false -- open the output window on demand (:MoltenEnterOutput)
+vim.g.molten_virt_text_output = true -- show output as virtual text under the chunk
+vim.g.molten_virt_lines_off_by_1 = true -- put that output below the closing ``` of the chunk
+vim.g.molten_wrap_output = true
+vim.g.molten_output_win_max_height = 20
+
+vim.pack.add({
+  { src = "https://github.com/benlubas/molten-nvim", version = vim.version.range("1.*") },
 })

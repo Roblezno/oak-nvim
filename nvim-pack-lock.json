@@ -41,6 +41,11 @@
       "rev": "9e4c1645ce2b78afd6191b6be2c38bc0f998dd48",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
+    "molten-nvim": {
+      "rev": "a286aa914d9a154bc359131aab788b5a077a5a99",
+      "src": "https://github.com/benlubas/molten-nvim",
+      "version": "1.0.0 - 2.0.0"
+    },
     "neo-tree.nvim": {
       "rev": "f3f3bf73414e400cf9fc13fda50f00404a8f8ab1",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim",

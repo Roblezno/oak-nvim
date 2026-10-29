@@ -71,6 +71,25 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	desc = "Update treesitter parsers after nvim-treesitter is updated",
 })
 
+-- Register molten-nvim's commands after it is installed or updated (it is a Python remote plugin)
+-- NOTE: The remote plugin manifest is only read at startup, so restart nvim afterwards
+-- HELP: :help vim.pack-events, :help :UpdateRemotePlugins
+local molten_update_group = vim.api.nvim_create_augroup("MoltenUpdate", {})
+vim.api.nvim_create_autocmd("PackChanged", {
+	group = molten_update_group,
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == "molten-nvim" and (kind == "install" or kind == "update") then
+			-- Load the plugin first if it is not active, so its rplugin/ is on the runtimepath
+			if not ev.data.active then
+				vim.cmd.packadd("molten-nvim")
+			end
+			vim.cmd("UpdateRemotePlugins")
+		end
+	end,
+	desc = "Update remote plugins after molten-nvim is installed or updated",
+})
+
 -- Start treesitter highlighting (provided by Neovim) for languages with an installed parser
 -- NOTE: lua and markdown are already highlighted by Neovim by default
 -- HELP: :help vim.treesitter.start()
