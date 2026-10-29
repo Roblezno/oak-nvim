@@ -67,11 +67,13 @@ require("image").setup({
   max_height = 12,
   max_width_window_percentage = math.huge,
   max_height_window_percentage = math.huge,
-  -- clear images covered by floating windows, except blink's popups and floats with no filetype
-  -- ("" is from molten's recommended config)
+  -- clear images covered by floating windows, except the floats listed here. "" is from molten's
+  -- recommended config. smear-cursor leaves 1x1 floats around the window that would hide every
+  -- molten plot, and notify's popups would hide plots in the top-right
   window_overlap_clear_enabled = true,
   window_overlap_clear_ft_ignore = {
     "blink-cmp-menu", "blink-cmp-documentation", "blink-cmp-signature", "",
+    "smear-cursor", "notify",
   },
   tmux_show_only_in_active_window = true,
 })
