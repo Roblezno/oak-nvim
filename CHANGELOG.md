@@ -1,4 +1,6 @@
 # Changelog
+## 0.3.0-dev (Unreleased)
+
 ## 0.2.3
 - Replacing the manual steps in 0.2.2 with a custom plugin: https://github.com/Roblezno/nvim-transparent-popups.
 
