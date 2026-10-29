@@ -26,6 +26,12 @@ vim.lsp.config("lua_ls", {
   },
 })
 
+-- R: don't attach to quarto buffers. R chunks in .qmd go through otter (see plugins/markdown.lua),
+-- attaching here too would duplicate completions and diagnostics
+vim.lsp.config("r_language_server", {
+  filetypes = { "r", "rmd" },
+})
+
 
 -- MASON + MASON-LSPCONFIG
 -- NOTE: mason installs the servers, mason-lspconfig enables them (vim.lsp.enable)

@@ -68,4 +68,9 @@ vim.keymap.set({ "n", "v" }, "<leader>lt", vim.lsp.buf.type_definition, { desc =
 -- Diagnostics with T
 vim.keymap.set('n', '<leader>tx', '<cmd>Trouble diagnostics toggle<CR> desc = Diagnostics (Trouble)')
 
+-- MARKDOWN / QUARTO (quarto-nvim)
+-- NOTE: The preview opens in the browser and also works for plain .md files
+vim.keymap.set("n", "<leader>mp", "<Cmd>QuartoPreview<CR>", { desc = "Quarto preview in browser" })
+vim.keymap.set("n", "<leader>mq", "<Cmd>QuartoClosePreview<CR>", { desc = "Close Quarto preview" })
+
 

@@ -21,3 +21,5 @@ require("plugins.lsp")
 -- Completion
 require("plugins.completion")
 
+-- Markdown
+require("plugins.markdown")
