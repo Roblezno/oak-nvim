@@ -25,3 +25,10 @@ require("nvim-treesitter").install({
   "toml",
   "json",
 })
+
+-- Quarto (.qmd) has no parser of its own: use the markdown one. Code chunks and the YAML header
+-- are injected by the markdown queries bundled with Neovim
+-- NOTE: quarto-nvim also does this in its ftplugin. Registering it here keeps highlighting and
+-- folding independent of plugin load order
+-- HELP: :help vim.treesitter.language.register()
+vim.treesitter.language.register("markdown", "quarto")

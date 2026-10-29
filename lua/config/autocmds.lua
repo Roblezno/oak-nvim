@@ -77,7 +77,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 local treesitter_start_group = vim.api.nvim_create_augroup("TreesitterStart", {})
 vim.api.nvim_create_autocmd("FileType", {
 	group = treesitter_start_group,
-	pattern = { "python", "r", "sh", "yaml", "toml", "json" }, -- filetypes, not parser names
+	pattern = { "python", "r", "sh", "yaml", "toml", "json", "quarto" }, -- filetypes, not parser names
 	callback = function(ev)
 		-- pcall: on first launch parsers install asynchronously and may not be ready yet
 		pcall(vim.treesitter.start, ev.buf)
