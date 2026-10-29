@@ -44,5 +44,6 @@ vim.pack.add({
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "basedpyright", "ruff", "r_language_server" },
+  -- marksman: markdown (.md only, its default filetypes). Quarto is handled by otter (plugins/markdown.lua)
+  ensure_installed = { "lua_ls", "basedpyright", "ruff", "r_language_server", "marksman" },
 })
