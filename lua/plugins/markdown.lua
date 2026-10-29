@@ -24,11 +24,16 @@ require("quarto").setup({
 
 
 -- IMG-CLIP.NVIM
--- NOTE: Pastes a clipboard image into ./assets and inserts the markdown link. The defaults already
--- cover markdown and quarto. Needs wl-clipboard on Wayland (xclip on X11)
+-- NOTE: Pastes a clipboard image into an assets/ folder next to the current file and inserts the
+-- markdown link. The defaults already cover markdown and quarto. Needs wl-clipboard on Wayland
+-- (xclip on X11)
 -- HELP: https://github.com/HakonHarnes/img-clip.nvim, :checkhealth img-clip
 vim.pack.add({
   "https://github.com/HakonHarnes/img-clip.nvim",
 })
 
-require("img-clip").setup({})
+require("img-clip").setup({
+  default = {
+    relative_to_current_file = true, -- assets/ next to the file, not in the cwd
+  },
+})
