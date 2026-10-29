@@ -1,6 +1,6 @@
 -- #################################################################
 -- Markdown and Quarto related plugins. Currently installed:
--- otter.nvim, quarto-nvim
+-- otter.nvim, quarto-nvim, img-clip.nvim
 -- #################################################################
 
 
@@ -21,3 +21,14 @@ require("quarto").setup({
   },
   codeRunner = { enabled = false }, -- no REPL/Jupyter runner installed
 })
+
+
+-- IMG-CLIP.NVIM
+-- NOTE: Pastes a clipboard image into ./assets and inserts the markdown link. The defaults already
+-- cover markdown and quarto. Needs wl-clipboard on Wayland (xclip on X11)
+-- HELP: https://github.com/HakonHarnes/img-clip.nvim, :checkhealth img-clip
+vim.pack.add({
+  "https://github.com/HakonHarnes/img-clip.nvim",
+})
+
+require("img-clip").setup({})

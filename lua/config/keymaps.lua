@@ -72,5 +72,6 @@ vim.keymap.set('n', '<leader>tx', '<cmd>Trouble diagnostics toggle<CR>', { desc 
 -- NOTE: The preview opens in the browser and also works for plain .md files
 vim.keymap.set("n", "<leader>mp", "<Cmd>QuartoPreview<CR>", { desc = "Quarto preview in browser" })
 vim.keymap.set("n", "<leader>mq", "<Cmd>QuartoClosePreview<CR>", { desc = "Close Quarto preview" })
+vim.keymap.set("n", "<leader>mi", "<Cmd>PasteImage<CR>", { desc = "Paste clipboard image (img-clip)" })
 
 
