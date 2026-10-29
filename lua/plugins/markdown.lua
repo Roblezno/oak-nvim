@@ -1,6 +1,6 @@
 -- #################################################################
 -- Markdown and Quarto related plugins. Currently installed:
--- otter.nvim, quarto-nvim, img-clip.nvim
+-- otter.nvim, quarto-nvim, img-clip.nvim, image.nvim
 -- #################################################################
 
 
@@ -36,4 +36,39 @@ require("img-clip").setup({
   default = {
     relative_to_current_file = true, -- assets/ next to the file, not in the cwd
   },
+})
+
+
+-- IMAGE.NVIM
+-- NOTE: Draws images inside nvim with the kitty graphics protocol (Ghostty implements it). In
+-- markdown/quarto it shows the image link under the cursor in a popup, and molten uses it for plot
+-- outputs. "magick_cli" uses the ImageMagick CLI, so no luarocks are needed. Inside tmux it needs
+-- `allow-passthrough on` and `visual-activity off` in ~/.tmux.conf
+-- HELP: https://github.com/3rd/image.nvim, :checkhealth image
+vim.pack.add({
+  "https://github.com/3rd/image.nvim",
+})
+
+require("image").setup({
+  backend = "kitty",
+  processor = "magick_cli",
+  integrations = {
+    markdown = {
+      filetypes = { "markdown", "quarto" },
+      only_render_image_at_cursor = true,
+      only_render_image_at_cursor_mode = "popup",
+    },
+  },
+  -- sizing recommended by molten for plot outputs
+  max_width = 100,
+  max_height = 12,
+  max_width_window_percentage = math.huge,
+  max_height_window_percentage = math.huge,
+  -- clear images covered by floating windows, except blink's popups and floats with no filetype
+  -- ("" is from molten's recommended config)
+  window_overlap_clear_enabled = true,
+  window_overlap_clear_ft_ignore = {
+    "blink-cmp-menu", "blink-cmp-documentation", "blink-cmp-signature", "",
+  },
+  tmux_show_only_in_active_window = true,
 })
