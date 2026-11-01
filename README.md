@@ -135,7 +135,7 @@ mkdir -p ~/.local/share/jupyter/runtime                     # jupyter_client doe
 ```
 
 For each project env, register a kernel named after the env (`<env>` for Python, `<env>-r` for
-R):
+R). Keep the `-r` suffix: a kernel with the same name overwrites the other one:
 
 ```sh
 # Python
@@ -157,7 +157,9 @@ set-option -g focus-events on
 ```
 
 After `vim.pack` installs molten on the first launch, restart Neovim once so its commands are
-registered. `:checkhealth molten` and `:checkhealth image` check the setup.
+registered. If the `neovim` env was created after that first launch, molten's commands are missing
+(`E117: Unknown function: MoltenAvailableKernels`): run `:UpdateRemotePlugins` and restart Neovim.
+`:checkhealth molten` and `:checkhealth image` check the setup.
 
 - `<leader>ji` starts the kernel named after the active conda env (or opens the picker),
   `<leader>jI` opens the picker to attach another kernel (e.g. R or bash).
