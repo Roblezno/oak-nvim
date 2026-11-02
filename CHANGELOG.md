@@ -33,6 +33,9 @@ each conda env), see the README.
 R_MakeMissingBinding): Mason builds its library with the R on PATH at install time, but its
 wrapper runs the R on PATH at run time. The server now always runs with the R that installed
 languageserver: the active conda env's R and packages, or the system R.
+- R files outside a git repository got the home folder as workspace root (nvim-lspconfig's
+fallback), so languageserver indexed every R file under it (conda envs included) and stopped
+answering. They now run without a workspace root (single-file mode).
 
 ## 0.3.0-dev (Unreleased)
 ### Implemented

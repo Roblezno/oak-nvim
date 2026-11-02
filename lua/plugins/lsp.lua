@@ -33,8 +33,14 @@ vim.lsp.config("lua_ls", {
 -- (rlang.so: undefined symbol R_MakeMissingBinding).
 -- Not attached to quarto buffers: R chunks in .qmd go through otter (see plugins/markdown.lua),
 -- attaching here too would duplicate completions and diagnostics.
+-- R files outside a git repo run without a workspace root (single-file mode). nvim-lspconfig
+-- falls back to the home folder, and languageserver then indexes every R file under it
+-- (conda envs included) and stops answering.
 vim.lsp.config("r_language_server", {
   filetypes = { "r", "rmd" },
+  root_dir = function(bufnr, on_dir)
+    on_dir(vim.fs.root(bufnr, ".git"))
+  end,
 })
 if vim.fn.executable("R") == 1 then
   vim.lsp.enable("r_language_server")
