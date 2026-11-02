@@ -36,6 +36,11 @@ languageserver: the active conda env's R and packages, or the system R.
 - R files outside a git repository got the home folder as workspace root (nvim-lspconfig's
 fallback), so languageserver indexed every R file under it (conda envs included) and stopped
 answering. They now run without a workspace root (single-file mode).
+- R chunks in .qmd files showed "Failed to run diagnostics" (normalizePath(): No such file or
+directory) for <file>.qmd.otter.R. otter's hidden buffers only existed in memory, and lintr's
+object_length, object_name and object_usage linters need the file on disk. otter now writes
+its buffers to disk (buffers.write_to_disk = true) and deletes them on quit or when the main
+buffer is closed.
 
 ## 0.3.0-dev (Unreleased)
 ### Implemented

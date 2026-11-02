@@ -15,6 +15,13 @@ vim.pack.add({
   "https://github.com/quarto-dev/quarto-nvim",
 })
 
+-- write_to_disk: lintr (through r_language_server) needs the otter buffer to exist on disk,
+-- otherwise object_*_linter fail with normalizePath(). otter writes <file>.otter.<ext> on
+-- save and deletes it on quit or when the main buffer is closed
+require("otter").setup({
+  buffers = { write_to_disk = true },
+})
+
 require("quarto").setup({
   lspFeatures = {
     languages = { "r", "python", "bash" }, -- only languages with an installed LSP
