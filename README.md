@@ -22,8 +22,8 @@ img visualization in kitty based terms.
 - `unzip` and `gzip`: Mason extracts the language servers it downloads
 - `python3` with the `venv` module: Mason installs the Python language servers (basedpyright,
   ruff) in a virtual environment
-- [R](https://www.r-project.org): runs the R language server, whose packages are compiled from
-  source on install
+- [R](https://www.r-project.org) with the `languageserver` package (compiled from source on
+  install): runs the R language server. See [R language server](#r-language-server)
 - `curl`: blink.cmp downloads its prebuilt fuzzy matcher
 - Optional: [`fd`](https://github.com/sharkdp/fd) for faster file search in Telescope
 - Optional: a clipboard tool (`wl-clipboard` on Wayland, `xclip`/`xsel` on X11) for system
@@ -58,8 +58,7 @@ The Treesitter parsers are then downloaded and compiled in the background. Files
 they finish are not highlighted until you reopen them.
 
 Mason then installs the language servers in the background (`:Mason` shows the progress). The R
-server is compiled from source, so it can take several minutes; keep Neovim open until it
-finishes.
+language server is installed separately, see [R language server](#r-language-server).
 
 To try it without replacing your config:
 
@@ -168,6 +167,25 @@ registered. If the `neovim` env was created after that first launch, molten's co
 - `<leader>jo` enters the output window, `<leader>jh` hides the output, `<leader>jd` deletes it.
 - `<leader>jx` / `<leader>jR` / `<leader>jq` interrupt / restart / stop the kernel,
   `<leader>jb` opens HTML output in the browser.
+
+### R language server
+
+The R language server ([languageserver](https://github.com/REditorSupport/languageserver)) runs
+with the `R` on your PATH, so it always uses the R that installed it: inside an activated conda
+env it runs the env's R and sees its packages, outside it runs the system R. It is not installed
+by Mason, which compiles it for a single R, and it crashes when another R runs it.
+
+Install `languageserver` in each R you use. For the system R, run
+`install.packages("languageserver")` in an R session started outside conda (once per device).
+For each conda env with R:
+
+```sh
+mamba install -n <env> -c conda-forge r-languageserver
+```
+
+- Activate the conda env before starting Neovim: the server uses the R on PATH at that moment.
+- After a minor R upgrade (e.g. 4.6 to 4.7), install `languageserver` again.
+- Older setups can remove Mason's copy with `:MasonUninstall r-languageserver`.
 
 
 ## Structure

@@ -23,6 +23,16 @@ protocol).
 
 ### Changed
 - quarto-nvim's code runner is enabled and sends chunks to molten (default_method = "molten").
+- The R language server is no longer installed by Mason. It runs nvim-lspconfig's default command
+(R -e "languageserver::run()") with the R on PATH and is enabled in lsp.lua, excluded from
+mason-lspconfig's automatic_enable. languageserver must be installed in each R (the system R and
+each conda env), see the README.
+
+### Fixed
+- r_language_server crashed inside conda envs with another R (rlang.so: undefined symbol
+R_MakeMissingBinding): Mason builds its library with the R on PATH at install time, but its
+wrapper runs the R on PATH at run time. The server now always runs with the R that installed
+languageserver: the active conda env's R and packages, or the system R.
 
 ## 0.3.0-dev (Unreleased)
 ### Implemented
