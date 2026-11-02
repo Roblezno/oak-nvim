@@ -1,5 +1,5 @@
 # Changelog
-## 0.3.1-dev (Unreleased)
+## 0.3.1
 ### Implemented
 - Image support in markdown.lua with image.nvim (https://github.com/3rd/image.nvim), using the
 kitty graphics protocol (Ghostty) and the ImageMagick CLI. In .md and .qmd files the image link
@@ -42,7 +42,7 @@ object_length, object_name and object_usage linters need the file on disk. otter
 its buffers to disk (buffers.write_to_disk = true) and deletes them on quit or when the main
 buffer is closed.
 
-## 0.3.0-dev (Unreleased)
+## 0.3.0
 ### Implemented
 - Quarto (.qmd) highlighting and folding: the markdown Treesitter parser is registered for the
 quarto filetype. Code chunks and the YAML header are highlighted through the markdown queries
