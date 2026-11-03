@@ -121,6 +121,10 @@
       "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
       "src": "https://github.com/folke/trouble.nvim"
     },
+    "vim-slime": {
+      "rev": "305b4d81ff4630af5137fdeffb54aa0fef14761b",
+      "src": "https://github.com/jpalardy/vim-slime"
+    },
     "vim-tmux-navigator": {
       "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
       "src": "https://github.com/christoomey/vim-tmux-navigator"

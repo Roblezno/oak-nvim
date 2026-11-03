@@ -49,9 +49,9 @@ require("img-clip").setup({
 
 -- IMAGE.NVIM
 -- NOTE: Draws images inside nvim with the kitty graphics protocol (Ghostty implements it). In
--- markdown/quarto it shows the image link under the cursor in a popup, and molten uses it for plot
--- outputs. "magick_cli" uses the ImageMagick CLI, so no luarocks are needed. Inside tmux it needs
--- `allow-passthrough on` and `visual-activity off` in ~/.tmux.conf
+-- markdown/quarto it shows the image link under the cursor in a popup. "magick_cli" uses the
+-- ImageMagick CLI, so no luarocks are needed. Inside tmux it needs `allow-passthrough on` and
+-- `visual-activity off` in ~/.tmux.conf
 -- HELP: https://github.com/3rd/image.nvim, :checkhealth image
 vim.pack.add({
   "https://github.com/3rd/image.nvim",
@@ -67,14 +67,8 @@ require("image").setup({
       only_render_image_at_cursor_mode = "popup",
     },
   },
-  -- sizing recommended by molten for plot outputs
- --  max_width = 100,
- --  max_height = 12,
- --  max_width_window_percentage = math.huge,
- --  max_height_window_percentage = math.huge,
-  -- clear images covered by floating windows, except the floats listed here. "" is from molten's
-  -- recommended config. smear-cursor leaves 1x1 floats around the window that would hide every
-  -- molten plot, and notify's popups would hide plots in the top-right
+  -- clear images covered by floating windows, except the floats listed here: blink.cmp menus,
+  -- floats without a filetype (""), smear-cursor's 1x1 cursor floats and notify's popups
   window_overlap_clear_enabled = true,
   window_overlap_clear_ft_ignore = {
     "blink-cmp-menu", "blink-cmp-documentation", "blink-cmp-signature", "",
