@@ -80,6 +80,15 @@ vim.keymap.set("n", "<leader>tu", function()
   vim.notify("Diagnostic underlines " .. (underline and "on" or "off"))
 end, { desc = "Toggle diagnostic underlines (keep signs)" })
 
+-- NOTIFY (nvim-notify)
+-- NOTE: Dismissed popups stay in the history (<leader>nh). require() is called inside the
+-- function because plugins are not loaded yet when this file runs
+-- HELP: :help notify.dismiss(), :Notifications
+vim.keymap.set("n", "<leader>nd", function()
+  require("notify").dismiss({ silent = true, pending = true })
+end, { desc = "Dismiss notifications" })
+vim.keymap.set("n", "<leader>nh", "<Cmd>Notifications<CR>", { desc = "Notification history" })
+
 -- MARKDOWN / QUARTO (quarto-nvim)
 -- NOTE: The preview opens in the browser and also works for plain .md files
 vim.keymap.set("n", "<leader>mp", "<Cmd>QuartoPreview<CR>", { desc = "Quarto preview in browser" })
