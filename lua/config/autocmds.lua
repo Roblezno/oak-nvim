@@ -117,3 +117,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 	desc = "Disable Ruff hover in favor of basedpyright",
 })
+
+-- Nextflow comment style, so `gc` works (Neovim ships no ftplugin for Nextflow)
+-- NOTE: The nextflow filetype is detected in config/options.lua
+-- HELP: :help 'commentstring', :help commenting
+local nextflow_buffer_group = vim.api.nvim_create_augroup("NextflowBuffer", {})
+vim.api.nvim_create_autocmd("FileType", {
+	group = nextflow_buffer_group,
+	pattern = "nextflow",
+	callback = function(ev)
+		vim.bo[ev.buf].commentstring = "// %s"
+	end,
+	desc = "Set Nextflow comment style",
+})

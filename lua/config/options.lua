@@ -98,6 +98,25 @@ vim.opt.guicursor = {
 }
 
 
+-- Filetypes
+-- Nextflow: not detected by Neovim. Scripts (.nf) and config files share one filetype, the
+-- language server tells them apart by extension. A *.config file counts as Nextflow when a
+-- nextflow.config sits in its folder or above (nf-core keeps extra configs in conf/).
+-- nf-test.config is excluded (not handled by the language server). Returning nil falls back to
+-- Neovim's own .config detection
+-- HELP: :help vim.filetype.add()
+vim.filetype.add({
+	extension = { nf = "nextflow" },
+	filename = { ["nextflow.config"] = "nextflow" },
+	pattern = {
+		[".*%.config"] = function(path)
+			if vim.fs.basename(path) ~= "nf-test.config" and vim.fs.root(path, "nextflow.config") then
+				return "nextflow"
+			end
+		end,
+	},
+})
+
 -- Folding Settings
 vim.opt.foldmethod = "expr" -- Use expression for folding
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folding
