@@ -3,10 +3,9 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.3.2. The base editor, UI, navigation, Treesitter (baseline languages), base
+> **Status:** v0.4.0. The base editor, UI, navigation, Treesitter (baseline languages), base
 LSP and cmp with some utilities and custom theme updates with personal plugins. 
-Now implementing Quarto markdown related plugins, molten for running code blocks and
-img visualization in kitty based terms.
+Quarto markdown support, with code sent to a REPL in a tmux pane (vim-slime).
 
 ## Requirements
 
@@ -31,10 +30,11 @@ img visualization in kitty based terms.
   supported)
 - Optional: the [Quarto CLI](https://quarto.org) for the browser preview of `.qmd` and `.md`
   files
-- Optional, to run code chunks and show images:
-  [Miniforge](https://github.com/conda-forge/miniforge) (conda/mamba in `~/miniforge3`),
-  ImageMagick (`magick`) and a terminal with the kitty graphics protocol (Ghostty, kitty). See
-  [Running code chunks](#running-code-chunks-molten)
+- Optional, to run code: [tmux](https://github.com/tmux/tmux) and a REPL for each language
+  (`R` or radian, IPython or Python 3.13+, `bash`). See [Running code](#running-code-vim-slime)
+- Optional, for image popups: ImageMagick (`magick`) and a terminal with the kitty graphics
+  protocol (Ghostty, kitty). Inside tmux it needs the options shown in
+  [Markdown and Quarto](#markdown-and-quarto)
 
 ## Installation
 
@@ -70,8 +70,7 @@ NVIM_APPNAME=oak-nvim nvim
 ### Updating plugins
 
 Run `:lua vim.pack.update()`, review the changes, then `:write` to apply them or `:quit` to
-cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpdate`). When
-`molten-nvim` is updated, `:UpdateRemotePlugins` runs too; restart Neovim afterwards.
+cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpdate`).
 
 ## Features
 
@@ -89,6 +88,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | UI         | [transparent-popups](https://github.com/Roblezno/nvim-transparent-popups) | Custom themed popups               |
 | Utilities  | [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                | Auto-close brackets and quotes     |
 | Utilities  | [which-key.nvim](https://github.com/folke/which-key.nvim)                 | Keymap hints                       |
+| Utilities  | [vim-slime](https://github.com/jpalardy/vim-slime)                        | Send code to a REPL in tmux        |
 | Navigation | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)           | File explorer                      |
 | Navigation | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)        | Fuzzy finder (with fzf-native)     |
 | Navigation | [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)            | Scrollbar                          |
@@ -101,8 +101,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                  | Quarto preview, LSP in code chunks |
 | Markdown   | [otter.nvim](https://github.com/jmbuhr/otter.nvim)                        | LSP backend for code chunks        |
 | Markdown   | [img-clip.nvim](https://github.com/HakonHarnes/img-clip.nvim)             | Paste clipboard images             |
-| Markdown   | [image.nvim](https://github.com/3rd/image.nvim)                           | Image popups and plot outputs      |
-| Markdown   | [molten-nvim](https://github.com/benlubas/molten-nvim)                    | Run code chunks in Jupyter kernels |
+| Markdown   | [image.nvim](https://github.com/3rd/image.nvim)                           | Image link popups                  |
 
 ### Markdown and Quarto
 
@@ -117,56 +116,28 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 - `<leader>mi` saves the clipboard image in an `assets/` folder next to the current file and
   inserts the markdown link.
 - With the cursor on an image link in `.md` or `.qmd`, the image is shown in a popup
-  (image.nvim).
+  (image.nvim, `:checkhealth image` checks the setup). Inside tmux, add this to `~/.tmux.conf`
+  so images are drawn:
 
-### Running code chunks (molten)
+  ```
+  set -gq allow-passthrough on
+  set -g visual-activity off
+  set-option -g focus-events on
+  ```
 
-Code chunks in `.qmd` files run in Jupyter kernels through molten, and their output (text and
-plots) is shown under each chunk. Molten runs from a dedicated `neovim` conda env, so it works
-whichever env is active. Each project env runs its own kernel, so chunks see that env's packages.
+### Running code (vim-slime)
 
-One-time setup:
+Code is sent with [vim-slime](https://github.com/jpalardy/vim-slime) to a REPL running in another
+tmux pane: open a split next to Neovim and start `R`, `ipython` or `bash` in it. Code goes to the
+last active pane (`{last}`) without asking, `<leader>rs` picks another one. Start the REPL inside
+the conda env you need, so it sees that env's packages.
 
-```sh
-mamba create -n neovim -c conda-forge python=3.12 pynvim jupyter_client cairosvg pyperclip bash_kernel
-mamba run -n neovim python -m bash_kernel.install --user   # kernel "bash"
-mkdir -p ~/.local/share/jupyter/runtime                     # jupyter_client does not create it
-```
-
-For each project env, register a kernel named after the env (`<env>` for Python, `<env>-r` for
-R). Keep the `-r` suffix: a kernel with the same name overwrites the other one:
-
-```sh
-# Python
-mamba install -n <env> -c conda-forge ipykernel
-mamba run -n <env> python -m ipykernel install --user --name <env> --display-name "Python (<env>)"
-
-# R (installspec needs jupyter on PATH, taken from the neovim env)
-mamba install -n <env> -c conda-forge r-irkernel
-env PATH="$HOME/miniforge3/envs/neovim/bin:$PATH" mamba run -n <env> \
-  R -q -e "IRkernel::installspec(name = '<env>-r', displayname = 'R (<env>)')"
-```
-
-Inside tmux, add this to `~/.tmux.conf` so images are drawn:
-
-```
-set -gq allow-passthrough on
-set -g visual-activity off
-set-option -g focus-events on
-```
-
-After `vim.pack` installs molten on the first launch, restart Neovim once so its commands are
-registered. If the `neovim` env was created after that first launch, molten's commands are missing
-(`E117: Unknown function: MoltenAvailableKernels`): run `:UpdateRemotePlugins` and restart Neovim.
-`:checkhealth molten` and `:checkhealth image` check the setup.
-
-- `<leader>ji` starts the kernel named after the active conda env (or opens the picker),
-  `<leader>jI` opens the picker to attach another kernel (e.g. R or bash).
-- `<leader>jc` / `<leader>ja` / `<leader>jA` / `<leader>jl` run the cell / cell and above / all
-  cells / line, `<leader>jr` runs the visual selection.
-- `<leader>jo` enters the output window, `<leader>jh` hides the output, `<leader>jd` deletes it.
-- `<leader>jx` / `<leader>jR` / `<leader>jq` interrupt / restart / stop the kernel,
-  `<leader>jb` opens HTML output in the browser.
+- `<leader>rc` / `<leader>ra` / `<leader>rA` run the cell / cell and above / all cells of a
+  `.qmd` (quarto runner, only cells in the same language as the current one).
+- `<leader>rl` sends the line (`3<leader>rl` sends three), `<leader>rp` the paragraph and
+  `<leader>rr` the visual selection. These work in any file (`.R`, `.py`, `.sh`, `.qmd`).
+- Code is sent with bracketed paste, so Python indentation survives. Use IPython or Python 3.13+,
+  older `python` REPLs do not support it.
 
 ### R language server
 

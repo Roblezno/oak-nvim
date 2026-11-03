@@ -1,5 +1,30 @@
 # Changelog
-## 0.3.2 (Unreleased)
+## 0.4.0
+### Implemented
+- Running code with vim-slime (https://github.com/jpalardy/vim-slime) in utilities.lua. Code is
+sent to a REPL (R, IPython, bash...) in the last active tmux pane, with bracketed paste and no
+prompt on the first send. It replaces molten-nvim for .qmd chunks and also works in plain
+scripts.
+- Run/REPL keymaps under <leader>r: <leader>rc/ra/rA run the cell/cell and above/all cells of a
+.qmd (quarto runner), <leader>rl/rp send the line/paragraph, <leader>rr sends the visual
+selection and <leader>rs picks another tmux pane.
+- Nextflow filetype detection in options.lua: .nf files, nextflow.config, and *.config files
+with a nextflow.config in their folder or above (nf-test.config excluded). Nextflow buffers use
+`// %s` comments, so `gc` works.
+- Diagnostic toggles: <leader>td turns diagnostics on/off, <leader>tu toggles only the
+underlines (signs stay).
+- nvim-notify keymaps: <leader>nd dismisses the popups, <leader>nh opens the notification
+history.
+
+### Changed
+- quarto-nvim's code runner sends chunks to vim-slime (default_method = "slime").
+- img-clip.nvim and image.nvim moved from markdown.lua to utilities.lua. image.nvim is only used
+for the image link popup in .md and .qmd files, with its default image sizes.
+
+### Removed
+- molten-nvim and its setup: the <leader>j keymaps, the PackChanged autocmd running
+:UpdateRemotePlugins, python3_host_prog and the `neovim` conda env. Jupyter kernels are no
+longer needed to run code chunks.
 
 ## 0.3.1
 ### Implemented
