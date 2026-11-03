@@ -3,7 +3,7 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.3.1. The base editor, UI, navigation, Treesitter (baseline languages), base
+> **Status:** v0.3.2. The base editor, UI, navigation, Treesitter (baseline languages), base
 LSP and cmp with some utilities and custom theme updates with personal plugins. 
 Now implementing Quarto markdown related plugins, molten for running code blocks and
 img visualization in kitty based terms.

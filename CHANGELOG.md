@@ -1,4 +1,6 @@
 # Changelog
+## 0.3.2 (Unreleased)
+
 ## 0.3.1
 ### Implemented
 - Image support in markdown.lua with image.nvim (https://github.com/3rd/image.nvim), using the
