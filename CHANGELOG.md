@@ -1,4 +1,6 @@
 # Changelog
+## 0.4.1-dev (Unreleased)
+
 ## 0.4.0
 ### Implemented
 - Running code with vim-slime (https://github.com/jpalardy/vim-slime) in utilities.lua. Code is
