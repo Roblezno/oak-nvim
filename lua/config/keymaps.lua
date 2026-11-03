@@ -67,6 +67,18 @@ vim.keymap.set({ "n", "v" }, "<leader>lt", vim.lsp.buf.type_definition, { desc =
 
 -- Diagnostics with T
 vim.keymap.set('n', '<leader>tx', '<cmd>Trouble diagnostics toggle<CR>', { desc = 'Diagnostics (Trouble)' })
+-- Toggle diagnostics globally. <leader>tu keeps the gutter signs and only hides underlines
+-- HELP: :help vim.diagnostic.enable(), :help vim.diagnostic.config()
+vim.keymap.set("n", "<leader>td", function()
+  local enabled = not vim.diagnostic.is_enabled()
+  vim.diagnostic.enable(enabled)
+  vim.notify("Diagnostics " .. (enabled and "on" or "off"))
+end, { desc = "Toggle diagnostics (all)" })
+vim.keymap.set("n", "<leader>tu", function()
+  local underline = not vim.diagnostic.config().underline
+  vim.diagnostic.config({ underline = underline })
+  vim.notify("Diagnostic underlines " .. (underline and "on" or "off"))
+end, { desc = "Toggle diagnostic underlines (keep signs)" })
 
 -- MARKDOWN / QUARTO (quarto-nvim)
 -- NOTE: The preview opens in the browser and also works for plain .md files
