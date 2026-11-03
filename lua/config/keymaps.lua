@@ -95,4 +95,18 @@ vim.keymap.set("n", "<leader>mp", "<Cmd>QuartoPreview<CR>", { desc = "Quarto pre
 vim.keymap.set("n", "<leader>mq", "<Cmd>QuartoClosePreview<CR>", { desc = "Close Quarto preview" })
 vim.keymap.set("n", "<leader>mi", "<Cmd>PasteImage<CR>", { desc = "Paste clipboard image (img-clip)" })
 
+-- RUN / REPL (vim-slime + quarto runner)
+-- NOTE: Code goes to the REPL in the last active tmux pane (vim-slime, see utilities.lua). The
+-- cell keymaps (rc/ra/rA) use quarto's runner and only work in .qmd files; line, paragraph and
+-- selection go straight to slime and work in any file. <Plug> targets need remap = true.
+-- require() is called inside each function because plugins are not loaded yet when this file runs
+-- HELP: :help slime, https://github.com/quarto-dev/quarto-nvim
+vim.keymap.set("n", "<leader>rc", function() require("quarto.runner").run_cell() end, { desc = "Run cell (quarto)" })
+vim.keymap.set("n", "<leader>ra", function() require("quarto.runner").run_above() end, { desc = "Run cell and above (quarto)" })
+vim.keymap.set("n", "<leader>rA", function() require("quarto.runner").run_all() end, { desc = "Run all cells (quarto)" })
+vim.keymap.set("n", "<leader>rl", "<Plug>SlimeLineSend", { remap = true, desc = "Send line to REPL" })
+vim.keymap.set("n", "<leader>rp", "<Plug>SlimeParagraphSend", { remap = true, desc = "Send paragraph to REPL" })
+vim.keymap.set("x", "<leader>rr", "<Plug>SlimeRegionSend", { remap = true, desc = "Send selection to REPL" })
+vim.keymap.set("n", "<leader>rs", "<Plug>SlimeConfig", { remap = true, desc = "Set REPL target (tmux pane)" })
+
 

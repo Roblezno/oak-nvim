@@ -28,5 +28,6 @@ require("quarto").setup({
   },
   codeRunner = {
     enabled = true,
+    default_method = "slime", -- send chunks to a tmux pane with vim-slime (see utilities.lua)
   },
 })

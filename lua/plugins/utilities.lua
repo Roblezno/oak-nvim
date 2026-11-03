@@ -78,3 +78,21 @@ require("image").setup({
 })
 
 
+-- VIM-SLIME
+-- NOTE: Sends code to a REPL (R, IPython, bash...) running in another tmux pane. "{last}" is the
+-- last active pane, so open the REPL in a split next to nvim (<leader>rs picks another pane).
+-- Quarto's code runner sends chunks through it (see markdown.lua). Bracketed paste keeps Python
+-- indentation intact (needs IPython or Python 3.13+). slime_no_mappings must be set before the
+-- plugin loads, so the options go before vim.pack.add(). Keymaps live in keymaps.lua
+-- HELP: https://github.com/jpalardy/vim-slime, :help slime
+vim.g.slime_target = "tmux"
+vim.g.slime_default_config = { socket_name = "default", target_pane = "{last}" }
+vim.g.slime_dont_ask_default = 1 -- use the config above, no prompt on the first send
+vim.g.slime_bracketed_paste = 1
+vim.g.slime_no_mappings = 1 -- drop the default <C-c><C-c> and <C-c>v mappings
+
+vim.pack.add({
+  "https://github.com/jpalardy/vim-slime",
+})
+
+
