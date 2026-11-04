@@ -1,5 +1,5 @@
 # Changelog
-## 0.4.1-dev (Unreleased)
+## 0.5.0-dev
 
 ## 0.4.0
 ### Implemented

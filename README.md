@@ -6,6 +6,8 @@ scripting, statistics with R and Quarto Markdown writing (among others).
 > **Status:** v0.4.1(Unreleased). The base editor, UI, navigation, Treesitter (baseline languages), base
 LSP and cmp with some utilities and custom theme updates with personal plugins. 
 Quarto markdown support, with code sent to a REPL in a tmux pane (vim-slime).
+Currently implementing a refactor for core functionallities in v0.5.0
+
 
 ## Requirements
 
