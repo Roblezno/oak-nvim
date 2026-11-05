@@ -93,6 +93,11 @@ is installed but not enabled. Every server gets file-rename support.
 - Diagnostics: inline text is on, as `● message`, with the source only when a buffer has several.
 `<leader>ti` toggles it. Underlined, not updated while typing and sorted by severity. Gutter icons
 come from the new shared icon set (lua/utils/icons.lua, `require("utils").icons`).
+- Per-server LSP settings moved from plugins/lsp.lua to after/lsp/<name>.lua, which Neovim merges
+on top of the nvim-lspconfig defaults. vtsls uses the workspace TypeScript, updates imports on
+file move, and adds server-side fuzzy matching, function-call completion and short inlay hints.
+lua_ls adds parameter type hints and silences the missing-fields and trailing-space checks.
+cssls ignores empty rules. `<leader>th` toggles inlay hints, which stay off by default.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).

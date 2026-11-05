@@ -95,3 +95,11 @@ vim.keymap.set("n", "<leader>ti", function()
 	end
 	vim.notify("Diagnostic inline text " .. (inline_text and "off" or "on"))
 end, { desc = "Toggle diagnostic inline text (keep signs)" })
+
+-- Inlay hints stay off until toggled. Each server's hint settings live in after/lsp/<name>.lua
+-- HELP: :help vim.lsp.inlay_hint.enable()
+vim.keymap.set("n", "<leader>th", function()
+	local enabled = not vim.lsp.inlay_hint.is_enabled()
+	vim.lsp.inlay_hint.enable(enabled)
+	vim.notify("Inlay hints " .. (enabled and "on" or "off"))
+end, { desc = "Toggle inlay hints" })
