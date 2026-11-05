@@ -12,7 +12,7 @@
 -- HELP: https://github.com/craftzdog/solarized-osaka.nvim
 require("solarized-osaka").setup({
 	transparent = true,
-	style = "vivid",
+  --style = "vivid",
 })
 
 vim.cmd.colorscheme("solarized-osaka-vivid")
