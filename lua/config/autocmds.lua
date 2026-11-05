@@ -157,6 +157,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "Disable LSP document colors in favor of nvim-highlight-colors",
 })
 
+-- Mark CodeDiff's tab, so <leader>gv closes it instead of opening another one
+-- NOTE: A tab variable goes away with its tab, so CodeDiffClose doesn't need handling
+-- HELP: :help vim.t, https://github.com/esmuellert/codediff.nvim#user-autocmd-events
+local codediff_tab_group = vim.api.nvim_create_augroup("CodeDiffTab", {})
+vim.api.nvim_create_autocmd("User", {
+	group = codediff_tab_group,
+	pattern = "CodeDiffOpen",
+	callback = function(ev)
+		vim.t[ev.data.tabpage].codediff = true
+	end,
+	desc = "Mark CodeDiff tabs",
+})
+
 -- Nextflow comment style, so `gc` works (Neovim ships no ftplugin for Nextflow)
 -- NOTE: The nextflow filetype is detected in config/options.lua
 -- HELP: :help 'commentstring', :help commenting

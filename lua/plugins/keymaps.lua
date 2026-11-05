@@ -88,6 +88,15 @@ end
 vim.keymap.set("n", "]c", goto_hunk("next", "]c"), { desc = "Next git hunk" })
 vim.keymap.set("n", "[c", goto_hunk("prev", "[c"), { desc = "Previous git hunk" })
 
+-- GIT DIFF VIEW (codediff)
+-- NOTE: Under <leader>g, not <leader>d, so they don't clash with the no-copy delete operator.
+-- Inside a CodeDiff tab <leader>gv closes it: an autocmd in config/autocmds.lua marks the tab
+vim.keymap.set("n", "<leader>gv", function()
+	vim.cmd(vim.t.codediff and "tabclose" or "CodeDiff")
+end, { desc = "Git toggle diff view" })
+vim.keymap.set("n", "<leader>gl", "<cmd>CodeDiff history %<CR>", { desc = "Git file history" })
+vim.keymap.set("n", "<leader>gL", "<cmd>CodeDiff history<CR>", { desc = "Git repo history" })
+
 -- TROUBLE diagnostics list
 -- NOTE: The plain diagnostic toggles (<leader>td, <leader>tu) live in config/keymaps.lua
 vim.keymap.set("n", "<leader>tx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (Trouble)" })

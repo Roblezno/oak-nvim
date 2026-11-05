@@ -107,6 +107,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | Completion | [blink.cmp](https://github.com/saghen/blink.cmp)                          | Completion Menu + cmdline          |
 | Git        | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)               | Git signs, blame and staging       |
 | Git        | [mini.diff](https://github.com/craftzdog/mini.diff/tree/feat/grouping)    | Diff overlay, grouped by hunk      |
+| Git        | [codediff.nvim](https://github.com/esmuellert/codediff.nvim)              | Side-by-side diffs and history     |
 | Completion | [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)      | Snippet collection                 |
 | Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                  | Quarto preview, LSP in code chunks |
 | Markdown   | [otter.nvim](https://github.com/jmbuhr/otter.nvim)                        | LSP backend for code chunks        |

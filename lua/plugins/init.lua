@@ -53,6 +53,7 @@ vim.pack.add({
 	"https://github.com/lewis6991/gitsigns.nvim",
 	-- craftzdog's fork, for the whole-hunk overlay (view.overlay_style)
 	{ src = "https://github.com/craftzdog/mini.diff", version = "feat/grouping" },
+	"https://github.com/esmuellert/codediff.nvim",
 	-- shared dependencies
 	"https://github.com/nvim-lua/plenary.nvim", -- telescope, todo-comments
 })

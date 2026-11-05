@@ -57,6 +57,11 @@ unstages it if nothing is left to stage, and `<leader>gh` stages or unstages the
 `feat/grouping`), for its overlay that groups changes into whole hunks, the way `git diff` shows
 them. `<leader>gd` toggles it and `]c`/`[c` jump between hunks. gitsigns keeps the signs and
 staging, so mini.diff's own mappings are off.
+- codediff.nvim (https://github.com/esmuellert/codediff.nvim) in git.lua for side-by-side diffs
+and history. The explorer is a tree 50 columns wide that opens files as the cursor moves and shows
++/- line stats. Compact mode shows only the changes plus 8 context lines, with folds synced across
+panes. `<leader>gv` toggles the diff view, `<leader>gl` shows the current file's history and
+`<leader>gL` the repo history.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes, empty for
 now).
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.

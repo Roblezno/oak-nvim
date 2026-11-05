@@ -1,6 +1,6 @@
 -- #################################################################
 -- Git related plugins. Configures:
--- gitsigns, mini.diff
+-- gitsigns, mini.diff, codediff
 -- #################################################################
 
 -- GITSIGNS
@@ -25,5 +25,24 @@ require("mini.diff").setup({
 		goto_prev = "",
 		goto_next = "",
 		goto_last = "",
+	},
+})
+
+-- CODEDIFF
+-- NOTE: Side-by-side diffs and history in their own tab, for reviewing larger changes. It downloads
+-- its diff library on first use. <leader>gv, gl and gL are in plugins/keymaps.lua, its other keys
+-- (q closes, gc toggles compact, ]f and [f change file...) only exist inside its tab
+-- HELP: :help codediff
+require("codediff").setup({
+	diff = {
+		compact = true, -- Only the changes plus some context, the rest is folded
+		compact_context_lines = 8,
+		compact_sync_folds = true,
+	},
+	explorer = {
+		view_mode = "tree",
+		width = 50,
+		auto_open_on_cursor = true,
+		line_stats = { enabled = true },
 	},
 })
