@@ -17,6 +17,16 @@ require("solarized-osaka").setup({
 
 vim.cmd.colorscheme("solarized-osaka-vivid")
 
+-- MINI.ICONS
+-- NOTE: The one icon source for every plugin. The mock makes require("nvim-web-devicons") return
+-- mini.icons, so plugins that only know devicons (telescope, neo-tree, lualine) use it too and
+-- nvim-web-devicons is not installed. It must run before any of them asks for icons, so it stays
+-- right after the colorscheme, at the top of the first group file (see plugins/init.lua)
+-- HELP: :help mini.icons, :help MiniIcons.mock_nvim_web_devicons()
+local mini_icons = require("mini.icons")
+mini_icons.setup({})
+mini_icons.mock_nvim_web_devicons()
+
 -- TRANSPARENT POPUPS
 -- NOTE: My own plugin: float borders and transparency that follow the colorscheme, padding for
 -- LSP hover and the blink.cmp menu. Must stay after the colorscheme and before completion.lua
@@ -97,6 +107,3 @@ vim.notify = require("notify")
 
 -- SMEAR CURSOR
 require("smear_cursor").setup({})
-
--- MINI.ICONS
-require("mini.icons").setup({})

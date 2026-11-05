@@ -48,10 +48,13 @@ and a diagonal `╱` fill in empty diff areas (fillchars).
 - Splits moved from `<leader>wsh`/`<leader>wsv` to `ss`/`sv`.
 - Colorscheme: solarized-osaka (https://github.com/craftzdog/solarized-osaka.nvim), vivid
 style, transparent background. lualine uses the `auto` theme.
+- mini.icons is the one icon source: it mocks nvim-web-devicons, so plugins that only know
+devicons (telescope, neo-tree, lualine) use it too. Set up right after the colorscheme.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
 - kanagawa.nvim, replaced by solarized-osaka.nvim.
+- nvim-web-devicons, replaced by the mini.icons mock.
 
 ## 0.4.0
 ### Implemented

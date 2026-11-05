@@ -18,7 +18,7 @@ vim.pack.add({
 	"https://github.com/folke/todo-comments.nvim",
 	"https://github.com/rcarriga/nvim-notify",
 	"https://github.com/sphamba/smear-cursor.nvim",
-	"https://github.com/nvim-mini/mini.icons",
+	"https://github.com/nvim-mini/mini.icons", -- also stands in for nvim-web-devicons
 	-- utilities.lua
 	"https://github.com/windwp/nvim-autopairs",
 	"https://github.com/folke/which-key.nvim",
@@ -50,7 +50,6 @@ vim.pack.add({
 	-- shared dependencies
 	"https://github.com/nvim-lua/plenary.nvim", -- neo-tree, telescope, todo-comments
 	"https://github.com/MunifTanjim/nui.nvim", -- neo-tree
-	"https://github.com/nvim-tree/nvim-web-devicons", -- neo-tree, telescope (optional)
 })
 
 -- Plugin groups. Order matters:
