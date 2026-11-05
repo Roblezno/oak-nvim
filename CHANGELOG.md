@@ -24,6 +24,9 @@ Other filetypes keep the global default of 2 spaces. A project's .editorconfig s
 globalstatus follows laststatus, otherwise it would reset it to 2.
 - Rounded borders on every float (winborder), the file name in the terminal tab title (title),
 and a diagonal `╱` fill in empty diff areas (fillchars).
+- Persistent undo moved from ~/.local/share/nvim/undodir to ~/.cache/nvim/undodir.
+- `:` completion and `:find` skip node_modules/ and build artifacts (*.o, *.obj, *.pyc, *.class,
+*.jar) through wildignore.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).

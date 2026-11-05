@@ -76,11 +76,11 @@ vim.opt.diffopt:append("vertical") -- Vertical diff splits
 vim.opt.diffopt:append("algorithm:patience") -- Better diff algorithm
 vim.opt.diffopt:append("linematch:60") -- Better diff highlighting (smart line matching)
 
--- Persistent undo: keep edit history when files are reopened.
--- The standard data path respects XDG_DATA_HOME and NVIM_APPNAME.
+-- Persistent undo: keep edit history when files are reopened (swap files only get in the way).
+-- Lives in the cache path (~/.cache/nvim/undodir), which respects XDG_CACHE_HOME and NVIM_APPNAME.
 -- HELP: :help undo-persistence, :help stdpath()
 vim.opt.undofile = true -- Save history on file write and restore it on file read
-local undodir = vim.fn.stdpath("data") .. "/undodir"
+local undodir = vim.fn.stdpath("cache") .. "/undodir"
 vim.opt.undodir = undodir
 if vim.fn.isdirectory(undodir) == 0 then
 	vim.fn.mkdir(undodir, "p") -- Create the directory and any missing parents
@@ -91,7 +91,7 @@ vim.opt.errorbells = false -- Disable error sounds
 vim.opt.backspace = "indent,eol,start" -- Make backspace behave naturally
 vim.opt.autochdir = false -- Don't change directory automatically
 vim.opt.iskeyword:append("-") -- Treat dash as part of a word (kebab-case names, CSS classes)
-vim.opt.path:append("**") -- Search into subfolders with `gf`
+vim.opt.path:append("**") -- Search into subfolders with `:find` and `gf`
 vim.opt.selection = "inclusive" -- Use inclusive selection
 vim.opt.mouse = "a" -- Enable mouse support
 vim.opt.clipboard:append("unnamedplus") -- Use system clipboard
@@ -99,6 +99,8 @@ vim.opt.modifiable = true -- Allow editing buffers
 vim.opt.encoding = "UTF-8" -- Use UTF-8 encoding
 vim.opt.wildmenu = true -- Enable command-line completion menu
 vim.opt.wildmode = "longest:full,full" -- Completion mode for command-line
+-- Files skipped by `:` completion, `:find` and glob()
+vim.opt.wildignore:append({ "*/node_modules/*", "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
 vim.opt.wildignorecase = true -- Case-insensitive tab completion in commands
 
 -- Cursor Settings
