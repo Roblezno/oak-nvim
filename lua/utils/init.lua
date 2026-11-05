@@ -6,6 +6,7 @@
 
 return {
 	editor = require("utils.editor"),
+	git = require("utils.git"),
 	icons = require("utils.icons"),
 	lsp = require("utils.lsp"),
 	tabline = require("utils.tabline"),

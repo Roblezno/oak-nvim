@@ -49,6 +49,10 @@ twice.
 prettierd or prettier (the first available), and oxfmt only runs in projects with an oxfmt config.
 Lua uses stylua, sh uses shfmt, fish uses fish_indent and Python uses ruff. R and Nextflow aren't
 formatted on save. `:ToggleFormatter` turns it off or back on for the current buffer.
+- gitsigns.nvim (https://github.com/lewis6991/gitsigns.nvim) in the new plugins/git.lua, with its
+defaults. `<leader>gb` blames the line and `<leader>gB` the buffer. `<leader>go` opens the file as
+of the commit that last touched the line, in a new tab. `<leader>gs` stages the buffer, or
+unstages it if nothing is left to stage, and `<leader>gh` stages or unstages the hunk.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes, empty for
 now).
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.

@@ -50,6 +50,26 @@ vim.keymap.set("n", "<leader>lcR", function()
 	require("snacks").rename.rename_file()
 end, { desc = "LSP rename file (updates imports)" })
 
+-- GIT (gitsigns)
+-- NOTE: <leader>gh stages the hunk under the cursor, and unstages it if it's already staged.
+-- <leader>go and <leader>gs need more than one call, see lua/utils/git.lua
+-- HELP: :help gitsigns
+vim.keymap.set("n", "<leader>gb", function()
+	require("gitsigns").blame_line()
+end, { desc = "Git blame line" })
+vim.keymap.set("n", "<leader>gB", function()
+	require("gitsigns").blame()
+end, { desc = "Git blame buffer" })
+vim.keymap.set("n", "<leader>go", function()
+	require("utils").git.open_line_commit()
+end, { desc = "Git open file at the line's last commit" })
+vim.keymap.set("n", "<leader>gs", function()
+	require("utils").git.toggle_stage_buffer()
+end, { desc = "Git stage or unstage buffer" })
+vim.keymap.set("n", "<leader>gh", function()
+	require("gitsigns").stage_hunk()
+end, { desc = "Git stage or unstage hunk" })
+
 -- TROUBLE diagnostics list
 -- NOTE: The plain diagnostic toggles (<leader>td, <leader>tu) live in config/keymaps.lua
 vim.keymap.set("n", "<leader>tx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (Trouble)" })

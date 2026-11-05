@@ -49,6 +49,8 @@ vim.pack.add({
 	-- markdown.lua
 	"https://github.com/jmbuhr/otter.nvim",
 	"https://github.com/quarto-dev/quarto-nvim",
+	-- git.lua
+	"https://github.com/lewis6991/gitsigns.nvim",
 	-- shared dependencies
 	"https://github.com/nvim-lua/plenary.nvim", -- telescope, todo-comments
 })
@@ -64,4 +66,5 @@ require("plugins.treesitter")
 require("plugins.lsp")
 require("plugins.completion")
 require("plugins.markdown")
+require("plugins.git")
 require("plugins.keymaps")
