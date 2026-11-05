@@ -14,10 +14,34 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 vim.keymap.set("n", "<leader>bn", "<Cmd>bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bp", "<Cmd>bprevious<CR>", { desc = "Previous buffer" })
 
+-- Registers: delete, change and paste without touching the yank register, so the yanked text
+-- stays safe while editing around it. <leader>p pastes the last yank (register 0), even after
+-- deleting something. dw deletes the word backwards, also without copying
+-- HELP: :help quote_, :help quote0
+vim.keymap.set("n", "x", '"_x', { desc = "Delete character (no copy)" })
+vim.keymap.set({ "n", "x" }, "<leader>d", '"_d', { desc = "Delete (no copy)" })
+vim.keymap.set({ "n", "x" }, "<leader>c", '"_c', { desc = "Change (no copy)" })
+vim.keymap.set({ "n", "x" }, "<leader>p", '"0p', { desc = "Paste last yank" })
+vim.keymap.set("n", "dw", 'vb"_d', { desc = "Delete word backwards (no copy)" })
+
+-- Numbers and selection
+-- NOTE: + and - take over increment/decrement, so <C-a> is free for select all
+vim.keymap.set("n", "+", "<C-a>", { desc = "Increment number" })
+vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement number" })
+-- vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
+
+-- Open a line below/above without continuing the comment (keeps the indentation)
+vim.keymap.set("n", "<leader>o", "o<Esc>^Da", { desc = "Open line below (no comment)" })
+vim.keymap.set("n", "<leader>O", "O<Esc>^Da", { desc = "Open line above (no comment)" })
+
+-- Tabs
+-- NOTE: te leaves `:tabedit ` in the command line: Enter opens an empty tab, or type a file first
+vim.keymap.set("n", "te", ":tabedit ", { desc = "New tab" })
+
 -- Splitting & Resizing
 -- NOTE: Moving between windows/tmux panes (<C-h/j/k/l>) uses vim-tmux-navigator, see plugins/keymaps.lua
-vim.keymap.set("n", "<leader>wsv", "<Cmd>vsplit<CR>", { desc = "Window split vertically" })
-vim.keymap.set("n", "<leader>wsh", "<Cmd>split<CR>", { desc = "Window split horizontally" })
+vim.keymap.set("n", "ss", "<Cmd>split<CR>", { desc = "Split window horizontally" })
+vim.keymap.set("n", "sv", "<Cmd>vsplit<CR>", { desc = "Split window vertically" })
 vim.keymap.set("n", "<C-Up>", "<Cmd>resize +2<CR>", { desc = "Increase window height" })
 vim.keymap.set("n", "<C-Down>", "<Cmd>resize -2<CR>", { desc = "Decrease window height" })
 vim.keymap.set("n", "<C-Left>", "<Cmd>vertical resize -2<CR>", { desc = "Decrease window width" })

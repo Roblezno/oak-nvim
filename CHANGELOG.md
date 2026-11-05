@@ -12,6 +12,10 @@ line as a floating box, centered left to right and 20% from the top. blink.cmp's
 follows it.
 - Only the active window shows the cursorline (WinLeave/WinEnter autocmds). Windows that keep
 it off, like pickers and popups, are left alone.
+- Core keymaps in config/keymaps.lua: `x`, `<leader>d` and `<leader>c` delete/change without
+copying, `<leader>p` pastes the last yank, `dw` deletes the word backwards without copying,
+`+`/`-` increment/decrement, `te` opens a new tab (`:tabedit`), and
+`<leader>o`/`<leader>O` open a line below/above without continuing the comment.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
 for now.
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
@@ -38,6 +42,7 @@ and a diagonal `╱` fill in empty diff areas (fillchars).
 - Persistent undo moved from ~/.local/share/nvim/undodir to ~/.cache/nvim/undodir.
 - `:` completion and `:find` skip node_modules/ and build artifacts (*.o, *.obj, *.pyc, *.class,
 *.jar) through wildignore.
+- Splits moved from `<leader>wsh`/`<leader>wsv` to `ss`/`sv`.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
