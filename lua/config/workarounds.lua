@@ -1,0 +1,5 @@
+-- ================================================================================================
+-- TITLE : workarounds
+-- ABOUT : temporary fixes for bugs in Neovim or plugins. Each one says what it fixes and when it
+--         can be removed
+-- ================================================================================================

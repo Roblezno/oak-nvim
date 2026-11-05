@@ -1,5 +1,24 @@
 # Changelog
 ## 0.5.0-dev
+### Implemented
+- config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
+for now.
+- lua/utils/init.lua: returns the table of shared helper modules, empty for now.
+
+### Changed
+- New config layout. init.lua enables vim.loader, loads config.options, config.keymaps,
+config.autocmds, config.commands and config.workarounds, then plugins.
+- plugins/init.lua installs every plugin in a single vim.pack.add() call, then requires each
+group file (ui, utilities, navigation, treesitter, lsp, completion, markdown). Group files only
+configure their plugins.
+- Keymaps that use a plugin moved from config/keymaps.lua to plugins/keymaps.lua, required last
+so every plugin is set up first. config/keymaps.lua keeps the plain Neovim keymaps.
+- Leader keys moved from config/globals.lua to the top of config/options.lua.
+- Lua files are indented with tabs and use double quotes (stylua defaults).
+- transparent-popups is disabled: its spec and setup are commented out.
+
+### Removed
+- config/globals.lua (merged into config/options.lua).
 
 ## 0.4.0
 ### Implemented

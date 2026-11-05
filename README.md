@@ -165,8 +165,10 @@ mamba install -n <env> -c conda-forge r-languageserver
 
 ```
 init.lua              entry point
-lua/config/           options, keymaps, autocommands and globals
-lua/plugins/          plugin installation and configuration
+lua/config/           plain Neovim settings: options, keymaps, autocommands, commands, workarounds
+lua/plugins/          init.lua installs every plugin, one file per group configures them,
+                      keymaps.lua holds the keymaps that use a plugin
+lua/utils/            shared helper modules
 nvim-pack-lock.json   locked plugin revisions
 ```
 

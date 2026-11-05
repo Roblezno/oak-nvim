@@ -1,7 +1,14 @@
 -- ================================================================
 -- TITLE: NeoVim Options
--- ABOUT: Native editor defaults, persistent undo, folding, and window behavior
+-- ABOUT: Leader keys, native editor defaults, persistent undo, folding, and window behavior
 -- ================================================================
+
+-- Leader keys: I pick <space> since that's what I'm used to
+-- NOTE: Set first, before any keymap that uses <leader> is defined (config/keymaps.lua and
+-- plugins/keymaps.lua load after this file)
+-- HELP: :help mapleader
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Basic Settings
 vim.opt.number = true -- Line numbers

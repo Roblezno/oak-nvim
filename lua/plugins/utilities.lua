@@ -1,51 +1,32 @@
 -- #################################################################
--- Utility tools and Quality of Life related plugins. 
--- Nvim-autopairs, which-key, Trouble, Noice
+-- Utility tools and Quality of Life related plugins. Configures:
+-- nvim-autopairs, which-key, Trouble, img-clip, image.nvim, vim-slime
 -- #################################################################
 
-
 -- NVIM-AUTOPAIRS
-vim.pack.add({
-  "https://github.com/windwp/nvim-autopairs",
+require("nvim-autopairs").setup({
+	event = "InsertENter",
+	config = true,
 })
-
-require('nvim-autopairs').setup({
-  event = "InsertENter",
-  config = true
-})
-
 
 -- WHICH-KEY
-vim.pack.add({
-  "https://github.com/folke/which-key.nvim"
-})
-
 require("which-key").setup({})
 
-
+-- TODO: Do I need this now?
 -- TROUBLE
-vim.pack.add({
-  "https://github.com/folke/trouble.nvim"
-})
-
 require("trouble").setup({})
 
-
+-- TODO: Check if image plugins can go through SNACKS nvim
 -- IMG-CLIP.NVIM
 -- NOTE: Pastes a clipboard image into an assets/ folder next to the current file and inserts the
 -- markdown link. The defaults already cover markdown and quarto. Needs wl-clipboard on Wayland
 -- (xclip on X11)
 -- HELP: https://github.com/HakonHarnes/img-clip.nvim, :checkhealth img-clip
-vim.pack.add({
-  "https://github.com/HakonHarnes/img-clip.nvim",
-})
-
 require("img-clip").setup({
-  default = {
-    relative_to_current_file = true, -- assets/ next to the file, not in the cwd
-  },
+	default = {
+		relative_to_current_file = true, -- assets/ next to the file, not in the cwd
+	},
 })
-
 
 -- IMAGE.NVIM
 -- NOTE: Draws images inside nvim with the kitty graphics protocol (Ghostty implements it). In
@@ -53,46 +34,40 @@ require("img-clip").setup({
 -- ImageMagick CLI, so no luarocks are needed. Inside tmux it needs `allow-passthrough on` and
 -- `visual-activity off` in ~/.tmux.conf
 -- HELP: https://github.com/3rd/image.nvim, :checkhealth image
-vim.pack.add({
-  "https://github.com/3rd/image.nvim",
-})
-
 require("image").setup({
-  backend = "kitty",
-  processor = "magick_cli",
-  integrations = {
-    markdown = {
-      filetypes = { "markdown", "quarto" },
-      only_render_image_at_cursor = true,
-      only_render_image_at_cursor_mode = "popup",
-    },
-  },
-  -- clear images covered by floating windows, except the floats listed here: blink.cmp menus,
-  -- floats without a filetype (""), smear-cursor's 1x1 cursor floats and notify's popups
-  window_overlap_clear_enabled = true,
-  window_overlap_clear_ft_ignore = {
-    "blink-cmp-menu", "blink-cmp-documentation", "blink-cmp-signature", "",
-    "smear-cursor", "notify",
-  },
-  tmux_show_only_in_active_window = true,
+	backend = "kitty",
+	processor = "magick_cli",
+	integrations = {
+		markdown = {
+			filetypes = { "markdown", "quarto" },
+			only_render_image_at_cursor = true,
+			only_render_image_at_cursor_mode = "popup",
+		},
+	},
+	-- clear images covered by floating windows, except the floats listed here: blink.cmp menus,
+	-- floats without a filetype (""), smear-cursor's 1x1 cursor floats and notify's popups
+	window_overlap_clear_enabled = true,
+	window_overlap_clear_ft_ignore = {
+		"blink-cmp-menu",
+		"blink-cmp-documentation",
+		"blink-cmp-signature",
+		"",
+		"smear-cursor",
+		"notify",
+	},
+	tmux_show_only_in_active_window = true,
 })
-
 
 -- VIM-SLIME
 -- NOTE: Sends code to a REPL (R, IPython, bash...) running in another tmux pane. "{last}" is the
 -- last active pane, so open the REPL in a split next to nvim (<leader>rs picks another pane).
 -- Quarto's code runner sends chunks through it (see markdown.lua). Bracketed paste keeps Python
 -- indentation intact (needs IPython or Python 3.13+). slime_no_mappings must be set before the
--- plugin loads, so the options go before vim.pack.add(). Keymaps live in keymaps.lua
+-- plugin loads: its plugin/ files are only sourced after init.lua (see plugins/init.lua), so
+-- setting it here is early enough. Keymaps live in plugins/keymaps.lua
 -- HELP: https://github.com/jpalardy/vim-slime, :help slime
 vim.g.slime_target = "tmux"
 vim.g.slime_default_config = { socket_name = "default", target_pane = "{last}" }
 vim.g.slime_dont_ask_default = 1 -- use the config above, no prompt on the first send
 vim.g.slime_bracketed_paste = 1
 vim.g.slime_no_mappings = 1 -- drop the default <C-c><C-c> and <C-c>v mappings
-
-vim.pack.add({
-  "https://github.com/jpalardy/vim-slime",
-})
-
-

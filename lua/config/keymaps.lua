@@ -1,6 +1,6 @@
 -- =========================================================================
 -- TITLE: NeoVim Keymaps
--- ABOUT: Native editor-wide mappings; plugin mappings live in their specifications
+-- ABOUT: Native editor-wide mappings; keymaps that use a plugin live in plugins/keymaps.lua
 -- HELP: :help vim.lsp.buf.format(), :help vim.ui.select(), :help package-undotree
 -- ============================================================================
 
@@ -15,6 +15,7 @@ vim.keymap.set("n", "<leader>bn", "<Cmd>bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bp", "<Cmd>bprevious<CR>", { desc = "Previous buffer" })
 
 -- Splitting & Resizing
+-- NOTE: Moving between windows/tmux panes (<C-h/j/k/l>) uses vim-tmux-navigator, see plugins/keymaps.lua
 vim.keymap.set("n", "<leader>wsv", "<Cmd>vsplit<CR>", { desc = "Window split vertically" })
 vim.keymap.set("n", "<leader>wsh", "<Cmd>split<CR>", { desc = "Window split horizontally" })
 vim.keymap.set("n", "<C-Up>", "<Cmd>resize +2<CR>", { desc = "Increase window height" })
@@ -22,39 +23,12 @@ vim.keymap.set("n", "<C-Down>", "<Cmd>resize -2<CR>", { desc = "Decrease window 
 vim.keymap.set("n", "<C-Left>", "<Cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
 vim.keymap.set("n", "<C-Right>", "<Cmd>vertical resize +2<CR>", { desc = "Increase window width" })
 
--- Window & tmux pane navigation (vim-tmux-navigator)
-vim.keymap.set("n", "<C-h>", "<Cmd>TmuxNavigateLeft<CR>", { desc = "Go to left window/pane" })
-vim.keymap.set("n", "<C-j>", "<Cmd>TmuxNavigateDown<CR>", { desc = "Go to lower window/pane" })
-vim.keymap.set("n", "<C-k>", "<Cmd>TmuxNavigateUp<CR>", { desc = "Go to upper window/pane" })
-vim.keymap.set("n", "<C-l>", "<Cmd>TmuxNavigateRight<CR>", { desc = "Go to right window/pane" })
-vim.keymap.set("n", "<C-\\>", "<Cmd>TmuxNavigatePrevious<CR>", { desc = "Go to previous window/pane" })
-
 -- Better indenting in visual mode
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Better J behavior
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
-
--- NEOTREE file explorer
-vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<CR>', {
-  desc = 'Toggle Neo-tree',
-  silent = true,
-})
-
--- WHICH-TREE Helper
-vim.keymap.set("n", "<leader>?", function()
-  require("which-key").show({ global = false })
-end, {
-  desc = "Buffer Local Keymaps (which-key)",
-})
-
--- TELESCOPE fuzzy finder
-vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<CR>', { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<CR>', { desc = 'Telescope help tags' })
-vim.keymap.set('n', '<leader>fr', '<cmd>Telescope oldfiles<CR>', { desc = 'Telescope find recent files' })
 
 -- LSP remaps (originaly g<t,r,a,i...>)
 vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, { desc = "LSP format buffer" })
@@ -64,49 +38,16 @@ vim.keymap.set({ "n", "v" }, "<leader>li", vim.lsp.buf.implementation, { desc = 
 vim.keymap.set({ "n", "v" }, "<leader>lR", vim.lsp.buf.references, { desc = "LSP references" })
 vim.keymap.set({ "n", "v" }, "<leader>lt", vim.lsp.buf.type_definition, { desc = "LSP type deffinition" })
 
-
--- Diagnostics with T
-vim.keymap.set('n', '<leader>tx', '<cmd>Trouble diagnostics toggle<CR>', { desc = 'Diagnostics (Trouble)' })
+-- Diagnostics with T (the Trouble list, <leader>tx, is in plugins/keymaps.lua)
 -- Toggle diagnostics globally. <leader>tu keeps the gutter signs and only hides underlines
 -- HELP: :help vim.diagnostic.enable(), :help vim.diagnostic.config()
 vim.keymap.set("n", "<leader>td", function()
-  local enabled = not vim.diagnostic.is_enabled()
-  vim.diagnostic.enable(enabled)
-  vim.notify("Diagnostics " .. (enabled and "on" or "off"))
+	local enabled = not vim.diagnostic.is_enabled()
+	vim.diagnostic.enable(enabled)
+	vim.notify("Diagnostics " .. (enabled and "on" or "off"))
 end, { desc = "Toggle diagnostics (all)" })
 vim.keymap.set("n", "<leader>tu", function()
-  local underline = not vim.diagnostic.config().underline
-  vim.diagnostic.config({ underline = underline })
-  vim.notify("Diagnostic underlines " .. (underline and "on" or "off"))
+	local underline = not vim.diagnostic.config().underline
+	vim.diagnostic.config({ underline = underline })
+	vim.notify("Diagnostic underlines " .. (underline and "on" or "off"))
 end, { desc = "Toggle diagnostic underlines (keep signs)" })
-
--- NOTIFY (nvim-notify)
--- NOTE: Dismissed popups stay in the history (<leader>nh). require() is called inside the
--- function because plugins are not loaded yet when this file runs
--- HELP: :help notify.dismiss(), :Notifications
-vim.keymap.set("n", "<leader>nd", function()
-  require("notify").dismiss({ silent = true, pending = true })
-end, { desc = "Dismiss notifications" })
-vim.keymap.set("n", "<leader>nh", "<Cmd>Notifications<CR>", { desc = "Notification history" })
-
--- MARKDOWN / QUARTO (quarto-nvim)
--- NOTE: The preview opens in the browser and also works for plain .md files
-vim.keymap.set("n", "<leader>mp", "<Cmd>QuartoPreview<CR>", { desc = "Quarto preview in browser" })
-vim.keymap.set("n", "<leader>mq", "<Cmd>QuartoClosePreview<CR>", { desc = "Close Quarto preview" })
-vim.keymap.set("n", "<leader>mi", "<Cmd>PasteImage<CR>", { desc = "Paste clipboard image (img-clip)" })
-
--- RUN / REPL (vim-slime + quarto runner)
--- NOTE: Code goes to the REPL in the last active tmux pane (vim-slime, see utilities.lua). The
--- cell keymaps (rc/ra/rA) use quarto's runner and only work in .qmd files; line, paragraph and
--- selection go straight to slime and work in any file. <Plug> targets need remap = true.
--- require() is called inside each function because plugins are not loaded yet when this file runs
--- HELP: :help slime, https://github.com/quarto-dev/quarto-nvim
-vim.keymap.set("n", "<leader>rc", function() require("quarto.runner").run_cell() end, { desc = "Run cell (quarto)" })
-vim.keymap.set("n", "<leader>ra", function() require("quarto.runner").run_above() end, { desc = "Run cell and above (quarto)" })
-vim.keymap.set("n", "<leader>rA", function() require("quarto.runner").run_all() end, { desc = "Run all cells (quarto)" })
-vim.keymap.set("n", "<leader>rl", "<Plug>SlimeLineSend", { remap = true, desc = "Send line to REPL" })
-vim.keymap.set("n", "<leader>rp", "<Plug>SlimeParagraphSend", { remap = true, desc = "Send paragraph to REPL" })
-vim.keymap.set("x", "<leader>rr", "<Plug>SlimeRegionSend", { remap = true, desc = "Send selection to REPL" })
-vim.keymap.set("n", "<leader>rs", "<Plug>SlimeConfig", { remap = true, desc = "Set REPL target (tmux pane)" })
-
-

@@ -1,8 +1,7 @@
 -- ================================================================================================
--- TITLE : globals
--- ABOUT : different global & local leaders
+-- TITLE : utils
+-- ABOUT : shared helpers. Returns a table of helper modules, e.g. utils/editor.lua as `editor`
+-- USAGE : local utils = require("utils")
 -- ================================================================================================
 
--- NeoVim Leader key, I pick <space> since that's what I'm used to
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+return {}
