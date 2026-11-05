@@ -145,6 +145,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "Disable Ruff hover in favor of basedpyright",
 })
 
+-- Turn off Neovim's LSP document colors, so nvim-highlight-colors doesn't paint them twice
+-- NOTE: LspAttach fires for each client, so servers that attach later are covered too
+-- HELP: :help vim.lsp.document_color.enable()
+local lsp_document_color_group = vim.api.nvim_create_augroup("LspDocumentColor", {})
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = lsp_document_color_group,
+	callback = function(ev)
+		vim.lsp.document_color.enable(false, { bufnr = ev.buf })
+	end,
+	desc = "Disable LSP document colors in favor of nvim-highlight-colors",
+})
+
 -- Nextflow comment style, so `gc` works (Neovim ships no ftplugin for Nextflow)
 -- NOTE: The nextflow filetype is detected in config/options.lua
 -- HELP: :help 'commentstring', :help commenting

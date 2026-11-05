@@ -4,6 +4,10 @@
 -- HELP: :help vim.lsp.buf.format(), :help vim.ui.select(), :help package-undotree
 -- ============================================================================
 
+-- Clear the search highlight. The next search, n or N brings it back
+-- HELP: :help :nohlsearch
+vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
+
 -- Center screen when jumping
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })

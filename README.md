@@ -86,6 +86,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | UI         | [incline.nvim](https://github.com/b0o/incline.nvim)                       | File name tag on each window       |
 | UI         | [tiny-cmdline.nvim](https://github.com/rachartier/tiny-cmdline.nvim)      | Floating `:` command line (ui2)    |
 | UI         | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)         | Highlight TODO/NOTE/WARNING tags   |
+| UI         | [nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors) | Color codes as backgrounds         |
 | UI         | [snacks.nvim](https://github.com/folke/snacks.nvim)                       | Notifier, indent, words, images    |
 | UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)         | Animated cursor movement           |
 | UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                     | Icons (stands in for devicons)     |

@@ -40,6 +40,10 @@ and modified time columns. Renaming a file asks the language server to update im
 those edits. `<leader>e` opens it as a centered float with a live preview (at most 200 columns,
 rounded corners), `h` goes to the parent directory and `q` closes it. In the tabline an oil tab
 shows its directory with no icon, cut from the left to `…` plus the last 17 characters.
+- nvim-highlight-colors (https://github.com/brenoprata10/nvim-highlight-colors) in ui.lua: hex,
+rgb, hsl, ANSI and CSS variable colors are painted as backgrounds. Tailwind and named colors stay
+off. Neovim's LSP document colors are turned off (LspAttach autocmd), so colors aren't painted
+twice.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
 for now.
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.

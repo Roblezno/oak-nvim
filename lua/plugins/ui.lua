@@ -1,7 +1,8 @@
 -- #################################################################
 -- Visual interface related plugins. Configures:
 -- solarized-osaka Theme, Alpha dashboard, Lualine, incline, tiny-cmdline,
--- todo-comments, snacks, smear-cursor, mini.icons, transparent-popups (disabled)
+-- todo-comments, nvim-highlight-colors, snacks, smear-cursor, mini.icons,
+-- transparent-popups (disabled)
 -- #################################################################
 
 -- THEME
@@ -225,6 +226,17 @@ tiny_cmdline.setup({
 
 -- TODO COMMENTS
 require("todo-comments").setup({})
+
+-- HIGHLIGHT COLORS
+-- NOTE: Paints hex, rgb, hsl, ANSI and CSS variable colors as backgrounds. Named colors stay off,
+-- so words like "red" in code and comments aren't painted. Neovim's own LSP document colors are
+-- turned off in config/autocmds.lua, so colors aren't painted twice
+-- HELP: https://github.com/brenoprata10/nvim-highlight-colors
+require("nvim-highlight-colors").setup({
+	render = "background",
+	enable_named_colors = false,
+	enable_tailwind = false,
+})
 
 -- SMEAR CURSOR
 require("smear_cursor").setup({})
