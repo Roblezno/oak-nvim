@@ -169,6 +169,14 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.HINT] = diagnostic_icons.hint,
 		},
 	},
+	-- ]d and [d (Neovim's defaults) show the diagnostic they land on in a float
+	jump = {
+		on_jump = function(diagnostic, bufnr)
+			if diagnostic then
+				vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+			end
+		end,
+	},
 })
 
 -- NOTE: LSP hover (K) padding is done by transparent-popups, see lua/plugins/ui.lua

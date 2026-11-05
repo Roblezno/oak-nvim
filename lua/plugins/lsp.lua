@@ -101,6 +101,9 @@ end
 -- The first one available runs
 local web_formatters = { "oxfmt", "prettierd", "prettier", stop_after_first = true }
 
+-- Not formatted on save, so language servers don't rewrite these. <leader>lcf still formats them
+local no_format_on_save = { r = true, rmd = true, nextflow = true }
+
 require("conform").setup({
 	formatters_by_ft = {
 		css = web_formatters,
@@ -124,7 +127,7 @@ require("conform").setup({
 		oxfmt = { condition = has_oxfmt_config },
 	},
 	format_on_save = function(bufnr)
-		if vim.b[bufnr].disable_autoformat then
+		if vim.b[bufnr].disable_autoformat or no_format_on_save[vim.bo[bufnr].filetype] then
 			return
 		end
 		return { timeout_ms = 1000, lsp_format = "fallback" }

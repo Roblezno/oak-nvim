@@ -33,6 +33,23 @@ vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telesc
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Telescope help tags" })
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope find recent files" })
 
+-- LSP (telescope, conform, snacks)
+-- NOTE: The plain LSP keymaps live in config/keymaps.lua. gr is nowait so it doesn't wait for
+-- Neovim's default grr/gra/grn/gri/grt/grx, which share its prefix
+vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { desc = "LSP go to definition" })
+vim.keymap.set("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "LSP go to type definition" })
+vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", { nowait = true, desc = "LSP references" })
+vim.keymap.set("n", "gI", function()
+	require("utils").lsp.goto_source_definition()
+end, { desc = "LSP go to source definition or implementation" })
+vim.keymap.set("n", ";c", "<cmd>Telescope lsp_incoming_calls<CR>", { desc = "LSP incoming calls" })
+vim.keymap.set({ "n", "x" }, "<leader>lcf", function()
+	require("conform").format({ lsp_format = "fallback" })
+end, { desc = "Format now" })
+vim.keymap.set("n", "<leader>lcR", function()
+	require("snacks").rename.rename_file()
+end, { desc = "LSP rename file (updates imports)" })
+
 -- TROUBLE diagnostics list
 -- NOTE: The plain diagnostic toggles (<leader>td, <leader>tu) live in config/keymaps.lua
 vim.keymap.set("n", "<leader>tx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (Trouble)" })

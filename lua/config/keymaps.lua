@@ -1,7 +1,7 @@
 -- =========================================================================
 -- TITLE: NeoVim Keymaps
 -- ABOUT: Native editor-wide mappings; keymaps that use a plugin live in plugins/keymaps.lua
--- HELP: :help vim.lsp.buf.format(), :help vim.ui.select(), :help package-undotree
+-- HELP: :help vim.ui.select(), :help package-undotree
 -- ============================================================================
 
 -- Clear the search highlight. The next search, n or N brings it back
@@ -62,13 +62,16 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 -- Better J behavior
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
--- LSP remaps (originaly g<t,r,a,i...>)
-vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, { desc = "LSP format buffer" })
-vim.keymap.set({ "n", "v" }, "<leader>lr", vim.lsp.buf.rename, { desc = "LSP rename" })
-vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "LSP action" })
-vim.keymap.set({ "n", "v" }, "<leader>li", vim.lsp.buf.implementation, { desc = "LSP go to implementation" })
-vim.keymap.set({ "n", "v" }, "<leader>lR", vim.lsp.buf.references, { desc = "LSP references" })
-vim.keymap.set({ "n", "v" }, "<leader>lt", vim.lsp.buf.type_definition, { desc = "LSP type deffinition" })
+-- LSP keymaps. K (hover), ]d and [d are Neovim's defaults. The ones that use a plugin (gd, gy, gr,
+-- gI, ;c, <leader>lcf, <leader>lcR) are in plugins/keymaps.lua
+-- NOTE: <leader>lc keeps them clear of the <leader>c operator and Telescope's <leader>f keys.
+-- gD isn't a picker: Telescope has no declarations picker
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "LSP go to declaration" })
+vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, { desc = "LSP signature help" })
+vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP signature help" })
+vim.keymap.set({ "n", "x" }, "<leader>lca", vim.lsp.buf.code_action, { desc = "LSP code action" })
+vim.keymap.set("n", "<leader>lcr", vim.lsp.buf.rename, { desc = "LSP rename symbol" })
+vim.keymap.set("n", "<leader>lcl", "<Cmd>checkhealth vim.lsp<CR>", { desc = "LSP info" })
 
 -- Diagnostics with T (the Trouble list, <leader>tx, is in plugins/keymaps.lua)
 -- Toggle diagnostics globally. <leader>tu and <leader>ti keep the gutter signs and only hide

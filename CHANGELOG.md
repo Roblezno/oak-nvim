@@ -47,8 +47,8 @@ twice.
 - conform.nvim (https://github.com/stevearc/conform.nvim) in lsp.lua: formats on save with a
 1000 ms timeout, falling back to the language server. Web files, markdown and yaml use oxfmt,
 prettierd or prettier (the first available), and oxfmt only runs in projects with an oxfmt config.
-Lua uses stylua, sh uses shfmt, fish uses fish_indent and Python uses ruff. `:ToggleFormatter`
-turns it off or back on for the current buffer.
+Lua uses stylua, sh uses shfmt, fish uses fish_indent and Python uses ruff. R and Nextflow aren't
+formatted on save. `:ToggleFormatter` turns it off or back on for the current buffer.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes, empty for
 now).
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
@@ -109,6 +109,12 @@ by Treesitter and kind icons come from the shared icon set. Ghost text stays off
 line nothing is preselected, so `<CR>` runs what was typed and `<Tab>` still accepts.
 - mini.pairs (https://github.com/nvim-mini/mini.pairs) replaces nvim-autopairs, with its defaults,
 in insert and command mode.
+- LSP keymaps: `gd`, `gy`, `gr` and `;c` (incoming calls) go through Telescope. `gD` goes to the
+declaration, `gI` to the source definition in TypeScript (skipping `.d.ts` files) and the
+implementation elsewhere, `gK` and `<C-k>` in insert mode show signature help. `<leader>lca` code
+actions, `<leader>lcr` rename, `<leader>lcR` rename the file with import updates, `<leader>lcf`
+format now and `<leader>lcl` LSP info. `]d` and `[d` show the diagnostic in a float. These replace
+`<leader>lf`, `lr`, `la`, `li`, `lR` and `lt`.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
