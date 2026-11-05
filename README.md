@@ -3,11 +3,10 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.4.1(Unreleased). The base editor, UI, navigation, Treesitter (baseline languages), base
-LSP and cmp with some utilities and custom theme updates with personal plugins. 
-Quarto markdown support, with code sent to a REPL in a tmux pane (vim-slime).
-Currently implementing a refactor for core functionallities in v0.5.0
-
+> **Status:** v0.5.0(Unreleased). The base editor, UI, navigation, Treesitter (baseline languages), base
+> LSP and cmp with some utilities and custom theme updates with personal plugins.
+> Quarto markdown support, with code sent to a REPL in a tmux pane (vim-slime).
+> Currently implementing a refactor for core functionallities in v0.5.0
 
 ## Requirements
 
@@ -81,38 +80,38 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 
 ### Plugins
 
-| Area       | Plugin                                                                    | Purpose                            |
-| ---------- | ------------------------------------------------------------------------- | ---------------------------------- |
-| UI         | [solarized-osaka.nvim](https://github.com/craftzdog/solarized-osaka.nvim) | Colorscheme (vivid, transparent)   |
-| UI         | [alpha-nvim](https://github.com/goolord/alpha-nvim)                       | Start dashboard                    |
-| UI         | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)              | Statusline                         |
-| UI         | [incline.nvim](https://github.com/b0o/incline.nvim)                       | File name tag on each window       |
-| UI         | [tiny-cmdline.nvim](https://github.com/rachartier/tiny-cmdline.nvim)      | Floating `:` command line (ui2)    |
-| UI         | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)         | Highlight TODO/NOTE/WARNING tags   |
-| UI         | [nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors) | Color codes as backgrounds         |
-| UI         | [snacks.nvim](https://github.com/folke/snacks.nvim)                       | Notifier, indent, words, images, lazygit |
-| UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)         | Animated cursor movement           |
-| UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                     | Icons (stands in for devicons)     |
-| UI         | [transparent-popups](https://github.com/Roblezno/nvim-transparent-popups) | Custom themed popups               |
-| Utilities  | [mini.pairs](https://github.com/nvim-mini/mini.pairs)                     | Auto-close brackets and quotes     |
-| Utilities  | [which-key.nvim](https://github.com/folke/which-key.nvim)                 | Keymap hints                       |
-| Utilities  | [vim-slime](https://github.com/jpalardy/vim-slime)                        | Send code to a REPL in tmux        |
-| Navigation | [oil.nvim](https://github.com/stevearc/oil.nvim)                          | File explorer                      |
-| Navigation | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)        | Fuzzy finder (with fzf-native)     |
-| Navigation | [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)            | Scrollbar                          |
-| Treesitter | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)     | Parser installer (`main` branch)   |
-| LSP        | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                | Language server configs            |
-| LSP        | [mason.nvim](https://github.com/mason-org/mason.nvim)                     | Language server and tool installer |
-| LSP        | [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) | Installs the tool list on start    |
-| Formatting | [conform.nvim](https://github.com/stevearc/conform.nvim)                  | Format on save                     |
-| Completion | [blink.cmp](https://github.com/saghen/blink.cmp)                          | Completion Menu + cmdline          |
-| Git        | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)               | Git signs, blame and staging       |
-| Git        | [mini.diff](https://github.com/craftzdog/mini.diff/tree/feat/grouping)    | Diff overlay, grouped by hunk      |
-| Git        | [codediff.nvim](https://github.com/esmuellert/codediff.nvim)              | Side-by-side diffs and history     |
-| Completion | [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)      | Snippet collection                 |
-| Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                  | Quarto preview, LSP in code chunks |
-| Markdown   | [otter.nvim](https://github.com/jmbuhr/otter.nvim)                        | LSP backend for code chunks        |
-| Markdown   | [img-clip.nvim](https://github.com/HakonHarnes/img-clip.nvim)             | Paste clipboard images             |
+| Area       | Plugin                                                                                    | Purpose                                  |
+| ---------- | ----------------------------------------------------------------------------------------- | ---------------------------------------- |
+| UI         | [solarized-osaka.nvim](https://github.com/craftzdog/solarized-osaka.nvim)                 | Colorscheme (vivid, transparent)         |
+| UI         | [alpha-nvim](https://github.com/goolord/alpha-nvim)                                       | Start dashboard                          |
+| UI         | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)                              | Statusline                               |
+| UI         | [incline.nvim](https://github.com/b0o/incline.nvim)                                       | File name tag on each window             |
+| UI         | [tiny-cmdline.nvim](https://github.com/rachartier/tiny-cmdline.nvim)                      | Floating `:` command line (ui2)          |
+| UI         | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)                         | Highlight TODO/NOTE/WARNING tags         |
+| UI         | [nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors)            | Color codes as backgrounds               |
+| UI         | [snacks.nvim](https://github.com/folke/snacks.nvim)                                       | Notifier, indent, words, images, lazygit |
+| UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)                         | Animated cursor movement                 |
+| UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                                     | Icons (stands in for devicons)           |
+| UI         | [transparent-popups](https://github.com/Roblezno/nvim-transparent-popups)                 | Custom themed popups                     |
+| Utilities  | [mini.pairs](https://github.com/nvim-mini/mini.pairs)                                     | Auto-close brackets and quotes           |
+| Utilities  | [which-key.nvim](https://github.com/folke/which-key.nvim)                                 | Keymap hints                             |
+| Utilities  | [vim-slime](https://github.com/jpalardy/vim-slime)                                        | Send code to a REPL in tmux              |
+| Navigation | [oil.nvim](https://github.com/stevearc/oil.nvim)                                          | File explorer                            |
+| Navigation | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)                        | Fuzzy finder (with fzf-native)           |
+| Navigation | [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)                            | Scrollbar                                |
+| Treesitter | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                     | Parser installer (`main` branch)         |
+| LSP        | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                                | Language server configs                  |
+| LSP        | [mason.nvim](https://github.com/mason-org/mason.nvim)                                     | Language server and tool installer       |
+| LSP        | [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) | Installs the tool list on start          |
+| Formatting | [conform.nvim](https://github.com/stevearc/conform.nvim)                                  | Format on save                           |
+| Completion | [blink.cmp](https://github.com/saghen/blink.cmp)                                          | Completion Menu + cmdline                |
+| Git        | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                               | Git signs, blame and staging             |
+| Git        | [mini.diff](https://github.com/craftzdog/mini.diff/tree/feat/grouping)                    | Diff overlay, grouped by hunk            |
+| Git        | [codediff.nvim](https://github.com/esmuellert/codediff.nvim)                              | Side-by-side diffs and history           |
+| Completion | [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)                      | Snippet collection                       |
+| Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                                  | Quarto preview, LSP in code chunks       |
+| Markdown   | [otter.nvim](https://github.com/jmbuhr/otter.nvim)                                        | LSP backend for code chunks              |
+| Markdown   | [img-clip.nvim](https://github.com/HakonHarnes/img-clip.nvim)                             | Paste clipboard images                   |
 
 ### Markdown and Quarto
 
@@ -168,7 +167,6 @@ mamba install -n <env> -c conda-forge r-languageserver
 - Activate the conda env before starting Neovim: the server uses the R on PATH at that moment.
 - After a minor R upgrade (e.g. 4.6 to 4.7), install `languageserver` again.
 - Older setups can remove Mason's copy with `:MasonUninstall r-languageserver`.
-
 
 ## Structure
 
