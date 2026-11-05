@@ -93,7 +93,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)         | Animated cursor movement           |
 | UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                     | Icons (stands in for devicons)     |
 | UI         | [transparent-popups](https://github.com/Roblezno/nvim-transparent-popups) | Custom themed popups               |
-| Utilities  | [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                | Auto-close brackets and quotes     |
+| Utilities  | [mini.pairs](https://github.com/nvim-mini/mini.pairs)                     | Auto-close brackets and quotes     |
 | Utilities  | [which-key.nvim](https://github.com/folke/which-key.nvim)                 | Keymap hints                       |
 | Utilities  | [vim-slime](https://github.com/jpalardy/vim-slime)                        | Send code to a REPL in tmux        |
 | Navigation | [oil.nvim](https://github.com/stevearc/oil.nvim)                          | File explorer                      |

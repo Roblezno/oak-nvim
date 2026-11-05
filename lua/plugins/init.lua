@@ -22,7 +22,7 @@ vim.pack.add({
 	"https://github.com/sphamba/smear-cursor.nvim",
 	"https://github.com/nvim-mini/mini.icons", -- also stands in for nvim-web-devicons
 	-- utilities.lua
-	"https://github.com/windwp/nvim-autopairs",
+	"https://github.com/nvim-mini/mini.pairs",
 	"https://github.com/folke/which-key.nvim",
 	"https://github.com/folke/trouble.nvim",
 	"https://github.com/HakonHarnes/img-clip.nvim",

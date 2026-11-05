@@ -88,8 +88,8 @@ instead of a fixed list. Languages without indent queries keep their filetype's 
 installs the server and formatter list on start and never updates it. Servers are turned on with
 one `vim.lsp.enable()` list, so only listed servers start: pyright and vimls no longer do, even
 when installed in Mason. New servers: vtsls, eslint, oxlint, tailwindcss, cssls and rust_analyzer.
-nextflow_ls, which only ran because it was in Mason, is now on both lists. copilot-language-server
-is installed but not enabled. Every server gets file-rename support.
+nextflow_ls, which only ran because it was in Mason, is now on both lists. Every server gets
+file-rename support.
 - Diagnostics: inline text is on, as `● message`, with the source only when a buffer has several.
 `<leader>ti` toggles it. Underlined, not updated while typing and sorted by severity. Gutter icons
 come from the new shared icon set (lua/utils/icons.lua, `require("utils").icons`).
@@ -102,6 +102,8 @@ cssls ignores empty rules. `<leader>th` toggles inlay hints, which stay off by d
 Brackets are added after functions, docs show after 200 ms, language server items are colorized
 by Treesitter and kind icons come from the shared icon set. Ghost text stays off. In the command
 line nothing is preselected, so `<CR>` runs what was typed and `<Tab>` still accepts.
+- mini.pairs (https://github.com/nvim-mini/mini.pairs) replaces nvim-autopairs, with its defaults,
+in insert and command mode.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).

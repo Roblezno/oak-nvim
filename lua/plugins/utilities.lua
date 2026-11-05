@@ -1,12 +1,14 @@
 -- #################################################################
 -- Utility tools and Quality of Life related plugins. Configures:
--- nvim-autopairs, which-key, Trouble, img-clip, vim-slime
+-- mini.pairs, which-key, Trouble, img-clip, vim-slime
 -- #################################################################
 
--- NVIM-AUTOPAIRS
-require("nvim-autopairs").setup({
-	event = "InsertENter",
-	config = true,
+-- MINI.PAIRS
+-- NOTE: Defaults, plus command mode (off by default). <CR> between a pair is shared with blink.cmp,
+-- which passes it on when there is nothing to accept
+-- HELP: :help mini.pairs
+require("mini.pairs").setup({
+	modes = { insert = true, command = true },
 })
 
 -- WHICH-KEY

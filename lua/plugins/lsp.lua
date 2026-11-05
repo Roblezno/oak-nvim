@@ -34,7 +34,6 @@ require("mason-tool-installer").setup({
 		-- Language servers
 		"basedpyright",
 		"bash-language-server",
-		"copilot-language-server", -- installed only, not enabled below
 		"css-lsp",
 		"eslint-lsp",
 		"lua-language-server",

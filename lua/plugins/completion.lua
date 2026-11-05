@@ -22,7 +22,7 @@ require("blink.cmp").setup(vim.tbl_deep_extend("force", popup_opts, {
 		accept = { auto_brackets = { enabled = true } }, -- Add brackets after functions
 		documentation = { auto_show = true, auto_show_delay_ms = 200 },
 		menu = { draw = { treesitter = { "lsp" } } }, -- Colorize language server items with treesitter
-		ghost_text = { enabled = false }, -- It would clash with Copilot's inline suggestions
+		ghost_text = { enabled = false },
 	},
 	sources = { default = { "lsp", "path", "snippets", "buffer" } },
 	-- Rust matcher (prebuilt binary), falls back to Lua with a warning if unavailable
