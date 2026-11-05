@@ -93,7 +93,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | Utilities  | [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                | Auto-close brackets and quotes     |
 | Utilities  | [which-key.nvim](https://github.com/folke/which-key.nvim)                 | Keymap hints                       |
 | Utilities  | [vim-slime](https://github.com/jpalardy/vim-slime)                        | Send code to a REPL in tmux        |
-| Navigation | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)           | File explorer                      |
+| Navigation | [oil.nvim](https://github.com/stevearc/oil.nvim)                          | File explorer                      |
 | Navigation | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)        | Fuzzy finder (with fzf-native)     |
 | Navigation | [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)            | Scrollbar                          |
 | Treesitter | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)     | Parser installer (`main` branch)   |

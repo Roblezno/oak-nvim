@@ -33,6 +33,13 @@ notifier (replaces nvim-notify), indent guides, statuscolumn, words (the word un
 highlighted everywhere through the language server, `]]`/`[[` jump between the references) and
 image (the image under the cursor in `.md`/`.qmd` shows in a popup, replaces image.nvim). Smooth
 scroll stays off. In Python and Markdown/Quarto buffers their own `]]`/`[[` keep winning.
+- oil.nvim (https://github.com/stevearc/oil.nvim) in navigation.lua: the file explorer, replacing
+neo-tree (nui.nvim goes with it) and netrw. Directories are buffers, so files are renamed, moved
+and deleted by editing the text and saving. Shows hidden files and the icon, permissions, size
+and modified time columns. Renaming a file asks the language server to update imports and saves
+those edits. `<leader>e` opens it as a centered float with a live preview (at most 200 columns,
+rounded corners), `h` goes to the parent directory and `q` closes it. In the tabline an oil tab
+shows its directory with no icon, cut from the left to `…` plus the last 17 characters.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
 for now.
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
@@ -63,7 +70,7 @@ and a diagonal `╱` fill in empty diff areas (fillchars).
 - Colorscheme: solarized-osaka (https://github.com/craftzdog/solarized-osaka.nvim), vivid
 style, transparent background. lualine uses the `auto` theme.
 - mini.icons is the one icon source: it mocks nvim-web-devicons, so plugins that only know
-devicons (telescope, neo-tree, lualine) use it too. Set up right after the colorscheme.
+devicons (telescope, lualine) use it too. Set up right after the colorscheme.
 - lualine sections: mode | git branch | project root name (only when it differs from the cwd),
 filetype icon and a short path | macro recording register, diagnostics, git diff counts |
 progress | line:column. The root is the nearest folder upward with `.git`, `lua`,

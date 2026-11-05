@@ -23,7 +23,18 @@ local function shorten(name)
 	return name
 end
 
---- Icon and name of a buffer. Terminals and empty buffers get no icon
+--- Cut paths longer than MAX_NAME characters to "…" plus their last MAX_NAME - 3 characters
+---@param path string
+---@return string
+local function shorten_left(path)
+	local length = vim.fn.strchars(path)
+	if length > MAX_NAME then
+		return "…" .. vim.fn.strcharpart(path, length - (MAX_NAME - 3))
+	end
+	return path
+end
+
+--- Icon and name of a buffer. Terminals, empty buffers and oil directories get no icon
 ---@param buf integer
 ---@return string|nil icon
 ---@return string name
@@ -34,6 +45,12 @@ local function describe(buf)
 	local path = vim.api.nvim_buf_get_name(buf)
 	if path == "" then
 		return nil, "[No Name]"
+	end
+	if vim.bo[buf].filetype == "oil" then
+		-- nil outside the local filesystem (oil-ssh://), which falls back to the buffer name
+		local dir = require("oil").get_current_dir(buf)
+		-- ":h" drops the trailing slash of the directory
+		return nil, shorten_left(dir and vim.fn.fnamemodify(dir, ":~:h") or path)
 	end
 	local file = vim.fn.fnamemodify(path, ":t")
 	local ok, icons = pcall(require, "mini.icons")

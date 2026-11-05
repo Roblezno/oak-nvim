@@ -15,11 +15,11 @@ require("solarized-osaka").setup({
   --style = "vivid",
 })
 
-vim.cmd.colorscheme("solarized-osaka-vivid")
+vim.cmd.colorscheme("solarized-osaka")
 
 -- MINI.ICONS
 -- NOTE: The one icon source for every plugin. The mock makes require("nvim-web-devicons") return
--- mini.icons, so plugins that only know devicons (telescope, neo-tree, lualine) use it too and
+-- mini.icons, so plugins that only know devicons (telescope, lualine) use it too and
 -- nvim-web-devicons is not installed. It must run before any of them asks for icons, so it stays
 -- right after the colorscheme, at the top of the first group file (see plugins/init.lua)
 -- HELP: :help mini.icons, :help MiniIcons.mock_nvim_web_devicons()
@@ -90,7 +90,7 @@ dashboard.section.header.val = {
 -- Set menu
 dashboard.section.buttons.val = {
 	dashboard.button("e", "  New file", "<cmd>ene<CR>"),
-	dashboard.button("SPC e", "󰙅  NeoTree"),
+	dashboard.button("SPC e", "󰙅  Oil"),
 	dashboard.button("SPC ff", "󰈞  Find file"),
 	dashboard.button("SPC fg", "󰈬  Find word"),
 	dashboard.button("SPC fn", "  Nvim config"),

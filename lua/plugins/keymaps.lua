@@ -12,11 +12,12 @@ vim.keymap.set("n", "<C-k>", "<Cmd>TmuxNavigateUp<CR>", { desc = "Go to upper wi
 vim.keymap.set("n", "<C-l>", "<Cmd>TmuxNavigateRight<CR>", { desc = "Go to right window/pane" })
 vim.keymap.set("n", "<C-\\>", "<Cmd>TmuxNavigatePrevious<CR>", { desc = "Go to previous window/pane" })
 
--- NEOTREE file explorer
-vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", {
-	desc = "Toggle Neo-tree",
-	silent = true,
-})
+-- OIL file explorer
+-- NOTE: h (parent directory) and q (close) only exist in oil buffers, see plugins/navigation.lua
+-- HELP: :help oil.open_float
+vim.keymap.set("n", "<leader>e", function()
+	require("oil").open_float(nil, { preview = {} })
+end, { desc = "Open oil in a float with preview" })
 
 -- WHICH-KEY Helper
 vim.keymap.set("n", "<leader>?", function()

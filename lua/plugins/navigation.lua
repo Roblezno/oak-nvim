@@ -1,10 +1,24 @@
 -- #################################################################
 -- Navigation related plugins. Configures:
--- Neo Tree, Scrollbar, Telescope, Tmux-navigation
+-- Oil, Scrollbar, Telescope, Tmux-navigation
 -- #################################################################
 
--- NEO TREE
--- NOTE: No setup() call, it runs with its defaults
+-- OIL file explorer
+-- NOTE: Replaces netrw (default_file_explorer is on by default). Directories are buffers: rename,
+-- move and delete by editing the text, then :w. h and q are set here because oil binds them on its
+-- own buffers. <leader>e, which opens it, is in plugins/keymaps.lua
+-- HELP: :help oil, https://github.com/stevearc/oil.nvim
+require("oil").setup({
+	columns = { "icon", "permissions", "size", "mtime" },
+	-- Renaming a file asks the language server to update imports, and those edits are saved
+	lsp_file_methods = { autosave_changes = true },
+	keymaps = {
+		["h"] = { "actions.parent", mode = "n" },
+		["q"] = { "actions.close", mode = "n" },
+	},
+	view_options = { show_hidden = true },
+	float = { max_width = 200, border = "rounded" },
+})
 
 -- SCROLLBAR
 require("scrollbar").setup({})

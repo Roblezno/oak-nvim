@@ -146,8 +146,8 @@ vim.opt.splitbelow = true -- Horizontal splits open below
 vim.opt.splitright = true -- Vertical splits open to the right
 
 -- Session Settings
--- :restart saves and restores the session. Without "blank", scratch windows such as
--- the Neo-tree sidebar are not saved, so restoring no longer clashes with Neo-tree (E95).
+-- :restart saves and restores the session. Without "blank", scratch windows are not
+-- saved, so restoring doesn't try to recreate them.
 -- HELP: :help 'sessionoptions', :help :restart
 vim.opt.sessionoptions:remove("blank") -- Don't save empty/scratch windows in sessions
 

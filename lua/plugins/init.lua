@@ -27,7 +27,7 @@ vim.pack.add({
 	"https://github.com/HakonHarnes/img-clip.nvim",
 	"https://github.com/jpalardy/vim-slime",
 	-- navigation.lua
-	{ src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = vim.version.range("3") },
+	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/petertriho/nvim-scrollbar",
 	-- latest release tag, as the README recommends
 	{ src = "https://github.com/nvim-telescope/telescope.nvim", version = vim.version.range("*") },
@@ -48,8 +48,7 @@ vim.pack.add({
 	"https://github.com/jmbuhr/otter.nvim",
 	"https://github.com/quarto-dev/quarto-nvim",
 	-- shared dependencies
-	"https://github.com/nvim-lua/plenary.nvim", -- neo-tree, telescope, todo-comments
-	"https://github.com/MunifTanjim/nui.nvim", -- neo-tree
+	"https://github.com/nvim-lua/plenary.nvim", -- telescope, todo-comments
 })
 
 -- Plugin groups. Order matters:
