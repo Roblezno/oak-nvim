@@ -152,10 +152,23 @@ vim.opt.splitright = true -- Vertical splits open to the right
 vim.opt.sessionoptions:remove("blank") -- Don't save empty/scratch windows in sessions
 
 -- Diagnostics (LSP errors/warnings)
+-- NOTE: <leader>td, <leader>tu and <leader>ti toggle these, see config/keymaps.lua
 -- HELP: :help vim.diagnostic.config()
+local diagnostic_icons = require("utils.icons").diagnostics
 vim.diagnostic.config({
-	virtual_text = false, -- Show the message at the end of the line
-	severity_sort = true, -- Errors before warnings in signs and floats
+	underline = true,
+	update_in_insert = false, -- Wait until leaving insert mode, so nothing changes while typing
+	severity_sort = true, -- Errors before warnings in signs, inline text and floats
+	-- `● message` at the end of the line, with the source only when the buffer has several
+	virtual_text = { prefix = "●", source = "if_many" },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = diagnostic_icons.error,
+			[vim.diagnostic.severity.WARN] = diagnostic_icons.warn,
+			[vim.diagnostic.severity.INFO] = diagnostic_icons.info,
+			[vim.diagnostic.severity.HINT] = diagnostic_icons.hint,
+		},
+	},
 })
 
 -- NOTE: LSP hover (K) padding is done by transparent-popups, see lua/plugins/ui.lua

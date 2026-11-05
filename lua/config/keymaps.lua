@@ -71,7 +71,8 @@ vim.keymap.set({ "n", "v" }, "<leader>lR", vim.lsp.buf.references, { desc = "LSP
 vim.keymap.set({ "n", "v" }, "<leader>lt", vim.lsp.buf.type_definition, { desc = "LSP type deffinition" })
 
 -- Diagnostics with T (the Trouble list, <leader>tx, is in plugins/keymaps.lua)
--- Toggle diagnostics globally. <leader>tu keeps the gutter signs and only hides underlines
+-- Toggle diagnostics globally. <leader>tu and <leader>ti keep the gutter signs and only hide
+-- underlines or the inline text
 -- HELP: :help vim.diagnostic.enable(), :help vim.diagnostic.config()
 vim.keymap.set("n", "<leader>td", function()
 	local enabled = not vim.diagnostic.is_enabled()
@@ -83,3 +84,14 @@ vim.keymap.set("n", "<leader>tu", function()
 	vim.diagnostic.config({ underline = underline })
 	vim.notify("Diagnostic underlines " .. (underline and "on" or "off"))
 end, { desc = "Toggle diagnostic underlines (keep signs)" })
+local hidden_inline_text -- The virtual_text settings (from config/options.lua) while it's off
+vim.keymap.set("n", "<leader>ti", function()
+	local inline_text = vim.diagnostic.config().virtual_text
+	if inline_text then
+		hidden_inline_text = inline_text
+		vim.diagnostic.config({ virtual_text = false })
+	else
+		vim.diagnostic.config({ virtual_text = hidden_inline_text })
+	end
+	vim.notify("Diagnostic inline text " .. (inline_text and "off" or "on"))
+end, { desc = "Toggle diagnostic inline text (keep signs)" })

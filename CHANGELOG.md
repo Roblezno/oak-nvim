@@ -90,6 +90,9 @@ one `vim.lsp.enable()` list, so only listed servers start: pyright and vimls no 
 when installed in Mason. New servers: vtsls, eslint, oxlint, tailwindcss, cssls and rust_analyzer.
 nextflow_ls, which only ran because it was in Mason, is now on both lists. copilot-language-server
 is installed but not enabled. Every server gets file-rename support.
+- Diagnostics: inline text is on, as `● message`, with the source only when a buffer has several.
+`<leader>ti` toggles it. Underlined, not updated while typing and sorted by severity. Gutter icons
+come from the new shared icon set (lua/utils/icons.lua, `require("utils").icons`).
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
