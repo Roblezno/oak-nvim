@@ -109,18 +109,26 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	desc = "Update treesitter parsers after nvim-treesitter is updated",
 })
 
--- Start treesitter highlighting (provided by Neovim) for languages with an installed parser
--- NOTE: lua and markdown are already highlighted by Neovim by default
--- HELP: :help vim.treesitter.start()
+-- Start treesitter highlighting (provided by Neovim) and indentation (provided by nvim-treesitter)
+-- for every filetype with a parser
+-- NOTE: language.add() returns nil without a parser, which also covers the first launch, when
+-- parsers are still installing. The parser name can differ from the filetype (sh uses bash, quarto
+-- uses markdown). Languages without indent queries keep their filetype's own indentation
+-- HELP: :help vim.treesitter.start(), :help vim.treesitter.language.add(), :help nvim-treesitter
 local treesitter_start_group = vim.api.nvim_create_augroup("TreesitterStart", {})
 vim.api.nvim_create_autocmd("FileType", {
 	group = treesitter_start_group,
-	pattern = { "python", "r", "sh", "yaml", "toml", "json", "quarto" }, -- filetypes, not parser names
 	callback = function(ev)
-		-- pcall: on first launch parsers install asynchronously and may not be ready yet
-		pcall(vim.treesitter.start, ev.buf)
+		local lang = vim.treesitter.language.get_lang(ev.match)
+		if not lang or not vim.treesitter.language.add(lang) then
+			return
+		end
+		vim.treesitter.start(ev.buf, lang)
+		if #vim.treesitter.query.get_files(lang, "indents") > 0 then
+			vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		end
 	end,
-	desc = "Start treesitter highlighting",
+	desc = "Start treesitter highlighting and indentation",
 })
 
 -- Disable Ruff hover so K shows basedpyright's type information

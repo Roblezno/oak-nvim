@@ -76,6 +76,9 @@ filetype icon and a short path | macro recording register, diagnostics, git diff
 progress | line:column. The root is the nearest folder upward with `.git`, `lua`,
 `package.json`, `Makefile`, `Cargo.toml`, `go.mod` or `pyproject.toml`. The bar also refreshes
 when a macro starts or stops, so the recording indicator replaces the hidden command line.
+- Treesitter installs 39 parsers instead of 6, adding the web, systems and tooling languages. A
+FileType autocmd now starts highlighting and indentation for every filetype with a parser,
+instead of a fixed list. Languages without indent queries keep their filetype's own indentation.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
