@@ -46,9 +46,12 @@ and a diagonal `╱` fill in empty diff areas (fillchars).
 - `:` completion and `:find` skip node_modules/ and build artifacts (*.o, *.obj, *.pyc, *.class,
 *.jar) through wildignore.
 - Splits moved from `<leader>wsh`/`<leader>wsv` to `ss`/`sv`.
+- Colorscheme: solarized-osaka (https://github.com/craftzdog/solarized-osaka.nvim), vivid
+style, transparent background. lualine uses the `auto` theme.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
+- kanagawa.nvim, replaced by solarized-osaka.nvim.
 
 ## 0.4.0
 ### Implemented

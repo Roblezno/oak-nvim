@@ -80,7 +80,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 
 | Area       | Plugin                                                                    | Purpose                            |
 | ---------- | ------------------------------------------------------------------------- | ---------------------------------- |
-| UI         | [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim)                 | Colorscheme (wave, transparent)    |
+| UI         | [solarized-osaka.nvim](https://github.com/craftzdog/solarized-osaka.nvim) | Colorscheme (vivid, transparent)   |
 | UI         | [alpha-nvim](https://github.com/goolord/alpha-nvim)                       | Start dashboard                    |
 | UI         | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)              | Statusline                         |
 | UI         | [tiny-cmdline.nvim](https://github.com/rachartier/tiny-cmdline.nvim)      | Floating `:` command line (ui2)    |

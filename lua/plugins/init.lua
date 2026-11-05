@@ -10,7 +10,7 @@
 -- HELP: :help vim.pack, :help vim.pack.add()
 vim.pack.add({
 	-- ui.lua
-	"https://github.com/rebelot/kanagawa.nvim",
+	"https://github.com/craftzdog/solarized-osaka.nvim",
 	-- "https://github.com/Roblezno/nvim-transparent-popups",
 	"http://github.com/goolord/alpha-nvim",
 	"https://github.com/nvim-lualine/lualine.nvim",

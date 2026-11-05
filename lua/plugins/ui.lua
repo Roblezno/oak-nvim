@@ -1,28 +1,21 @@
 -- #################################################################
 -- Visual interface related plugins. Configures:
--- Kanagawa Theme, Alpha dashboard, Lualine, tiny-cmdline, todo-comments,
+-- solarized-osaka Theme, Alpha dashboard, Lualine, tiny-cmdline, todo-comments,
 -- Notify, smear-cursor, mini.icons, transparent-popups (disabled)
 -- #################################################################
 
 -- THEME
--- Transparent background. Floats and popup menus follow it through transparent-popups (below)
-local transparent = true
-
-require("kanagawa").setup({
-	transparent = transparent,
-	theme = "wave",
-	colors = {
-		theme = {
-			all = {
-				ui = {
-					bg_gutter = "none",
-				},
-			},
-		},
-	},
+-- NOTE: solarized-osaka, vivid style (brighter text colors, higher contrast). Transparent
+-- background, so the terminal's background (opacity, blur) shows through. Ghostty's built-in
+-- "Solarized Osaka Night" theme uses the same palette. Floats and popup menus follow the
+-- background through transparent-popups (below), when it is enabled
+-- HELP: https://github.com/craftzdog/solarized-osaka.nvim
+require("solarized-osaka").setup({
+	transparent = true,
+	style = "vivid",
 })
 
-vim.cmd("colorscheme kanagawa")
+vim.cmd.colorscheme("solarized-osaka-vivid")
 
 -- TRANSPARENT POPUPS
 -- NOTE: My own plugin: float borders and transparency that follow the colorscheme, padding for
@@ -73,7 +66,7 @@ alpha.setup(dashboard.opts)
 -- LUALINE
 require("lualine").setup({
 	options = {
-		theme = "kanagawa",
+		theme = "auto", -- Built from the colorscheme
 		icons_enabled = true,
 		-- One bar for all windows when 'laststatus' is 3 (set in config/options.lua). Without it
 		-- lualine puts 'laststatus' back to 2
