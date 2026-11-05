@@ -44,8 +44,13 @@ shows its directory with no icon, cut from the left to `…` plus the last 17 ch
 rgb, hsl, ANSI and CSS variable colors are painted as backgrounds. Tailwind and named colors stay
 off. Neovim's LSP document colors are turned off (LspAttach autocmd), so colors aren't painted
 twice.
-- config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
-for now.
+- conform.nvim (https://github.com/stevearc/conform.nvim) in lsp.lua: formats on save with a
+1000 ms timeout, falling back to the language server. Web files, markdown and yaml use oxfmt,
+prettierd or prettier (the first available), and oxfmt only runs in projects with an oxfmt config.
+Lua uses stylua, sh uses shfmt, fish uses fish_indent and Python uses ruff. `:ToggleFormatter`
+turns it off or back on for the current buffer.
+- config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes, empty for
+now).
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
 
 ### Changed

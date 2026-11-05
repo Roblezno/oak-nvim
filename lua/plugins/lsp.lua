@@ -1,6 +1,6 @@
 -- #################################################################
 -- LSP related plugins. Configures:
--- nvim-lspconfig, mason, mason-tool-installer
+-- nvim-lspconfig, mason, mason-tool-installer, conform
 -- #################################################################
 
 -- NVIM-LSPCONFIG
@@ -71,4 +71,62 @@ vim.lsp.enable({
 	"rust_analyzer",
 	"tailwindcss",
 	"vtsls",
+})
+
+-- CONFORM
+-- NOTE: Formats on save, falling back to the language server for filetypes not listed here.
+-- :ToggleFormatter turns it off for a buffer (see config/commands.lua). mason-tool-installer
+-- installs the formatters above, fish_indent comes with fish
+-- HELP: :help conform, :ConformInfo
+
+-- oxfmt only runs in projects with an oxfmt config, so projects using prettier keep it. Every Vite
+-- project has a vite.config.ts, so that file only counts if it sets up Vite+ with a fmt field
+---@param ctx conform.Context
+---@return boolean
+local function has_oxfmt_config(_, ctx)
+	local function find(names)
+		return vim.fs.find(names, { path = ctx.dirname, upward = true })[1]
+	end
+	if find({ ".oxfmtrc.json", ".oxfmtrc.jsonc", "oxfmt.config.ts" }) then
+		return true
+	end
+	local vite_config = find("vite.config.ts")
+	if not vite_config then
+		return false
+	end
+	local text = table.concat(vim.fn.readfile(vite_config), "\n")
+	return text:find("vite-plus", 1, true) ~= nil and text:find("fmt:", 1, true) ~= nil
+end
+
+-- The first one available runs
+local web_formatters = { "oxfmt", "prettierd", "prettier", stop_after_first = true }
+
+require("conform").setup({
+	formatters_by_ft = {
+		css = web_formatters,
+		fish = { "fish_indent" },
+		html = web_formatters,
+		javascript = web_formatters,
+		javascriptreact = web_formatters,
+		json = web_formatters,
+		less = web_formatters,
+		lua = { "stylua" },
+		markdown = web_formatters,
+		mdx = web_formatters,
+		python = { "ruff_format" },
+		scss = web_formatters,
+		sh = { "shfmt" },
+		typescript = web_formatters,
+		typescriptreact = web_formatters,
+		yaml = web_formatters,
+	},
+	formatters = {
+		oxfmt = { condition = has_oxfmt_config },
+	},
+	format_on_save = function(bufnr)
+		if vim.b[bufnr].disable_autoformat then
+			return
+		end
+		return { timeout_ms = 1000, lsp_format = "fallback" }
+	end,
 })

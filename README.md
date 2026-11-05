@@ -103,6 +103,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | LSP        | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                | Language server configs            |
 | LSP        | [mason.nvim](https://github.com/mason-org/mason.nvim)                     | Language server and tool installer |
 | LSP        | [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) | Installs the tool list on start    |
+| Formatting | [conform.nvim](https://github.com/stevearc/conform.nvim)                  | Format on save                     |
 | Completion | [blink.cmp](https://github.com/saghen/blink.cmp)                          | Completion Menu + cmdline          |
 | Completion | [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)      | Snippet collection                 |
 | Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                  | Quarto preview, LSP in code chunks |
