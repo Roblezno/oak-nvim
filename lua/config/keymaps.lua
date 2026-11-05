@@ -13,6 +13,10 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 -- Buffer navigation
 vim.keymap.set("n", "<leader>bn", "<Cmd>bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bp", "<Cmd>bprevious<CR>", { desc = "Previous buffer" })
+-- NOTE: Unsaved buffers are kept. The logic lives in lua/utils/editor.lua
+vim.keymap.set("n", "<leader>bd", function()
+	require("utils").editor.close_hidden_buffers()
+end, { desc = "Close hidden buffers (keeps unsaved)" })
 
 -- Registers: delete, change and paste without touching the yank register, so the yanked text
 -- stays safe while editing around it. <leader>p pastes the last yank (register 0), even after

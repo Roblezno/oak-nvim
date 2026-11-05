@@ -4,4 +4,6 @@
 -- USAGE : local utils = require("utils")
 -- ================================================================================================
 
-return {}
+return {
+	editor = require("utils.editor"),
+}

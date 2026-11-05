@@ -16,6 +16,9 @@ it off, like pickers and popups, are left alone.
 copying, `<leader>p` pastes the last yank, `dw` deletes the word backwards without copying,
 `+`/`-` increment/decrement, `te` opens a new tab (`:tabedit`), and
 `<leader>o`/`<leader>O` open a line below/above without continuing the comment.
+- `<leader>bd` closes every hidden buffer except unsaved ones, and says how many it closed and
+kept. Only listed file buffers count: terminals, help and plugin buffers are left alone. The
+helper lives in lua/utils/editor.lua (`require("utils").editor`).
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
 for now.
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
