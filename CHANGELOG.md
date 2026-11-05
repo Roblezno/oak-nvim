@@ -10,6 +10,8 @@ moves it into the pager.
 - tiny-cmdline.nvim (https://github.com/rachartier/tiny-cmdline.nvim) in ui.lua: the `:` command
 line as a floating box, centered left to right and 20% from the top. blink.cmp's cmdline menu
 follows it.
+- Only the active window shows the cursorline (WinLeave/WinEnter autocmds). Windows that keep
+it off, like pickers and popups, are left alone.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
 for now.
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.

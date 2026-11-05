@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "Restore last cursor position when reopening a file",
 })
 
--- Highlight the yanked text for 200ms
+-- Highlight the yanked text for 300ms
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYank", {})
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = highlight_yank_group,
@@ -35,6 +35,32 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		})
 	end,
 	desc = "Highlight the yanked text for 300ms",
+})
+
+-- Show the cursorline only in the active window
+-- NOTE: It only comes back in windows where it was hidden here, so floats and plugin windows that
+-- keep it off (pickers, popups) are left alone. setlocal keeps the global value on
+-- HELP: :help 'cursorline', :help WinLeave, :help WinEnter
+local active_cursorline_group = vim.api.nvim_create_augroup("ActiveCursorline", {})
+vim.api.nvim_create_autocmd("WinLeave", {
+	group = active_cursorline_group,
+	callback = function()
+		if vim.wo.cursorline then
+			vim.w.auto_cursorline = true -- Mark it, so WinEnter knows to bring it back
+			vim.opt_local.cursorline = false
+		end
+	end,
+	desc = "Hide the cursorline when leaving a window",
+})
+vim.api.nvim_create_autocmd("WinEnter", {
+	group = active_cursorline_group,
+	callback = function()
+		if vim.w.auto_cursorline then
+			vim.w.auto_cursorline = nil
+			vim.opt_local.cursorline = true
+		end
+	end,
+	desc = "Show the cursorline again when entering a window",
 })
 
 -- Build telescope-fzf-native after it is installed or updated
