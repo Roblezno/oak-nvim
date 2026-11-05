@@ -111,3 +111,31 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 	desc = "Set Nextflow comment style",
 })
+
+-- Indentation per filetype: tabstop, shiftwidth and softtabstop all take `width`
+-- NOTE: Other filetypes use the global default from config/options.lua (2 spaces). Filetype
+-- plugins run before this autocmd, so these values win over theirs (Python's sets tabstop=8).
+-- A project's .editorconfig still wins over both, Neovim applies it after FileType autocmds
+-- HELP: :help 'shiftwidth', :help ft-python-plugin, :help editorconfig
+local indent_by_filetype = {
+	lua = { width = 2, spaces = false }, -- real tabs shown 2 wide, like the stylua-formatted files
+	sh = { width = 2, spaces = true },
+	bash = { width = 2, spaces = true },
+	r = { width = 2, spaces = true },
+	python = { width = 4, spaces = true },
+	nextflow = { width = 4, spaces = true }, -- nf-core style
+}
+local filetype_indent_group = vim.api.nvim_create_augroup("FiletypeIndent", {})
+vim.api.nvim_create_autocmd("FileType", {
+	group = filetype_indent_group,
+	pattern = vim.tbl_keys(indent_by_filetype),
+	callback = function(ev)
+		local indent = indent_by_filetype[ev.match]
+		local bo = vim.bo[ev.buf]
+		bo.tabstop = indent.width
+		bo.shiftwidth = indent.width
+		bo.softtabstop = indent.width
+		bo.expandtab = indent.spaces
+	end,
+	desc = "Set indentation per filetype",
+})

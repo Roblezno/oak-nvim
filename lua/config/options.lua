@@ -20,9 +20,11 @@ vim.opt.sidescrolloff = 8 -- Keep 8 columns left/right of the cursor when scroll
 vim.opt.cmdheight = 1 -- Command-line height
 vim.opt.spelllang = { "en" }
 
--- TODO: Identation 2 for lua, 4 for the rest of languages I tend to use
-
 -- Tabbing / Indentation
+-- NOTE: 2 spaces by default (bash, R, YAML, JSON, Markdown...). Python and Nextflow use 4 spaces
+-- and Lua uses tabs shown 2 wide, set per filetype in config/autocmds.lua. A project's
+-- .editorconfig is applied on top of all of this by Neovim
+-- HELP: :help 'expandtab', :help editorconfig
 vim.opt.tabstop = 2 -- Tab width
 vim.opt.shiftwidth = 2 -- Indent width
 vim.opt.softtabstop = 2 -- Soft tab stop
@@ -83,7 +85,7 @@ end
 vim.opt.errorbells = false -- Disable error sounds
 vim.opt.backspace = "indent,eol,start" -- Make backspace behave naturally
 vim.opt.autochdir = false -- Don't change directory automatically
--- vim.opt.iskeyword:append("-") -- Treat dash as part of a word
+vim.opt.iskeyword:append("-") -- Treat dash as part of a word (kebab-case names, CSS classes)
 vim.opt.path:append("**") -- Search into subfolders with `gf`
 vim.opt.selection = "inclusive" -- Use inclusive selection
 vim.opt.mouse = "a" -- Enable mouse support

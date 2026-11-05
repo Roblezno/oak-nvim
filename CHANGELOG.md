@@ -16,6 +16,10 @@ so every plugin is set up first. config/keymaps.lua keeps the plain Neovim keyma
 - Leader keys moved from config/globals.lua to the top of config/options.lua.
 - Lua files are indented with tabs and use double quotes (stylua defaults).
 - transparent-popups is disabled: its spec and setup are commented out.
+- Indentation per filetype (FileType autocmd in config/autocmds.lua): Python and Nextflow use 4
+spaces, Lua uses tabs shown 2 wide (like the stylua-formatted files), bash and R use 2 spaces.
+Other filetypes keep the global default of 2 spaces. A project's .editorconfig still wins.
+- `-` counts as part of a word (iskeyword), so kebab-case names and CSS classes are one word.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
