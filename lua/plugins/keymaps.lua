@@ -70,6 +70,24 @@ vim.keymap.set("n", "<leader>gh", function()
 	require("gitsigns").stage_hunk()
 end, { desc = "Git stage or unstage hunk" })
 
+-- GIT DIFF OVERLAY (mini.diff)
+-- NOTE: In a diff window, ]c and [c keep their native job of jumping between changes
+-- HELP: :help mini.diff, :help ]c
+vim.keymap.set("n", "<leader>gd", function()
+	require("mini.diff").toggle_overlay(0)
+end, { desc = "Git toggle diff overlay" })
+local function goto_hunk(direction, native_key)
+	return function()
+		if vim.wo.diff then
+			vim.cmd.normal({ vim.v.count1 .. native_key, bang = true })
+		else
+			require("mini.diff").goto_hunk(direction)
+		end
+	end
+end
+vim.keymap.set("n", "]c", goto_hunk("next", "]c"), { desc = "Next git hunk" })
+vim.keymap.set("n", "[c", goto_hunk("prev", "[c"), { desc = "Previous git hunk" })
+
 -- TROUBLE diagnostics list
 -- NOTE: The plain diagnostic toggles (<leader>td, <leader>tu) live in config/keymaps.lua
 vim.keymap.set("n", "<leader>tx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (Trouble)" })

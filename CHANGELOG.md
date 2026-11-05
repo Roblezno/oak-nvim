@@ -53,6 +53,10 @@ formatted on save. `:ToggleFormatter` turns it off or back on for the current bu
 defaults. `<leader>gb` blames the line and `<leader>gB` the buffer. `<leader>go` opens the file as
 of the commit that last touched the line, in a new tab. `<leader>gs` stages the buffer, or
 unstages it if nothing is left to stage, and `<leader>gh` stages or unstages the hunk.
+- mini.diff in git.lua, from craftzdog's fork (https://github.com/craftzdog/mini.diff, branch
+`feat/grouping`), for its overlay that groups changes into whole hunks, the way `git diff` shows
+them. `<leader>gd` toggles it and `]c`/`[c` jump between hunks. gitsigns keeps the signs and
+staging, so mini.diff's own mappings are off.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes, empty for
 now).
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.

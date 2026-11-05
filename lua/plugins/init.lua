@@ -51,6 +51,8 @@ vim.pack.add({
 	"https://github.com/quarto-dev/quarto-nvim",
 	-- git.lua
 	"https://github.com/lewis6991/gitsigns.nvim",
+	-- craftzdog's fork, for the whole-hunk overlay (view.overlay_style)
+	{ src = "https://github.com/craftzdog/mini.diff", version = "feat/grouping" },
 	-- shared dependencies
 	"https://github.com/nvim-lua/plenary.nvim", -- telescope, todo-comments
 })
