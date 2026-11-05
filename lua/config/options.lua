@@ -17,7 +17,7 @@ vim.opt.cursorline = true -- Highlight current line
 vim.opt.scrolloff = 10 -- Keep 10 lines above/below cursor
 vim.opt.wrap = false -- Display long lines without wrapping
 vim.opt.sidescrolloff = 8 -- Keep 8 columns left/right of the cursor when scrolling
--- cmdheight 0 + one global statusline: maximize vertical space. ui2 handles messages (step 1.6)
+-- cmdheight 0 + one global statusline: maximize vertical space. ui2 handles messages (end of file)
 vim.opt.cmdheight = 0 -- Hide the command line when it is not in use
 vim.opt.laststatus = 3 -- One global statusline for all windows (lualine follows it, see plugins/ui.lua)
 vim.opt.spelllang = { "en" }
@@ -156,5 +156,45 @@ vim.diagnostic.config({
 })
 
 -- NOTE: LSP hover (K) padding is done by transparent-popups, see lua/plugins/ui.lua
+
+-- Messages: Neovim 0.12's experimental ui2 replaces the message area and the hit-enter prompt
+-- - Short messages: popup in a corner, at most 30% of the screen tall, gone after 5 seconds
+-- - Long output (errors, :ls, 'verbose', :!cmd, progress): scrollable pager, at most half the
+--   screen. q closes it, g< reopens the message history
+-- - Search, completion, the `:` completion list and confirm prompts stay in the command line
+-- - Output of a command typed in the command line goes there too, whatever its kind: it expands
+--   over the bottom of the screen until the next key, and <CR> moves it into the pager
+-- NOTE: 0.12 API (nightly moves the timeout to 'messagesopt'). ui2 checks targets[trigger] before
+-- targets[kind], so typed_cmd wins over the message kind. Entered searches always go to the
+-- command line. The floating `:` box on top of ui2 is tiny-cmdline, see plugins/ui.lua
+-- HELP: :help ui-messages, $VIMRUNTIME/lua/vim/_core/ui2.lua
+require("vim._core.ui2").enable({
+	msg = {
+		target = "msg", -- Kinds not listed below
+		targets = {
+			-- Trigger: a command typed in the command line
+			typed_cmd = "cmd",
+			-- Kinds that stay in the command line
+			search_count = "cmd",
+			completion = "cmd",
+			wildlist = "cmd",
+			confirm = "cmd",
+			-- Kinds with long output
+			emsg = "pager",
+			echoerr = "pager",
+			lua_error = "pager",
+			rpc_error = "pager",
+			list_cmd = "pager",
+			verbose = "pager",
+			shell_cmd = "pager",
+			shell_out = "pager",
+			shell_err = "pager",
+			shell_ret = "pager",
+			progress = "pager",
+		},
+		msg = { height = 0.3, timeout = 5000 },
+		pager = { height = 0.5 },
+	},
+})
 
 -- END OF BASIC CONFIG OPTS

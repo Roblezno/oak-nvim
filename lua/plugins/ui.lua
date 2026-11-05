@@ -1,7 +1,7 @@
 -- #################################################################
 -- Visual interface related plugins. Configures:
--- Kanagawa Theme, Alpha dashboard, Lualine, todo-comments, Notify,
--- smear-cursor, mini.icons, transparent-popups (disabled)
+-- Kanagawa Theme, Alpha dashboard, Lualine, tiny-cmdline, todo-comments,
+-- Notify, smear-cursor, mini.icons, transparent-popups (disabled)
 -- #################################################################
 
 -- THEME
@@ -79,6 +79,19 @@ require("lualine").setup({
 		-- lualine puts 'laststatus' back to 2
 		globalstatus = vim.o.laststatus == 3,
 	},
+})
+
+-- TINY-CMDLINE
+-- NOTE: Shows the `:` command line as a floating box on top of ui2 (enabled at the end of
+-- config/options.lua), centered left to right and 20% from the top: with cmdheight 0 it needs
+-- somewhere to appear, and near the top is where the eyes already are. Searches (/ ?) stay at the
+-- bottom. The border follows 'winborder'. The blink adapter moves blink.cmp's cmdline menu along
+-- with the box
+-- HELP: https://github.com/rachartier/tiny-cmdline.nvim
+local tiny_cmdline = require("tiny-cmdline")
+tiny_cmdline.setup({
+	position = { x = "50%", y = "20%" },
+	on_reposition = tiny_cmdline.adapters.blink,
 })
 
 -- TODO COMMENTS

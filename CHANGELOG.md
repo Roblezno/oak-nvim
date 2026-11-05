@@ -1,6 +1,15 @@
 # Changelog
 ## 0.5.0-dev
 ### Implemented
+- Messages through Neovim 0.12's experimental ui2, enabled at the end of config/options.lua.
+Short messages show in a corner popup (at most 30% of the screen, gone after 5 seconds). Errors,
+list output (:ls), 'verbose', :!cmd output and progress go to a scrollable pager (at most half
+the screen). Search, completion, the `:` completion list and confirm prompts stay in the
+command line, and so does the output of a typed command: it expands until the next key, <CR>
+moves it into the pager.
+- tiny-cmdline.nvim (https://github.com/rachartier/tiny-cmdline.nvim) in ui.lua: the `:` command
+line as a floating box, centered left to right and 20% from the top. blink.cmp's cmdline menu
+follows it.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
 for now.
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
