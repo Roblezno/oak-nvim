@@ -98,6 +98,10 @@ on top of the nvim-lspconfig defaults. vtsls uses the workspace TypeScript, upda
 file move, and adds server-side fuzzy matching, function-call completion and short inlay hints.
 lua_ls adds parameter type hints and silences the missing-fields and trailing-space checks.
 cssls ignores empty rules. `<leader>th` toggles inlay hints, which stay off by default.
+- Completion: blink.cmp moved to the `enter` preset, so `<CR>` accepts instead of `<C-y>`.
+Brackets are added after functions, docs show after 200 ms, language server items are colorized
+by Treesitter and kind icons come from the shared icon set. Ghost text stays off. In the command
+line nothing is preselected, so `<CR>` runs what was typed and `<Tab>` still accepts.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
