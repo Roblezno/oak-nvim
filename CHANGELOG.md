@@ -83,6 +83,13 @@ when a macro starts or stops, so the recording indicator replaces the hidden com
 - Treesitter installs 39 parsers instead of 6, adding the web, systems and tooling languages. A
 FileType autocmd now starts highlighting and indentation for every filetype with a parser,
 instead of a fixed list. Languages without indent queries keep their filetype's own indentation.
+- Language servers: mason-tool-installer.nvim
+(https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) replaces mason-lspconfig.nvim. It
+installs the server and formatter list on start and never updates it. Servers are turned on with
+one `vim.lsp.enable()` list, so only listed servers start: pyright and vimls no longer do, even
+when installed in Mason. New servers: vtsls, eslint, oxlint, tailwindcss, cssls and rust_analyzer.
+nextflow_ls, which only ran because it was in Mason, is now on both lists. copilot-language-server
+is installed but not enabled. Every server gets file-rename support.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).

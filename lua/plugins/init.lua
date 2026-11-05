@@ -40,7 +40,7 @@ vim.pack.add({
 	-- lsp.lua
 	"https://github.com/neovim/nvim-lspconfig",
 	"https://github.com/mason-org/mason.nvim",
-	"https://github.com/mason-org/mason-lspconfig.nvim",
+	"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
 	-- completion.lua
 	"https://github.com/rafamadriz/friendly-snippets",
 	-- 1.* release tags, so the prebuilt fuzzy matcher is downloaded (no build step)

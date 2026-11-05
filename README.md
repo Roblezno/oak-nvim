@@ -23,6 +23,8 @@ Currently implementing a refactor for core functionallities in v0.5.0
 - `unzip` and `gzip`: Mason extracts the language servers it downloads
 - `python3` with the `venv` module: Mason installs the Python language servers (basedpyright,
   ruff) in a virtual environment
+- `npm` (Node.js): Mason installs the bash and web language servers and the JavaScript formatters
+- Java 17+: runs the Nextflow language server
 - [R](https://www.r-project.org) with the `languageserver` package (compiled from source on
   install): runs the R language server. See [R language server](#r-language-server)
 - `curl`: blink.cmp downloads its prebuilt fuzzy matcher
@@ -99,8 +101,8 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | Navigation | [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)            | Scrollbar                          |
 | Treesitter | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)     | Parser installer (`main` branch)   |
 | LSP        | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                | Language server configs            |
-| LSP        | [mason.nvim](https://github.com/mason-org/mason.nvim)                     | Language server installer          |
-| LSP        | [mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim) | Installs and enables the servers   |
+| LSP        | [mason.nvim](https://github.com/mason-org/mason.nvim)                     | Language server and tool installer |
+| LSP        | [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) | Installs the tool list on start    |
 | Completion | [blink.cmp](https://github.com/saghen/blink.cmp)                          | Completion Menu + cmdline          |
 | Completion | [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)      | Snippet collection                 |
 | Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                  | Quarto preview, LSP in code chunks |
