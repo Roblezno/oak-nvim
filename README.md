@@ -29,6 +29,7 @@ Currently implementing a refactor for core functionallities in v0.5.0
   install): runs the R language server. See [R language server](#r-language-server)
 - `curl`: blink.cmp downloads its prebuilt fuzzy matcher
 - Optional: [`fd`](https://github.com/sharkdp/fd) for faster file search in Telescope
+- Optional: [`lazygit`](https://github.com/jesseduffield/lazygit), opened in a float with `;g`
 - Optional: a clipboard tool (`wl-clipboard` on Wayland, `xclip`/`xsel` on X11) for system
   clipboard support. Pasting images (img-clip) needs `wl-clipboard` or `xclip` (`xsel` is not
   supported)
@@ -89,7 +90,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | UI         | [tiny-cmdline.nvim](https://github.com/rachartier/tiny-cmdline.nvim)      | Floating `:` command line (ui2)    |
 | UI         | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)         | Highlight TODO/NOTE/WARNING tags   |
 | UI         | [nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors) | Color codes as backgrounds         |
-| UI         | [snacks.nvim](https://github.com/folke/snacks.nvim)                       | Notifier, indent, words, images    |
+| UI         | [snacks.nvim](https://github.com/folke/snacks.nvim)                       | Notifier, indent, words, images, lazygit |
 | UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)         | Animated cursor movement           |
 | UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                     | Icons (stands in for devicons)     |
 | UI         | [transparent-popups](https://github.com/Roblezno/nvim-transparent-popups) | Custom themed popups               |

@@ -40,8 +40,23 @@ mini_icons.mock_nvim_web_devicons()
 --   graphics protocol, ImageMagick converts non-PNG files). Inside tmux it needs
 --   `allow-passthrough on` in ~/.tmux.conf. Pasting images is img-clip (utilities.lua)
 -- - scroll: smooth scrolling stays off, scrolling should feel instant
--- Later steps turn on more modules (picker, lazygit)
+-- - lazygit: ;g opens it in a float, with the theme synced to the colorscheme (plugins/keymaps.lua)
 -- HELP: https://github.com/folke/snacks.nvim, :checkhealth snacks
+
+-- What lazygit's `e` runs: quit lazygit and go back to the window ;g was pressed in, then open the
+-- file there. q goes first and in the same send: once focus moves, it would start recording a macro
+-- in the normal buffer instead of reaching lazygit.
+-- NOTE: Opening the file is a second command, so in theory the closing terminal could kill it, as
+-- with lazygit's own preset. If `e` ever closes lazygit without opening the file, look here first.
+-- lazygit runs this with $SHELL, which isn't always fish here, so it stays valid in fish, zsh
+-- and bash. <Cmd> keeps it away from the command line, where mini.pairs would change the text. The
+-- nvim-remote preset stays as the base (it doesn't suspend inside Neovim), only its templates are
+-- replaced because they open a new tab
+-- HELP: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+local lazygit_leave =
+	[[nvim --server "$NVIM" --remote-send 'q<C-\><C-n><Cmd>lua require("utils").git.focus_lazygit_origin()<CR>'; ]]
+local lazygit_open = lazygit_leave .. [[nvim --server "$NVIM" --remote ]]
+
 require("snacks").setup({
 	notifier = { enabled = true },
 	indent = { enabled = true },
@@ -53,6 +68,16 @@ require("snacks").setup({
 		doc = { inline = false, float = true },
 	},
 	scroll = { enabled = false },
+	lazygit = {
+		theme = { activeBorderColor = { fg = "WarningMsg", bold = true } },
+		config = {
+			os = {
+				edit = lazygit_open .. "{{filename}}",
+				editAtLine = lazygit_open .. [[{{filename}}; nvim --server "$NVIM" --remote-send '<Cmd>{{line}}<CR>']],
+				openDirInEditor = lazygit_open .. "{{dir}}",
+			},
+		},
+	},
 })
 
 -- TRANSPARENT POPUPS

@@ -6,6 +6,22 @@
 
 local M = {}
 
+local lazygit_origin_win -- The window ;g was pressed in
+
+--- Open lazygit in a float, remembering the window to come back to
+function M.open_lazygit()
+	lazygit_origin_win = vim.api.nvim_get_current_win()
+	require("snacks").lazygit()
+end
+
+--- Go back to the window lazygit was opened from. lazygit's edit command calls this through
+--- --remote-send, see the snacks setup in plugins/ui.lua
+function M.focus_lazygit_origin()
+	if lazygit_origin_win and vim.api.nvim_win_is_valid(lazygit_origin_win) then
+		vim.api.nvim_set_current_win(lazygit_origin_win)
+	end
+end
+
 --- Stage the buffer, or unstage it if nothing is left to stage
 function M.toggle_stage_buffer()
 	local gitsigns = require("gitsigns")

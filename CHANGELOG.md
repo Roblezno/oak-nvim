@@ -62,6 +62,10 @@ and history. The explorer is a tree 50 columns wide that opens files as the curs
 +/- line stats. Compact mode shows only the changes plus 8 context lines, with folds synced across
 panes. `<leader>gv` toggles the diff view, `<leader>gl` shows the current file's history and
 `<leader>gL` the repo history.
+- Lazygit through snacks.nvim: `;g` opens it in a float, with the theme synced and the active
+border in the `WarningMsg` color. `e` on a file closes lazygit and opens the file in the window
+it was launched from, not a new tab or a nested Neovim. The edit command works in fish, zsh and
+bash, since lazygit runs it with `$SHELL`.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes, empty for
 now).
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.

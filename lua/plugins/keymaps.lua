@@ -97,6 +97,12 @@ end, { desc = "Git toggle diff view" })
 vim.keymap.set("n", "<leader>gl", "<cmd>CodeDiff history %<CR>", { desc = "Git file history" })
 vim.keymap.set("n", "<leader>gL", "<cmd>CodeDiff history<CR>", { desc = "Git repo history" })
 
+-- LAZYGIT (snacks)
+-- NOTE: Its `e` key comes back to this window, see the snacks setup in plugins/ui.lua
+vim.keymap.set("n", ";g", function()
+	require("utils").git.open_lazygit()
+end, { desc = "Lazygit" })
+
 -- TROUBLE diagnostics list
 -- NOTE: The plain diagnostic toggles (<leader>td, <leader>tu) live in config/keymaps.lua
 vim.keymap.set("n", "<leader>tx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (Trouble)" })
