@@ -1,7 +1,7 @@
 -- #################################################################
 -- Visual interface related plugins. Configures:
 -- solarized-osaka Theme, Alpha dashboard, Lualine, incline, tiny-cmdline,
--- todo-comments, Notify, smear-cursor, mini.icons, transparent-popups (disabled)
+-- todo-comments, snacks, smear-cursor, mini.icons, transparent-popups (disabled)
 -- #################################################################
 
 -- THEME
@@ -26,6 +26,33 @@ vim.cmd.colorscheme("solarized-osaka-vivid")
 local mini_icons = require("mini.icons")
 mini_icons.setup({})
 mini_icons.mock_nvim_web_devicons()
+
+-- SNACKS
+-- NOTE: Only the modules enabled here run. Set up early (right after the icons), so notifications
+-- from the other plugins' setup already go through its notifier
+-- - notifier: replaces vim.notify, popups plus a history (<leader>nd/<leader>nh, plugins/keymaps.lua)
+-- - indent: indent guides and the current scope
+-- - statuscolumn: signs, line numbers and folds in the gutter
+-- - words: highlights the word under the cursor everywhere (LSP document highlights, so it needs a
+--   language server). ]] / [[ jump between them (plugins/keymaps.lua)
+-- - image: with the cursor on an image link in .md/.qmd, shows the image in a popup (kitty
+--   graphics protocol, ImageMagick converts non-PNG files). Inside tmux it needs
+--   `allow-passthrough on` in ~/.tmux.conf. Pasting images is img-clip (utilities.lua)
+-- - scroll: smooth scrolling stays off, scrolling should feel instant
+-- Later steps turn on more modules (picker, lazygit)
+-- HELP: https://github.com/folke/snacks.nvim, :checkhealth snacks
+require("snacks").setup({
+	notifier = { enabled = true },
+	indent = { enabled = true },
+	statuscolumn = { enabled = true },
+	words = { enabled = true },
+	image = {
+		enabled = true,
+		-- A popup at the cursor instead of drawing the images inline in the buffer
+		doc = { inline = false, float = true },
+	},
+	scroll = { enabled = false },
+})
 
 -- TRANSPARENT POPUPS
 -- NOTE: My own plugin: float borders and transparency that follow the colorscheme, padding for
@@ -198,11 +225,6 @@ tiny_cmdline.setup({
 
 -- TODO COMMENTS
 require("todo-comments").setup({})
-
--- TODO: Move to snacks
--- NOTIFY
-require("notify").setup({})
-vim.notify = require("notify")
 
 -- SMEAR CURSOR
 require("smear_cursor").setup({})

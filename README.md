@@ -86,7 +86,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | UI         | [incline.nvim](https://github.com/b0o/incline.nvim)                       | File name tag on each window       |
 | UI         | [tiny-cmdline.nvim](https://github.com/rachartier/tiny-cmdline.nvim)      | Floating `:` command line (ui2)    |
 | UI         | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)         | Highlight TODO/NOTE/WARNING tags   |
-| UI         | [nvim-notify](https://github.com/rcarriga/nvim-notify)                    | Notification popups                |
+| UI         | [snacks.nvim](https://github.com/folke/snacks.nvim)                       | Notifier, indent, words, images    |
 | UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)         | Animated cursor movement           |
 | UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                     | Icons (stands in for devicons)     |
 | UI         | [transparent-popups](https://github.com/Roblezno/nvim-transparent-popups) | Custom themed popups               |
@@ -105,7 +105,6 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                  | Quarto preview, LSP in code chunks |
 | Markdown   | [otter.nvim](https://github.com/jmbuhr/otter.nvim)                        | LSP backend for code chunks        |
 | Markdown   | [img-clip.nvim](https://github.com/HakonHarnes/img-clip.nvim)             | Paste clipboard images             |
-| Markdown   | [image.nvim](https://github.com/3rd/image.nvim)                           | Image link popups                  |
 
 ### Markdown and Quarto
 
@@ -120,7 +119,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 - `<leader>mi` saves the clipboard image in an `assets/` folder next to the current file and
   inserts the markdown link.
 - With the cursor on an image link in `.md` or `.qmd`, the image is shown in a popup
-  (image.nvim, `:checkhealth image` checks the setup). Inside tmux, add this to `~/.tmux.conf`
+  (snacks.image, `:checkhealth snacks` checks the setup). Inside tmux, add this to `~/.tmux.conf`
   so images are drawn:
 
   ```

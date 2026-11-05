@@ -36,13 +36,27 @@ vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Teles
 -- NOTE: The plain diagnostic toggles (<leader>td, <leader>tu) live in config/keymaps.lua
 vim.keymap.set("n", "<leader>tx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (Trouble)" })
 
--- NOTIFY (nvim-notify)
+-- NOTIFICATIONS (snacks notifier)
 -- NOTE: Dismissed popups stay in the history (<leader>nh)
--- HELP: :help notify.dismiss(), :Notifications
+-- HELP: https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md
 vim.keymap.set("n", "<leader>nd", function()
-	require("notify").dismiss({ silent = true, pending = true })
+	require("snacks").notifier.hide()
 end, { desc = "Dismiss notifications" })
-vim.keymap.set("n", "<leader>nh", "<Cmd>Notifications<CR>", { desc = "Notification history" })
+vim.keymap.set("n", "<leader>nh", function()
+	require("snacks").notifier.show_history()
+end, { desc = "Notification history" })
+
+-- WORD REFERENCES (snacks words)
+-- NOTE: Jump between the highlighted references of the word under the cursor (needs a language
+-- server). Global mappings: in Python and Markdown/Quarto buffers, their filetype plugins' own
+-- ]] / [[ (next class/def, next heading) keep winning
+-- HELP: https://github.com/folke/snacks.nvim/blob/main/docs/words.md
+vim.keymap.set("n", "]]", function()
+	require("snacks").words.jump(vim.v.count1)
+end, { desc = "Next reference of the word" })
+vim.keymap.set("n", "[[", function()
+	require("snacks").words.jump(-vim.v.count1)
+end, { desc = "Previous reference of the word" })
 
 -- MARKDOWN / QUARTO (quarto-nvim, img-clip)
 -- NOTE: The preview opens in the browser and also works for plain .md files

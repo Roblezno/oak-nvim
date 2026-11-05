@@ -28,6 +28,11 @@ can be clicked.
 - incline.nvim (https://github.com/b0o/incline.nvim) in ui.lua: a file name tag with its icon in
 the top-right corner of each window, plus `[+]` when unsaved, so each split says which file it
 holds with one global statusline. The tag hides when the cursor reaches its line.
+- snacks.nvim (https://github.com/folke/snacks.nvim) in ui.lua, set up right after the icons:
+notifier (replaces nvim-notify), indent guides, statuscolumn, words (the word under the cursor is
+highlighted everywhere through the language server, `]]`/`[[` jump between the references) and
+image (the image under the cursor in `.md`/`.qmd` shows in a popup, replaces image.nvim). Smooth
+scroll stays off. In Python and Markdown/Quarto buffers their own `]]`/`[[` keep winning.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
 for now.
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
@@ -69,6 +74,9 @@ when a macro starts or stops, so the recording indicator replaces the hidden com
 - config/globals.lua (merged into config/options.lua).
 - kanagawa.nvim, replaced by solarized-osaka.nvim.
 - nvim-web-devicons, replaced by the mini.icons mock.
+- nvim-notify, replaced by the snacks notifier. `<leader>nd`/`<leader>nh` (dismiss, history) now
+use it.
+- image.nvim, replaced by snacks.image (same popup at the cursor). img-clip stays for pasting.
 
 ## 0.4.0
 ### Implemented

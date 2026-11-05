@@ -17,7 +17,7 @@ vim.pack.add({
 	"https://github.com/b0o/incline.nvim",
 	"https://github.com/rachartier/tiny-cmdline.nvim",
 	"https://github.com/folke/todo-comments.nvim",
-	"https://github.com/rcarriga/nvim-notify",
+	"https://github.com/folke/snacks.nvim",
 	"https://github.com/sphamba/smear-cursor.nvim",
 	"https://github.com/nvim-mini/mini.icons", -- also stands in for nvim-web-devicons
 	-- utilities.lua
@@ -25,7 +25,6 @@ vim.pack.add({
 	"https://github.com/folke/which-key.nvim",
 	"https://github.com/folke/trouble.nvim",
 	"https://github.com/HakonHarnes/img-clip.nvim",
-	"https://github.com/3rd/image.nvim",
 	"https://github.com/jpalardy/vim-slime",
 	-- navigation.lua
 	{ src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = vim.version.range("3") },
