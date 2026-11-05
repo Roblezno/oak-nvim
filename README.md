@@ -83,6 +83,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | UI         | [solarized-osaka.nvim](https://github.com/craftzdog/solarized-osaka.nvim) | Colorscheme (vivid, transparent)   |
 | UI         | [alpha-nvim](https://github.com/goolord/alpha-nvim)                       | Start dashboard                    |
 | UI         | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)              | Statusline                         |
+| UI         | [incline.nvim](https://github.com/b0o/incline.nvim)                       | File name tag on each window       |
 | UI         | [tiny-cmdline.nvim](https://github.com/rachartier/tiny-cmdline.nvim)      | Floating `:` command line (ui2)    |
 | UI         | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)         | Highlight TODO/NOTE/WARNING tags   |
 | UI         | [nvim-notify](https://github.com/rcarriga/nvim-notify)                    | Notification popups                |

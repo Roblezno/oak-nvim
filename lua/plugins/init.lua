@@ -14,6 +14,7 @@ vim.pack.add({
 	-- "https://github.com/Roblezno/nvim-transparent-popups",
 	"http://github.com/goolord/alpha-nvim",
 	"https://github.com/nvim-lualine/lualine.nvim",
+	"https://github.com/b0o/incline.nvim",
 	"https://github.com/rachartier/tiny-cmdline.nvim",
 	"https://github.com/folke/todo-comments.nvim",
 	"https://github.com/rcarriga/nvim-notify",

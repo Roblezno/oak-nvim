@@ -1,7 +1,7 @@
 -- #################################################################
 -- Visual interface related plugins. Configures:
--- solarized-osaka Theme, Alpha dashboard, Lualine, tiny-cmdline, todo-comments,
--- Notify, smear-cursor, mini.icons, transparent-popups (disabled)
+-- solarized-osaka Theme, Alpha dashboard, Lualine, incline, tiny-cmdline,
+-- todo-comments, Notify, smear-cursor, mini.icons, transparent-popups (disabled)
 -- #################################################################
 
 -- THEME
@@ -156,6 +156,31 @@ require("lualine").setup({
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
 	},
+})
+
+-- INCLINE
+-- NOTE: A file name tag with its icon in the top-right corner of each window, plus [+] when
+-- unsaved (like the tabline): with one global statusline, each split still says which file it
+-- holds. The tag hides when the cursor reaches its line. The icon comes from mini.icons, in its
+-- own color. Floats, unlisted and special buffers get no tag (incline's defaults)
+-- HELP: :help incline, https://github.com/b0o/incline.nvim
+require("incline").setup({
+	hide = { cursorline = true },
+	render = function(props)
+		local unsaved = vim.bo[props.buf].modified and "[+] " or ""
+		local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+		if name == "" then
+			return { unsaved, "[No Name]" }
+		end
+		local icon, icon_hl = require("mini.icons").get("file", name)
+		local icon_fg = vim.api.nvim_get_hl(0, { name = icon_hl, link = false }).fg
+		return {
+			unsaved,
+			{ icon, guifg = icon_fg and ("#%06x"):format(icon_fg) },
+			" ",
+			name,
+		}
+	end,
 })
 
 -- TINY-CMDLINE

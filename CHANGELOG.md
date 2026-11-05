@@ -25,6 +25,9 @@ bold base4 on yellow when active, base0 on base02 otherwise (solarized-osaka pal
 TabLine/TabLineSel fallback for other colorschemes). Names over 20 characters are cut to 17 plus
 `…`, unsaved tabs show `[+]`, terminals and empty buffers show `[Terminal]`/`[No Name]`. Tabs
 can be clicked.
+- incline.nvim (https://github.com/b0o/incline.nvim) in ui.lua: a file name tag with its icon in
+the top-right corner of each window, plus `[+]` when unsaved, so each split says which file it
+holds with one global statusline. The tag hides when the cursor reaches its line.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
 for now.
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
