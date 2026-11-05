@@ -56,6 +56,9 @@ vim.opt.pumblend = 10 -- Popup menu transparency
 -- NOTE: transparent-popups (disabled, see lua/plugins/ui.lua) sets its own border when enabled
 vim.opt.winborder = "rounded" -- Rounded borders on every floating window
 vim.opt.title = true -- Show the file name in the terminal tab title
+-- Tabline: custom one in lua/utils/tabline.lua, colors set on ColorScheme (config/autocmds.lua)
+vim.opt.showtabline = 1 -- Only when there are 2 or more tabs
+vim.opt.tabline = "%!v:lua.require'utils.tabline'.render()"
 vim.opt.fillchars:append({ diff = "╱" }) -- Diagonal lines in empty diff areas
 vim.opt.redrawtime = 10000 -- Timeout for syntax highlighting redraw
 vim.opt.maxmempattern = 20000 -- Max memory for pattern matching

@@ -37,6 +37,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight the yanked text for 300ms",
 })
 
+-- Tabline colors from the colorscheme palette (the tabline itself is set in config/options.lua)
+-- NOTE: Defined before plugins/ui.lua loads the colorscheme, so it also runs for the first one
+-- HELP: :help ColorScheme
+local tabline_colors_group = vim.api.nvim_create_augroup("TablineColors", {})
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = tabline_colors_group,
+	callback = function()
+		require("utils.tabline").set_highlights()
+	end,
+	desc = "Set the tabline colors",
+})
+
 -- Show the cursorline only in the active window
 -- NOTE: It only comes back in windows where it was hidden here, so floats and plugin windows that
 -- keep it off (pickers, popups) are left alone. setlocal keeps the global value on

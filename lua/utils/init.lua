@@ -6,4 +6,5 @@
 
 return {
 	editor = require("utils.editor"),
+	tabline = require("utils.tabline"),
 }

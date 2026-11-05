@@ -19,6 +19,12 @@ copying, `<leader>p` pastes the last yank, `dw` deletes the word backwards witho
 - `<leader>bd` closes every hidden buffer except unsaved ones, and says how many it closed and
 kept. Only listed file buffers count: terminals, help and plugin buffers are left alone. The
 helper lives in lua/utils/editor.lua (`require("utils").editor`).
+- Custom tabline without a plugin (lua/utils/tabline.lua), shown only with 2 or more tabs. Each
+tab is a trapezoid with the icon and file name of its active window, padded with 3 spaces:
+bold base4 on yellow when active, base0 on base02 otherwise (solarized-osaka palette, with a
+TabLine/TabLineSel fallback for other colorschemes). Names over 20 characters are cut to 17 plus
+`…`, unsaved tabs show `[+]`, terminals and empty buffers show `[Terminal]`/`[No Name]`. Tabs
+can be clicked.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes), empty
 for now.
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
