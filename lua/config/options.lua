@@ -17,7 +17,9 @@ vim.opt.cursorline = true -- Highlight current line
 vim.opt.scrolloff = 10 -- Keep 10 lines above/below cursor
 vim.opt.wrap = false -- Display long lines without wrapping
 vim.opt.sidescrolloff = 8 -- Keep 8 columns left/right of the cursor when scrolling
-vim.opt.cmdheight = 1 -- Command-line height
+-- cmdheight 0 + one global statusline: maximize vertical space. ui2 handles messages (step 1.6)
+vim.opt.cmdheight = 0 -- Hide the command line when it is not in use
+vim.opt.laststatus = 3 -- One global statusline for all windows (lualine follows it, see plugins/ui.lua)
 vim.opt.spelllang = { "en" }
 
 -- Tabbing / Indentation
@@ -51,7 +53,10 @@ vim.opt.completeopt = "menuone,noinsert,noselect" -- Completion options
 vim.opt.showmode = false -- Don't show mode in command line
 vim.opt.pumheight = 10 -- Popup menu height
 vim.opt.pumblend = 10 -- Popup menu transparency
--- NOTE: 'winborder' (float borders) is set by transparent-popups, see lua/plugins/ui.lua
+-- NOTE: transparent-popups (disabled, see lua/plugins/ui.lua) sets its own border when enabled
+vim.opt.winborder = "rounded" -- Rounded borders on every floating window
+vim.opt.title = true -- Show the file name in the terminal tab title
+vim.opt.fillchars:append({ diff = "╱" }) -- Diagonal lines in empty diff areas
 vim.opt.redrawtime = 10000 -- Timeout for syntax highlighting redraw
 vim.opt.maxmempattern = 20000 -- Max memory for pattern matching
 -- NOTE: The next line could be increased in case I need to search for

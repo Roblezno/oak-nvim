@@ -75,6 +75,9 @@ require("lualine").setup({
 	options = {
 		theme = "kanagawa",
 		icons_enabled = true,
+		-- One bar for all windows when 'laststatus' is 3 (set in config/options.lua). Without it
+		-- lualine puts 'laststatus' back to 2
+		globalstatus = vim.o.laststatus == 3,
 	},
 })
 

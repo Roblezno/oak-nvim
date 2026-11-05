@@ -20,6 +20,10 @@ so every plugin is set up first. config/keymaps.lua keeps the plain Neovim keyma
 spaces, Lua uses tabs shown 2 wide (like the stylua-formatted files), bash and R use 2 spaces.
 Other filetypes keep the global default of 2 spaces. A project's .editorconfig still wins.
 - `-` counts as part of a word (iskeyword), so kebab-case names and CSS classes are one word.
+- More vertical space: cmdheight 0 and one global statusline (laststatus 3). lualine's
+globalstatus follows laststatus, otherwise it would reset it to 2.
+- Rounded borders on every float (winborder), the file name in the terminal tab title (title),
+and a diagonal `╱` fill in empty diff areas (fillchars).
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
