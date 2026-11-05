@@ -74,13 +74,87 @@ dashboard.section.buttons.val = {
 alpha.setup(dashboard.opts)
 
 -- LUALINE
+-- NOTE: One global bar. Sections: a mode | b git branch | c project root (only when it is not the
+-- cwd), filetype icon, path | x macro recording, diagnostics, git diff | y progress | z line:col
+-- The recording indicator stands in for the hidden command line (cmdheight 0)
+-- HELP: :help lualine.txt
+local root_markers = { ".git", "lua", "package.json", "Makefile", "Cargo.toml", "go.mod", "pyproject.toml" }
+
+--- Name of the current file's project root (nearest folder upward with a root marker), shown
+--- only when it differs from the cwd
+---@return string
+local function root_name()
+	local path = vim.api.nvim_buf_get_name(0)
+	if path == "" or vim.bo.buftype ~= "" then
+		return ""
+	end
+	local root = vim.fs.root(path, root_markers)
+	if not root or root == vim.fn.getcwd() then
+		return ""
+	end
+	return "\u{f07c} " .. vim.fs.basename(root) -- Nerd Font folder-open icon
+end
+
+--- Path of the current file relative to the cwd (or ~), cut to its first part, "…" and the last 2
+---@return string
+local function pretty_path()
+	if vim.bo.buftype == "terminal" then
+		return "[Terminal]"
+	end
+	local path = vim.api.nvim_buf_get_name(0)
+	if path == "" then
+		return "[No Name]"
+	end
+	local parts = vim.split(vim.fn.fnamemodify(path, ":~:."), "/", { plain = true })
+	if #parts > 3 then
+		parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
+	end
+	return (table.concat(parts, "/"):gsub("%%", "%%%%")) -- A literal % must be doubled
+end
+
+--- "recording @q" while a macro is being recorded, empty (hidden) otherwise
+---@return string
+local function recording()
+	local reg = vim.fn.reg_recording()
+	return reg == "" and "" or "recording @" .. reg
+end
+
 require("lualine").setup({
 	options = {
-		theme = "auto", -- Built from the colorscheme
+		theme = "auto", -- The colorscheme's own lualine theme if it ships one, else built from it
 		icons_enabled = true,
 		-- One bar for all windows when 'laststatus' is 3 (set in config/options.lua). Without it
 		-- lualine puts 'laststatus' back to 2
 		globalstatus = vim.o.laststatus == 3,
+		refresh = {
+			-- lualine's default events (cursor moves included) plus macro start/stop
+			events = {
+				"WinEnter",
+				"BufEnter",
+				"BufWritePost",
+				"SessionLoadPost",
+				"FileChangedShellPost",
+				"VimResized",
+				"Filetype",
+				"CursorMoved",
+				"CursorMovedI",
+				"ModeChanged",
+				"RecordingEnter",
+				"RecordingLeave",
+			},
+		},
+	},
+	sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "branch" },
+		lualine_c = {
+			root_name,
+			{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+			pretty_path,
+		},
+		lualine_x = { recording, "diagnostics", "diff" },
+		lualine_y = { "progress" },
+		lualine_z = { "location" },
 	},
 })
 

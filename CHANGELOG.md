@@ -56,6 +56,11 @@ and a diagonal `╱` fill in empty diff areas (fillchars).
 style, transparent background. lualine uses the `auto` theme.
 - mini.icons is the one icon source: it mocks nvim-web-devicons, so plugins that only know
 devicons (telescope, neo-tree, lualine) use it too. Set up right after the colorscheme.
+- lualine sections: mode | git branch | project root name (only when it differs from the cwd),
+filetype icon and a short path | macro recording register, diagnostics, git diff counts |
+progress | line:column. The root is the nearest folder upward with `.git`, `lua`,
+`package.json`, `Makefile`, `Cargo.toml`, `go.mod` or `pyproject.toml`. The bar also refreshes
+when a macro starts or stops, so the recording indicator replaces the hidden command line.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
