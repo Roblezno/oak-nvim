@@ -8,6 +8,27 @@
 -- move and delete by editing the text, then :w. h and q are set here because oil binds them on its
 -- own buffers. <leader>e, which opens it, is in plugins/keymaps.lua
 -- HELP: :help oil, https://github.com/stevearc/oil.nvim
+
+-- Files oil won't preview: snacks.image would draw them in the terminal, which glitches the UI
+local no_preview_exts = {
+	"png",
+	"jpg",
+	"jpeg",
+	"gif",
+	"bmp",
+	"webp",
+	"tiff",
+	"heic",
+	"avif",
+	"icns",
+	"pdf",
+	"mp4",
+	"mov",
+	"avi",
+	"mkv",
+	"webm",
+}
+
 require("oil").setup({
 	columns = { "icon", "permissions", "size", "mtime" },
 	-- Renaming a file asks the language server to update imports, and those edits are saved
@@ -18,6 +39,11 @@ require("oil").setup({
 	},
 	view_options = { show_hidden = true },
 	float = { max_width = 200, border = "rounded" },
+	preview_win = {
+		disable_preview = function(filename)
+			return vim.list_contains(no_preview_exts, vim.fn.fnamemodify(filename, ":e"):lower())
+		end,
+	},
 })
 
 -- SCROLLBAR
