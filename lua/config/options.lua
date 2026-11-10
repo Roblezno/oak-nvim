@@ -42,7 +42,6 @@ vim.opt.smartcase = true -- Case-sensitive if uppercase in search
 vim.opt.hlsearch = true -- Highlight search matches; <Esc> clears them with :nohlsearch
 vim.opt.incsearch = true -- Show matches as you type
 
-
 -- Visual Settings
 vim.opt.termguicolors = true -- Enable 24-bit colors
 vim.opt.signcolumn = "yes" -- Always show sign column
@@ -72,7 +71,11 @@ vim.opt.writebackup = false -- Don't backup before overwriting
 vim.opt.swapfile = false -- Don't create swap files
 vim.opt.updatetime = 300 -- Time in ms to trigger CursorHold
 vim.opt.timeoutlen = 500 -- Time in ms to wait for mapped sequence
-vim.opt.ttimeoutlen = 0 -- No wait for key code sequences
+-- NOTE: Not 0: terminal replies (e.g. Ghostty's XTVERSION `ESC P >|ghostty ...`) can arrive split,
+-- and with no wait the ESC is read as <Esc> and the rest runs as keys (P pastes the clipboard)
+-- HELP: :help 'ttimeout'
+vim.opt.ttimeoutlen = 10 -- Wait 10 ms for key code / terminal reply sequences to complete
+
 vim.opt.autoread = true -- Auto-reload file if changed outside
 vim.opt.autowrite = false -- Don't auto-save on some events
 vim.opt.diffopt:append("vertical") -- Vertical diff splits
@@ -115,7 +118,6 @@ vim.opt.guicursor = {
 	"a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor", -- All modes: blinking & highlight groups
 	"sm:block-blinkwait175-blinkoff150-blinkon175", -- Showmatch mode
 }
-
 
 -- Filetypes
 -- Nextflow: not detected by Neovim. Scripts (.nf) and config files share one filetype, the
