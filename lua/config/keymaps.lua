@@ -30,7 +30,7 @@ vim.keymap.set("n", "x", '"_x', { desc = "Delete character (no copy)" })
 vim.keymap.set({ "n", "x" }, "<leader>d", '"_d', { desc = "Delete (no copy)" })
 vim.keymap.set({ "n", "x" }, "<leader>c", '"_c', { desc = "Change (no copy)" })
 vim.keymap.set({ "n", "x" }, "<leader>p", '"0p', { desc = "Paste last yank" })
-vim.keymap.set("n", "dw", 'vb"_d', { desc = "Delete word backwards (no copy)" })
+vim.keymap.set("n", "dw", '"_dw', { desc = "Delete word forwards (no copy)" })
 
 -- Numbers and selection
 -- NOTE: + and - take over increment/decrement, so <C-a> is free for select all

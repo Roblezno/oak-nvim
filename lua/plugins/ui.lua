@@ -13,7 +13,7 @@
 -- HELP: https://github.com/craftzdog/solarized-osaka.nvim
 require("solarized-osaka").setup({
 	transparent = true,
-  --style = "vivid",
+	--style = "vivid",
 })
 
 vim.cmd.colorscheme("solarized-osaka")
@@ -264,4 +264,4 @@ require("nvim-highlight-colors").setup({
 })
 
 -- SMEAR CURSOR
-require("smear_cursor").setup({})
+-- require("smear_cursor").setup({})
