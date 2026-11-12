@@ -38,7 +38,10 @@ mini_icons.mock_nvim_web_devicons()
 --   language server). ]] / [[ jump between them (plugins/keymaps.lua)
 -- - image: with the cursor on an image link in .md/.qmd, shows the image in a popup (kitty
 --   graphics protocol, ImageMagick converts non-PNG files). Inside tmux it needs
---   `allow-passthrough on` in ~/.tmux.conf. Pasting images is img-clip (utilities.lua)
+--   `allow-passthrough on` and `extended-keys on` (not `always`) in ~/.tmux.conf: with
+--   `always`, snacks queries the terminal version and tmux types Ghostty's reply into the
+--   buffer (P pastes the clipboard, then `ostty <version>`), see snacks.nvim issue #2332.
+--   Pasting images is img-clip (utilities.lua)
 -- - scroll: smooth scrolling stays off, scrolling should feel instant
 -- - lazygit: ;g opens it in a float, with the theme synced to the colorscheme (plugins/keymaps.lua)
 -- HELP: https://github.com/folke/snacks.nvim, :checkhealth snacks
