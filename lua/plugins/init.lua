@@ -19,7 +19,6 @@ vim.pack.add({
 	"https://github.com/folke/todo-comments.nvim",
 	"https://github.com/brenoprata10/nvim-highlight-colors",
 	"https://github.com/folke/snacks.nvim",
-	"https://github.com/sphamba/smear-cursor.nvim",
 	"https://github.com/nvim-mini/mini.icons", -- also stands in for nvim-web-devicons
 	-- utilities.lua
 	"https://github.com/nvim-mini/mini.pairs",

@@ -69,6 +69,24 @@ bash, since lazygit runs it with `$SHELL`.
 - config/commands.lua (user commands) and config/workarounds.lua (temporary bug fixes, empty for
 now).
 - lua/utils/init.lua: returns the table of shared helper modules, empty for now.
+- Jupyter notebooks: jupytext.nvim (https://github.com/goerz/jupytext.nvim) in markdown.lua opens
+.ipynb files as markdown text with the quarto filetype, so otter, LSP and the quarto runner work
+as in .qmd files. Saving writes the .ipynb back and keeps the outputs already stored in it. The
+jupytext CLI comes from the `neovim` conda env when it exists, otherwise from PATH.
+- molten-nvim (https://github.com/benlubas/molten-nvim) is back in markdown.lua, pinned to the 1.*
+releases, with text-only output: nothing is drawn in the terminal, plots open in the system image
+viewer (needs pillow) and the virtual text under each cell is capped at 4 lines. The `neovim`
+conda env is python3_host_prog again (options.lua), and :UpdateRemotePlugins runs through a
+PackChanged autocmd when molten is installed or updated.
+- quarto's code runner picks molten or vim-slime per buffer: cells go to molten once the buffer
+has a kernel, and to the tmux pane otherwise. MoltenInitPost/MoltenDeinitPost autocmds set a
+buffer flag (vim.b.molten_kernel), so slime runs never start molten's Python host.
+- Molten keymaps under <leader>j: <leader>ji starts the kernel named after the active conda env
+(or opens the picker), <leader>jI opens the picker, <leader>jo enters the output window,
+<leader>jh/jd hide/delete the output, <leader>jx/jR/jq interrupt/restart/stop the kernel and
+<leader>jb opens HTML output in the browser. Cells still run with <leader>rc/ra/rA.
+- README documents notebook support and the molten setup (conda env, kernel registration, Jupyter
+runtime folder, and :UpdateRemotePlugins when the env is created after molten is installed).
 
 ### Changed
 - New config layout. init.lua enables vim.loader, loads config.options, config.keymaps,
@@ -132,6 +150,11 @@ implementation elsewhere, `gK` and `<C-k>` in insert mode show signature help. `
 actions, `<leader>lcr` rename, `<leader>lcR` rename the file with import updates, `<leader>lcf`
 format now and `<leader>lcl` LSP info. `]d` and `[d` show the diagnostic in a float. These replace
 `<leader>lf`, `lr`, `la`, `li`, `lR` and `lt`.
+- quarto-nvim's lspFeatures.chunks is "all": plain ```python fences count as code chunks too,
+which is how jupytext writes notebook cells. In .qmd files, plain fenced blocks now also get LSP
+and run with <leader>rA.
+- oil doesn't preview .ipynb files: the preview ran jupytext's conversion and stalled for a
+second.
 
 ### Removed
 - config/globals.lua (merged into config/options.lua).
@@ -140,6 +163,8 @@ format now and `<leader>lcl` LSP info. `]d` and `[d` show the diagnostic in a fl
 - nvim-notify, replaced by the snacks notifier. `<leader>nd`/`<leader>nh` (dismiss, history) now
 use it.
 - image.nvim, replaced by snacks.image (same popup at the cursor). img-clip stays for pasting.
+- smear-cursor.nvim: its vim.pack spec and README row. Its setup was already commented out in
+ui.lua.
 
 ## 0.4.0
 ### Implemented

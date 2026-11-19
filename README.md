@@ -5,7 +5,8 @@ scripting, statistics with R and Quarto Markdown writing (among others).
 
 > **Status:** v0.5.0(Unreleased). The base editor, UI, navigation, Treesitter (baseline languages), base
 > LSP and cmp with some utilities and custom theme updates with personal plugins.
-> Quarto markdown support, with code sent to a REPL in a tmux pane (vim-slime).
+> Quarto markdown and Jupyter notebook support, with code sent to a REPL in a tmux pane
+> (vim-slime) or to Jupyter kernels (molten).
 > Currently implementing a refactor for core functionallities in v0.5.0
 
 ## Requirements
@@ -36,6 +37,9 @@ scripting, statistics with R and Quarto Markdown writing (among others).
   files
 - Optional, to run code: [tmux](https://github.com/tmux/tmux) and a REPL for each language
   (`R` or radian, IPython or Python 3.13+, `bash`). See [Running code](#running-code-vim-slime)
+- Optional, for Jupyter notebooks and kernels: [miniforge](https://github.com/conda-forge/miniforge)
+  (`mamba`), with a `neovim` env holding the `jupytext` CLI and molten's Python packages. See
+  [Jupyter kernels](#jupyter-kernels-molten)
 - Optional, for image popups: ImageMagick (`magick`) and a terminal with the kitty graphics
   protocol (Ghostty, kitty). Inside tmux it needs the options shown in
   [Markdown and Quarto](#markdown-and-quarto)
@@ -90,7 +94,6 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | UI         | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)                         | Highlight TODO/NOTE/WARNING tags         |
 | UI         | [nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors)            | Color codes as backgrounds               |
 | UI         | [snacks.nvim](https://github.com/folke/snacks.nvim)                                       | Notifier, indent, words, images, lazygit |
-| UI         | [smear-cursor.nvim](https://github.com/sphamba/smear-cursor.nvim)                         | Animated cursor movement                 |
 | UI         | [mini.icons](https://github.com/nvim-mini/mini.icons)                                     | Icons (stands in for devicons)           |
 | UI         | [transparent-popups](https://github.com/Roblezno/nvim-transparent-popups)                 | Custom themed popups                     |
 | Utilities  | [mini.pairs](https://github.com/nvim-mini/mini.pairs)                                     | Auto-close brackets and quotes           |
@@ -112,13 +115,19 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 | Markdown   | [quarto-nvim](https://github.com/quarto-dev/quarto-nvim)                                  | Quarto preview, LSP in code chunks       |
 | Markdown   | [otter.nvim](https://github.com/jmbuhr/otter.nvim)                                        | LSP backend for code chunks              |
 | Markdown   | [img-clip.nvim](https://github.com/HakonHarnes/img-clip.nvim)                             | Paste clipboard images                   |
+| Markdown   | [jupytext.nvim](https://github.com/goerz/jupytext.nvim)                                   | Open .ipynb notebooks as text            |
+| Markdown   | [molten-nvim](https://github.com/benlubas/molten-nvim)                                    | Run cells in Jupyter kernels             |
 
 ### Markdown and Quarto
 
 - `.qmd` files are highlighted and folded with the markdown Treesitter parser, including the
   code chunks and the YAML header.
-- Python and R code chunks in `.qmd` get completion, hover and diagnostics through otter
-  (diagnostics refresh on save).
+- Python and R code chunks in `.qmd` and `.ipynb` get completion, hover and diagnostics through
+  otter (diagnostics refresh on save).
+- `.ipynb` notebooks open as markdown text (jupytext.nvim) and work like `.qmd` files. Saving
+  writes the `.ipynb` back and keeps the outputs already stored in it. Needs the `jupytext` CLI,
+  from the `neovim` env (see [Jupyter kernels](#jupyter-kernels-molten)) or on PATH. oil doesn't
+  preview notebooks, so browsing them stays fast.
 - `.md` files use the [marksman](https://github.com/artempyanykh/marksman) language server
   (installed by Mason): link and heading completion, go to linked files.
 - `<leader>mp` opens the browser preview (`quarto preview`, also for `.md`), `<leader>mq` closes
@@ -143,11 +152,60 @@ last active pane (`{last}`) without asking, `<leader>rs` picks another one. Star
 the conda env you need, so it sees that env's packages.
 
 - `<leader>rc` / `<leader>ra` / `<leader>rA` run the cell / cell and above / all cells of a
-  `.qmd` (quarto runner, only cells in the same language as the current one).
+  `.qmd` or `.ipynb` (quarto runner, only cells in the same language as the current one). Once
+  the buffer has a Jupyter kernel, they run in it instead, see
+  [Jupyter kernels](#jupyter-kernels-molten).
 - `<leader>rl` sends the line (`3<leader>rl` sends three), `<leader>rp` the paragraph and
   `<leader>rr` the visual selection. These work in any file (`.R`, `.py`, `.sh`, `.qmd`).
 - Code is sent with bracketed paste, so Python indentation survives. Use IPython or Python 3.13+,
   older `python` REPLs do not support it.
+
+### Jupyter kernels (molten)
+
+Cells of a `.qmd` or `.ipynb` can also run in a Jupyter kernel through
+[molten](https://github.com/benlubas/molten-nvim). Once a buffer has a kernel, the cell keymaps
+(`<leader>rc` / `<leader>ra` / `<leader>rA`) send its cells there instead of to the tmux pane, and
+stopping the kernel switches them back. Text output is shown under each cell (up to 4 lines) and
+plots open in the system image viewer: nothing is drawn in the terminal, so the buffer stays fast.
+molten's outputs are not written into the `.ipynb`.
+
+Molten runs from a dedicated `neovim` conda env, so it works whichever env is active. Each project
+env runs its own kernel, so cells see that env's packages.
+
+One-time setup:
+
+```sh
+mamba create -n neovim -c conda-forge python=3.12 pynvim jupyter_client pillow jupytext bash_kernel
+mamba run -n neovim python -m bash_kernel.install --user   # kernel "bash"
+mkdir -p ~/.local/share/jupyter/runtime                     # jupyter_client does not create it
+```
+
+For each project env, register a kernel named after the env (`<env>` for Python, `<env>-r` for
+R). Keep the `-r` suffix: a kernel with the same name overwrites the other one:
+
+```sh
+# Python
+mamba install -n <env> -c conda-forge ipykernel
+mamba run -n <env> python -m ipykernel install --user --name <env> --display-name "Python (<env>)"
+
+# R (installspec needs jupyter on PATH, taken from the neovim env)
+mamba install -n <env> -c conda-forge r-irkernel
+env PATH="$HOME/miniforge3/envs/neovim/bin:$PATH" mamba run -n <env> \
+  R -q -e "IRkernel::installspec(name = '<env>-r', displayname = 'R (<env>)')"
+```
+
+After `vim.pack` installs molten on the first launch, restart Neovim once so its commands are
+registered. If the `neovim` env was created after that first launch, molten's commands are missing
+(`E117: Unknown function: MoltenAvailableKernels`): run `:UpdateRemotePlugins` and restart Neovim.
+`:checkhealth molten` and `:checkhealth provider` check the setup.
+
+- `<leader>ji` starts the kernel named after the active conda env (or opens the picker),
+  `<leader>jI` opens the picker to attach another kernel (e.g. R or bash).
+- `<leader>jo` enters the output window, `<leader>jh` hides the output, `<leader>jd` deletes it.
+- `<leader>jx` / `<leader>jR` / `<leader>jq` interrupt / restart / stop the kernel,
+  `<leader>jb` opens HTML output in the browser.
+- With two or more kernels in one buffer (e.g. Python and R in a `.qmd`), molten asks which one
+  runs each cell.
 
 ### R language server
 
