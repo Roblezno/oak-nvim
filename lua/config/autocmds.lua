@@ -109,6 +109,48 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	desc = "Update treesitter parsers after nvim-treesitter is updated",
 })
 
+-- Register molten-nvim's commands after it is installed or updated (it is a Python remote plugin)
+-- NOTE: The remote plugin manifest is only read at startup, so restart nvim afterwards
+-- HELP: :help vim.pack-events, :help :UpdateRemotePlugins
+local molten_update_group = vim.api.nvim_create_augroup("MoltenUpdate", {})
+vim.api.nvim_create_autocmd("PackChanged", {
+	group = molten_update_group,
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == "molten-nvim" and (kind == "install" or kind == "update") then
+			-- Load the plugin first if it is not active, so its rplugin/ is on the runtimepath
+			if not ev.data.active then
+				vim.cmd.packadd("molten-nvim")
+			end
+			vim.cmd("UpdateRemotePlugins")
+		end
+	end,
+	desc = "Update remote plugins after molten-nvim is installed or updated",
+})
+
+-- Mark the buffers that have a molten kernel, so quarto's runner sends their cells to molten
+-- instead of slime (see plugins/markdown.lua)
+-- NOTE: Asking molten itself (MoltenRunningKernels, molten.status) would start its Python host on
+-- every run, even in buffers that only use slime. MoltenDeinit stops all the buffer's kernels
+-- HELP: https://github.com/benlubas/molten-nvim#autocommands
+local molten_kernel_group = vim.api.nvim_create_augroup("MoltenKernel", {})
+vim.api.nvim_create_autocmd("User", {
+	group = molten_kernel_group,
+	pattern = "MoltenInitPost",
+	callback = function()
+		vim.b.molten_kernel = true
+	end,
+	desc = "Mark the buffer as having a molten kernel",
+})
+vim.api.nvim_create_autocmd("User", {
+	group = molten_kernel_group,
+	pattern = "MoltenDeinitPost",
+	callback = function()
+		vim.b.molten_kernel = nil
+	end,
+	desc = "Unmark the buffer when its molten kernels stop",
+})
+
 -- Start treesitter highlighting (provided by Neovim) and indentation (provided by nvim-treesitter)
 -- for every filetype with a parser
 -- NOTE: language.add() returns nil without a parser, which also covers the first launch, when

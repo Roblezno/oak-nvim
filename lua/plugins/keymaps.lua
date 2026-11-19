@@ -136,7 +136,8 @@ vim.keymap.set("n", "<leader>mq", "<Cmd>QuartoClosePreview<CR>", { desc = "Close
 vim.keymap.set("n", "<leader>mi", "<Cmd>PasteImage<CR>", { desc = "Paste clipboard image (img-clip)" })
 
 -- RUN / REPL (vim-slime + quarto runner)
--- NOTE: Code goes to the REPL in the last active tmux pane (vim-slime, see utilities.lua). The
+-- NOTE: Code goes to the REPL in the last active tmux pane (vim-slime, see utilities.lua). Cells
+-- go to molten instead once the buffer has a kernel (see MOLTEN below). The
 -- cell keymaps (rc/ra/rA) use quarto's runner and only work in .qmd and .ipynb files (notebooks
 -- open with the quarto filetype, see plugins/markdown.lua); line, paragraph and selection go
 -- straight to slime and work in any file. <Plug> targets need remap = true
@@ -154,3 +155,26 @@ vim.keymap.set("n", "<leader>rl", "<Plug>SlimeLineSend", { remap = true, desc = 
 vim.keymap.set("n", "<leader>rp", "<Plug>SlimeParagraphSend", { remap = true, desc = "Send paragraph to REPL" })
 vim.keymap.set("x", "<leader>rr", "<Plug>SlimeRegionSend", { remap = true, desc = "Send selection to REPL" })
 vim.keymap.set("n", "<leader>rs", "<Plug>SlimeConfig", { remap = true, desc = "Set REPL target (tmux pane)" })
+
+-- MOLTEN (Jupyter kernels)
+-- NOTE: Starting a kernel switches the cell keymaps above (rc/ra/rA) from slime to molten for this
+-- buffer, stopping it (jq) switches them back. Kernels are named after their conda env: <env> for
+-- Python, <env>-r for R, plus bash. ji starts the Python one, jI picks any
+-- HELP: https://github.com/benlubas/molten-nvim
+vim.keymap.set("n", "<leader>ji", function()
+	local env = vim.env.CONDA_DEFAULT_ENV
+	if env and vim.list_contains(vim.fn.MoltenAvailableKernels(), env) then
+		vim.cmd("MoltenInit " .. env)
+	else
+		vim.cmd("MoltenInit") -- no kernel named after the active env: open the picker
+	end
+end, { desc = "Molten init kernel for active conda env" })
+vim.keymap.set("n", "<leader>jI", "<Cmd>MoltenInit<CR>", { desc = "Molten init kernel (picker)" })
+-- noautocmd: auto-open is off, so open the output window on demand without triggering it again
+vim.keymap.set("n", "<leader>jo", "<Cmd>noautocmd MoltenEnterOutput<CR>", { desc = "Molten enter output" })
+vim.keymap.set("n", "<leader>jh", "<Cmd>MoltenHideOutput<CR>", { desc = "Molten hide output" })
+vim.keymap.set("n", "<leader>jd", "<Cmd>MoltenDelete<CR>", { desc = "Molten delete cell output" })
+vim.keymap.set("n", "<leader>jx", "<Cmd>MoltenInterrupt<CR>", { desc = "Molten interrupt kernel" })
+vim.keymap.set("n", "<leader>jR", "<Cmd>MoltenRestart!<CR>", { desc = "Molten restart kernel (clear outputs)" })
+vim.keymap.set("n", "<leader>jq", "<Cmd>MoltenDeinit<CR>", { desc = "Molten stop kernel" })
+vim.keymap.set("n", "<leader>jb", "<Cmd>MoltenOpenInBrowser<CR>", { desc = "Molten open HTML output in browser" })

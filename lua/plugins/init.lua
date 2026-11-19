@@ -51,6 +51,9 @@ vim.pack.add({
 	"https://github.com/quarto-dev/quarto-nvim",
 	-- latest release tag
 	{ src = "https://github.com/goerz/jupytext.nvim", version = vim.version.range("*") },
+	-- 1.* release tags, as molten recommends. Python remote plugin: :UpdateRemotePlugins runs from
+	-- the PackChanged hook in config/autocmds.lua
+	{ src = "https://github.com/benlubas/molten-nvim", version = vim.version.range("1.*") },
 	-- git.lua
 	"https://github.com/lewis6991/gitsigns.nvim",
 	-- craftzdog's fork, for the whole-hunk overlay (view.overlay_style)

@@ -221,4 +221,14 @@ require("vim._core.ui2").enable({
 	},
 })
 
+-- Providers
+-- molten-nvim (a Python remote plugin) needs pynvim and jupyter_client, plus pillow for its plot
+-- popups. They live in a dedicated `neovim` conda env (with the jupytext CLI, see
+-- plugins/markdown.lua), so molten works whatever env is active. Skipped until that env exists
+-- HELP: :help provider-python, :checkhealth provider
+local python3_host = vim.fn.expand("~/miniforge3/envs/neovim/bin/python")
+if vim.fn.executable(python3_host) == 1 then
+	vim.g.python3_host_prog = python3_host
+end
+
 -- END OF BASIC CONFIG OPTS
