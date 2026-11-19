@@ -49,6 +49,8 @@ vim.pack.add({
 	-- markdown.lua
 	"https://github.com/jmbuhr/otter.nvim",
 	"https://github.com/quarto-dev/quarto-nvim",
+	-- latest release tag
+	{ src = "https://github.com/goerz/jupytext.nvim", version = vim.version.range("*") },
 	-- git.lua
 	"https://github.com/lewis6991/gitsigns.nvim",
 	-- craftzdog's fork, for the whole-hunk overlay (view.overlay_style)

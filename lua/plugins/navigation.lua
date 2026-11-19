@@ -9,8 +9,12 @@
 -- own buffers. <leader>e, which opens it, is in plugins/keymaps.lua
 -- HELP: :help oil, https://github.com/stevearc/oil.nvim
 
--- Files oil won't preview: snacks.image would draw them in the terminal, which glitches the UI
+-- Files oil won't preview:
+-- - media: snacks.image would draw them in the terminal, which glitches the UI
+-- - ipynb: previewing runs jupytext's conversion (plugins/markdown.lua), which stalls for a
+--   second. Notebooks are converted only when opened
 local no_preview_exts = {
+	"ipynb",
 	"png",
 	"jpg",
 	"jpeg",

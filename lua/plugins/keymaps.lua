@@ -137,8 +137,9 @@ vim.keymap.set("n", "<leader>mi", "<Cmd>PasteImage<CR>", { desc = "Paste clipboa
 
 -- RUN / REPL (vim-slime + quarto runner)
 -- NOTE: Code goes to the REPL in the last active tmux pane (vim-slime, see utilities.lua). The
--- cell keymaps (rc/ra/rA) use quarto's runner and only work in .qmd files; line, paragraph and
--- selection go straight to slime and work in any file. <Plug> targets need remap = true
+-- cell keymaps (rc/ra/rA) use quarto's runner and only work in .qmd and .ipynb files (notebooks
+-- open with the quarto filetype, see plugins/markdown.lua); line, paragraph and selection go
+-- straight to slime and work in any file. <Plug> targets need remap = true
 -- HELP: :help slime, https://github.com/quarto-dev/quarto-nvim
 vim.keymap.set("n", "<leader>rc", function()
 	require("quarto.runner").run_cell()
