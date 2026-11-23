@@ -1,4 +1,6 @@
 # Changelog
+## 0.5.1-dev (Unreleased)
+
 ## 0.5.0
 ### Implemented
 - Messages through Neovim 0.12's experimental ui2, enabled at the end of config/options.lua.
