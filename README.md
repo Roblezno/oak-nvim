@@ -3,11 +3,11 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.5.0(Unreleased). The base editor, UI, navigation, Treesitter (baseline languages), base
+> **Status:** v0.5.0. The base editor, UI, navigation, Treesitter (baseline languages), base
 > LSP and cmp with some utilities and custom theme updates with personal plugins.
 > Quarto markdown and Jupyter notebook support, with code sent to a REPL in a tmux pane
 > (vim-slime) or to Jupyter kernels (molten).
-> Currently implementing a refactor for core functionallities in v0.5.0
+> Git integration (gitsigns, mini.diff, codediff, lazygit) and format on save (conform).
 
 ## Requirements
 
@@ -59,8 +59,8 @@ git clone <repo-url> ~/.config/nvim
 nvim
 ```
 
-On first launch `vim.pack` asks you to confirm installing the plugins. They are installed at the
-revisions recorded in `nvim-pack-lock.json`, and `telescope-fzf-native` is built automatically.
+On first launch `vim.pack` asks you to confirm installing the plugins, and `telescope-fzf-native` is
+built automatically.
 blink.cmp downloads its prebuilt fuzzy matcher on first load.
 The Treesitter parsers are then downloaded and compiled in the background. Files opened before
 they finish are not highlighted until you reopen them.
@@ -86,7 +86,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 
 | Area       | Plugin                                                                                    | Purpose                                  |
 | ---------- | ----------------------------------------------------------------------------------------- | ---------------------------------------- |
-| UI         | [solarized-osaka.nvim](https://github.com/craftzdog/solarized-osaka.nvim)                 | Colorscheme (vivid, transparent)         |
+| UI         | [solarized-osaka.nvim](https://github.com/craftzdog/solarized-osaka.nvim)                 | Colorscheme (transparent)                |
 | UI         | [alpha-nvim](https://github.com/goolord/alpha-nvim)                                       | Start dashboard                          |
 | UI         | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)                              | Statusline                               |
 | UI         | [incline.nvim](https://github.com/b0o/incline.nvim)                                       | File name tag on each window             |
@@ -234,7 +234,7 @@ lua/config/           plain Neovim settings: options, keymaps, autocommands, com
 lua/plugins/          init.lua installs every plugin, one file per group configures them,
                       keymaps.lua holds the keymaps that use a plugin
 lua/utils/            shared helper modules
-nvim-pack-lock.json   locked plugin revisions
+nvim-pack-lock.json   locked plugin revisions (created locally, not tracked)
 ```
 
 ## License

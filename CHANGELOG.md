@@ -1,5 +1,5 @@
 # Changelog
-## 0.5.0-dev
+## 0.5.0
 ### Implemented
 - Messages through Neovim 0.12's experimental ui2, enabled at the end of config/options.lua.
 Short messages show in a corner popup (at most 30% of the screen, gone after 5 seconds). Errors,
@@ -13,7 +13,7 @@ follows it.
 - Only the active window shows the cursorline (WinLeave/WinEnter autocmds). Windows that keep
 it off, like pickers and popups, are left alone.
 - Core keymaps in config/keymaps.lua: `x`, `<leader>d` and `<leader>c` delete/change without
-copying, `<leader>p` pastes the last yank, `dw` deletes the word backwards without copying,
+copying, `<leader>p` pastes the last yank, `dw` deletes the word forwards without copying,
 `+`/`-` increment/decrement, `te` opens a new tab (`:tabedit`), and
 `<leader>o`/`<leader>O` open a line below/above without continuing the comment.
 - `<leader>bd` closes every hidden buffer except unsaved ones, and says how many it closed and
@@ -111,8 +111,8 @@ and a diagonal `╱` fill in empty diff areas (fillchars).
 - `:` completion and `:find` skip node_modules/ and build artifacts (*.o, *.obj, *.pyc, *.class,
 *.jar) through wildignore.
 - Splits moved from `<leader>wsh`/`<leader>wsv` to `ss`/`sv`.
-- Colorscheme: solarized-osaka (https://github.com/craftzdog/solarized-osaka.nvim), vivid
-style, transparent background. lualine uses the `auto` theme.
+- Colorscheme: solarized-osaka (https://github.com/craftzdog/solarized-osaka.nvim), with a
+transparent background. lualine uses the `auto` theme.
 - mini.icons is the one icon source: it mocks nvim-web-devicons, so plugins that only know
 devicons (telescope, lualine) use it too. Set up right after the colorscheme.
 - lualine sections: mode | git branch | project root name (only when it differs from the cwd),
