@@ -1,5 +1,5 @@
 # Changelog
-## 0.5.2-dev (Unreleased)
+## 0.5.2
 ### Changed
 - Colorscheme: catppuccin (https://github.com/catppuccin/nvim), macchiato flavour with a solid
 background, the same palette as Ghostty's built-in "Catppuccin Macchiato" theme. A light
