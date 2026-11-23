@@ -1,24 +1,26 @@
 -- #################################################################
 -- Visual interface related plugins. Configures:
--- kanagawa Theme, Alpha dashboard, Lualine, incline, tiny-cmdline,
+-- catppuccin Theme, Alpha dashboard, Lualine, incline, tiny-cmdline,
 -- todo-comments, nvim-highlight-colors, snacks, smear-cursor, mini.icons,
 -- transparent-popups (disabled)
 -- #################################################################
 
 -- THEME
--- NOTE: kanagawa, dragon variant (darker and more muted than the default wave). The background
--- map picks the variant from 'background', so dark says dragon too: left at its default "wave",
--- a 'background' change would load wave. A light 'background' loads lotus. Solid background
--- (transparent = false). Floats and popup menus follow the background through
--- transparent-popups (below), when it is enabled
--- HELP: https://github.com/rebelot/kanagawa.nvim
-require("kanagawa").setup({
-	transparent = false,
-	theme = "dragon",
-	background = { dark = "dragon", light = "lotus" },
+-- NOTE: catppuccin, macchiato flavour (between frappe and mocha in darkness). The background map
+-- picks the flavour from 'background', so dark says macchiato too: left at its default "mocha",
+-- a 'background' change would load mocha. A light 'background' loads latte. Solid background
+-- (transparent_background = false). Ghostty's built-in "Catppuccin Macchiato" theme uses the same
+-- palette. Integrations for installed plugins are detected on their own (auto_integrations).
+-- Floats and popup menus follow the background through transparent-popups (below), when it is
+-- enabled
+-- HELP: :help catppuccin, https://github.com/catppuccin/nvim
+require("catppuccin").setup({
+	flavour = "macchiato",
+	background = { dark = "macchiato", light = "latte" },
+	transparent_background = false,
 })
 
-vim.cmd.colorscheme("kanagawa")
+vim.cmd.colorscheme("catppuccin-nvim")
 
 -- MINI.ICONS
 -- NOTE: The one icon source for every plugin. The mock makes require("nvim-web-devicons") return
