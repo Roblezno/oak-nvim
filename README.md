@@ -3,7 +3,7 @@
 A personal Neovim config focused on bioinformatics: pipeline building with Nextflow, Python
 scripting, statistics with R and Quarto Markdown writing (among others).
 
-> **Status:** v0.5.1(Unreleased). The base editor, UI, navigation, Treesitter (baseline languages), base
+> **Status:** v0.5.1. The base editor, UI, navigation, Treesitter (baseline languages), base
 > LSP and cmp with some utilities and custom theme updates with personal plugins.
 > Quarto markdown and Jupyter notebook support, with code sent to a REPL in a tmux pane
 > (vim-slime) or to Jupyter kernels (molten).
@@ -86,7 +86,7 @@ cancel. When `nvim-treesitter` is updated, its parsers are updated too (`:TSUpda
 
 | Area       | Plugin                                                                                    | Purpose                                  |
 | ---------- | ----------------------------------------------------------------------------------------- | ---------------------------------------- |
-| UI         | [solarized-osaka.nvim](https://github.com/craftzdog/solarized-osaka.nvim)                 | Colorscheme (transparent)                |
+| UI         | [catppuccin/nvim](https://github.com/catppuccin/nvim)                                     | Colorscheme (macchiato)                  |
 | UI         | [alpha-nvim](https://github.com/goolord/alpha-nvim)                                       | Start dashboard                          |
 | UI         | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)                              | Statusline                               |
 | UI         | [incline.nvim](https://github.com/b0o/incline.nvim)                                       | File name tag on each window             |

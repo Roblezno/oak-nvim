@@ -1,5 +1,14 @@
 # Changelog
-## 0.5.1-dev (Unreleased)
+## 0.5.1
+### Changed
+- Colorscheme: catppuccin (https://github.com/catppuccin/nvim), macchiato flavour with a solid
+background, the same palette as Ghostty's built-in "Catppuccin Macchiato" theme. A light
+'background' loads latte. catppuccin detects the installed plugins' integrations on its own, and
+lualine keeps the `auto` theme.
+- The popup menu is no longer blended: 'pumblend' is commented out in config/options.lua.
+
+### Removed
+- solarized-osaka.nvim, replaced by catppuccin.
 
 ## 0.5.0
 ### Implemented
