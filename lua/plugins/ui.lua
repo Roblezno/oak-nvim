@@ -1,22 +1,24 @@
 -- #################################################################
 -- Visual interface related plugins. Configures:
--- solarized-osaka Theme, Alpha dashboard, Lualine, incline, tiny-cmdline,
+-- kanagawa Theme, Alpha dashboard, Lualine, incline, tiny-cmdline,
 -- todo-comments, nvim-highlight-colors, snacks, smear-cursor, mini.icons,
 -- transparent-popups (disabled)
 -- #################################################################
 
 -- THEME
--- NOTE: solarized-osaka, vivid style (brighter text colors, higher contrast). Transparent
--- background, so the terminal's background (opacity, blur) shows through. Ghostty's built-in
--- "Solarized Osaka Night" theme uses the same palette. Floats and popup menus follow the
--- background through transparent-popups (below), when it is enabled
--- HELP: https://github.com/craftzdog/solarized-osaka.nvim
-require("solarized-osaka").setup({
-	transparent = true,
-	--style = "vivid",
+-- NOTE: kanagawa, dragon variant (darker and more muted than the default wave). The background
+-- map picks the variant from 'background', so dark says dragon too: left at its default "wave",
+-- a 'background' change would load wave. A light 'background' loads lotus. Solid background
+-- (transparent = false). Floats and popup menus follow the background through
+-- transparent-popups (below), when it is enabled
+-- HELP: https://github.com/rebelot/kanagawa.nvim
+require("kanagawa").setup({
+	transparent = false,
+	theme = "dragon",
+	background = { dark = "dragon", light = "lotus" },
 })
 
-vim.cmd.colorscheme("solarized-osaka")
+vim.cmd.colorscheme("kanagawa")
 
 -- MINI.ICONS
 -- NOTE: The one icon source for every plugin. The mock makes require("nvim-web-devicons") return

@@ -42,7 +42,6 @@ vim.opt.smartcase = true -- Case-sensitive if uppercase in search
 vim.opt.hlsearch = true -- Highlight search matches; <Esc> clears them with :nohlsearch
 vim.opt.incsearch = true -- Show matches as you type
 
-
 -- Visual Settings
 vim.opt.termguicolors = true -- Enable 24-bit colors
 vim.opt.signcolumn = "yes" -- Always show sign column
@@ -52,7 +51,7 @@ vim.opt.matchtime = 2 -- Show the matching bracket for 0.2 seconds
 vim.opt.completeopt = "menuone,noinsert,noselect" -- Completion options
 vim.opt.showmode = false -- Don't show mode in command line
 vim.opt.pumheight = 10 -- Popup menu height
-vim.opt.pumblend = 10 -- Popup menu transparency
+-- vim.opt.pumblend = 10 -- Popup menu transparency
 -- NOTE: transparent-popups (disabled, see lua/plugins/ui.lua) sets its own border when enabled
 vim.opt.winborder = "rounded" -- Rounded borders on every floating window
 vim.opt.title = true -- Show the file name in the terminal tab title
@@ -115,7 +114,6 @@ vim.opt.guicursor = {
 	"a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor", -- All modes: blinking & highlight groups
 	"sm:block-blinkwait175-blinkoff150-blinkon175", -- Showmatch mode
 }
-
 
 -- Filetypes
 -- Nextflow: not detected by Neovim. Scripts (.nf) and config files share one filetype, the
