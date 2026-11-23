@@ -78,15 +78,18 @@ function M.render()
 	return table.concat(parts) .. "%#TablineEmpty#%T"
 end
 
---- Tab colors: the solarized-osaka palette, or TabLineSel/TabLine with any other colorscheme
+--- Tab colors: the catppuccin palette, or TabLineSel/TabLine with any other colorscheme
+--- HELP: :help catppuccin (get_palette)
 ---@return table
 local function colors()
-	if (vim.g.colors_name or ""):find("^solarized%-osaka") then
+	-- catppuccin names itself catppuccin-<flavour>, so a 'background' change picks the new flavour
+	local flavour = (vim.g.colors_name or ""):match("^catppuccin%-(%a+)$")
+	if flavour then
 		local ok, c = pcall(function()
-			return require("solarized-osaka.colors").setup()
+			return require("catppuccin.palettes").get_palette(flavour)
 		end)
 		if ok then
-			return { active_fg = c.base4, active_bg = c.yellow, inactive_fg = c.base0, inactive_bg = c.base02 }
+			return { active_fg = c.base, active_bg = c.blue, inactive_fg = c.subtext0, inactive_bg = c.surface0 }
 		end
 	end
 	local sel = vim.api.nvim_get_hl(0, { name = "TabLineSel", link = false })

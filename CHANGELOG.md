@@ -6,6 +6,9 @@ background, the same palette as Ghostty's built-in "Catppuccin Macchiato" theme.
 'background' loads latte. catppuccin detects the installed plugins' integrations on its own, and
 lualine keeps the `auto` theme.
 - The popup menu is no longer blended: 'pumblend' is commented out in config/options.lua.
+- The tabline (lua/utils/tabline.lua) takes its colors from the catppuccin palette of the loaded
+flavour: bold base on blue when active, subtext0 on surface0 otherwise. Other colorschemes still
+fall back to TabLineSel/TabLine.
 
 ### Removed
 - solarized-osaka.nvim, replaced by catppuccin.
